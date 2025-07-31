@@ -50,14 +50,14 @@ export const sendEmailWithEmailJS = async (data: EmailData): Promise<{ success: 
   try {
     // Esta función requiere que instales @emailjs/browser
     // y configures las credenciales en emailConfig
-    const templateParams = {
-      from_name: data.name,
-      from_email: data.email,
-      subject: data.subject,
-      message: data.message,
-      to_name: emailConfig.default.recipientName,
-      to_email: emailConfig.default.recipientEmail,
-    };
+    // const templateParams = {
+    //   from_name: data.name,
+    //   from_email: data.email,
+    //   subject: data.subject,
+    //   message: data.message,
+    //   to_name: emailConfig.default.recipientName,
+    //   to_email: emailConfig.default.recipientEmail,
+    // };
 
     // Descomenta las siguientes líneas cuando tengas EmailJS configurado
     // import emailjs from '@emailjs/browser';
