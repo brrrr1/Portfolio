@@ -5,6 +5,11 @@ import {
 } from '@heroicons/react/24/outline';
 import { useTranslation } from '../hooks/useTranslation';
 
+// Import local images
+import lagradaBack from '../assets/images/lagrada-back.png';
+import lagradaFront from '../assets/images/lagrada-front.jpg';
+import pipocapp from '../assets/images/pipocapp.jpeg';
+
 const Projects: React.FC = () => {
   const [activeFilter, setActiveFilter] = useState('all');
   const { t } = useTranslation();
@@ -14,7 +19,7 @@ const Projects: React.FC = () => {
       id: 1,
       title: 'La Grada',
       description: 'Aplicación web completa para la gestión y visualización de eventos deportivos en un bar dedicado. Permite a los usuarios registrarse, seleccionar su equipo favorito, comprar entradas y gestionar su perfil de usuario.',
-      image: '/images/lagrada-back.png',
+      image: lagradaBack,
       technologies: ['Java/Spring', 'Angular', 'TypeScript', 'MySQL'],
       category: 'web',
       liveUrl: null,
@@ -25,7 +30,7 @@ const Projects: React.FC = () => {
       id: 2,
       title: 'La Grada Frontend',
       description: 'Frontend de la aplicación La Grada desarrollado con Angular que proporciona una interfaz moderna y funcional para la gestión de eventos deportivos.',
-      image: '/images/lagrada-front.jpg',
+      image: lagradaFront,
       technologies: ['Angular', 'TypeScript', 'RxJS', 'Angular Material'],
       category: 'web',
       liveUrl: null,
@@ -36,7 +41,7 @@ const Projects: React.FC = () => {
       id: 3,
       title: 'PipocApp',
       description: 'Aplicación web para la gestión y organización de eventos sociales y reuniones.',
-      image: '/images/pipocapp.jpeg',
+      image: pipocapp,
       technologies: ['React', 'JavaScript', 'Firebase', 'Node.js'],
       category: 'web',
       liveUrl: null,

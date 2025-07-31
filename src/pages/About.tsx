@@ -9,6 +9,9 @@ import {
 } from '@heroicons/react/24/outline';
 import { useTranslation } from '../hooks/useTranslation';
 
+// Import local images
+import brunoProfile from '../assets/images/bruno-profile.jpg';
+
 const About: React.FC = () => {
   const { t } = useTranslation();
 
@@ -126,7 +129,7 @@ const About: React.FC = () => {
               <div className="text-center mb-6">
                 <div className="w-32 h-32 mx-auto mb-4 rounded-full overflow-hidden border-4 border-primary-100 dark:border-primary-800 shadow-lg">
                   <img
-                    src="/images/bruno-profile.jpg"
+                    src={brunoProfile}
                     alt="Bruno Delgado"
                     className="w-full h-full object-cover"
                     onError={(e) => {

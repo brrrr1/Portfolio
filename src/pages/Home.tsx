@@ -1,7 +1,12 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { ArrowRightIcon } from '@heroicons/react/24/outline';
+import { 
+  ArrowRightIcon
+} from '@heroicons/react/24/outline';
 import { useTranslation } from '../hooks/useTranslation';
+
+// Import local images
+import brunoProfile from '../assets/images/bruno-profile.jpg';
 
 const Home: React.FC = () => {
   const { t } = useTranslation();
@@ -54,7 +59,7 @@ const Home: React.FC = () => {
             >
               <div className="w-40 h-40 mx-auto rounded-full overflow-hidden border-4 border-white dark:border-gray-700 shadow-xl">
                 <img
-                  src="/images/bruno-profile.jpg"
+                  src={brunoProfile}
                   alt="Bruno Delgado"
                   className="w-full h-full object-cover"
                   onError={(e) => {
