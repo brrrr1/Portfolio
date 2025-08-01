@@ -2,8 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { 
   ArrowRightIcon,
-  DocumentArrowDownIcon,
-  EyeIcon
+  DocumentArrowDownIcon
 } from '@heroicons/react/24/outline';
 import { useTranslation } from '../hooks/useTranslation';
 
@@ -31,9 +30,7 @@ const Home: React.FC = () => {
     document.body.removeChild(link);
   };
 
-  const handleViewCV = () => {
-    window.open('/CV_Bruno_Delgado_2025.pdf', '_blank');
-  };
+
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -141,13 +138,7 @@ const Home: React.FC = () => {
                 <DocumentArrowDownIcon className="h-5 w-5 mr-2" />
                 {t('home.downloadCV')}
               </button>
-              <button
-                onClick={handleViewCV}
-                className="btn-secondary inline-flex items-center"
-              >
-                <EyeIcon className="h-5 w-5 mr-2" />
-                {t('home.viewCV')}
-              </button>
+
             </motion.div>
           </motion.div>
         </div>
