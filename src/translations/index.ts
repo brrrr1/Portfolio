@@ -15,6 +15,8 @@ export const translations = {
       description: 'Desarrollador Full Stack apasionado por innovar y dar soluciones que marcan la diferencia.',
       viewProjects: 'Ver Proyectos',
       contact: 'Contactar',
+      downloadCV: 'Descargar CV',
+      viewCV: 'Ver CV',
       skills: {
         title: 'Mis Habilidades',
         subtitle: 'Tecnologías y herramientas que utilizo para crear soluciones innovadoras',
@@ -134,6 +136,8 @@ export const translations = {
       description: 'Full Stack Developer passionate about innovating and delivering solutions that make a difference.',
       viewProjects: 'View Projects',
       contact: 'Contact',
+      downloadCV: 'Download CV',
+      viewCV: 'View CV',
       skills: {
         title: 'My Skills',
         subtitle: 'Technologies and tools I use to create innovative solutions',
@@ -253,6 +257,8 @@ export const translations = {
       description: 'Full Stack Entwickler mit Leidenschaft für Innovation und Lösungen, die einen Unterschied machen.',
       viewProjects: 'Projekte ansehen',
       contact: 'Kontakt',
+      downloadCV: 'Lebenslauf herunterladen',
+      viewCV: 'Lebenslauf ansehen',
       skills: {
         title: 'Meine Fähigkeiten',
         subtitle: 'Technologien und Tools, die ich verwende, um innovative Lösungen zu erstellen',

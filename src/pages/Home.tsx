@@ -1,7 +1,9 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { 
-  ArrowRightIcon
+  ArrowRightIcon,
+  DocumentArrowDownIcon,
+  EyeIcon
 } from '@heroicons/react/24/outline';
 import { useTranslation } from '../hooks/useTranslation';
 
@@ -19,6 +21,19 @@ const Home: React.FC = () => {
     { name: 'AWS', category: t('home.skills.cloud') },
     { name: 'SQL', category: t('home.skills.database') },
   ];
+
+  const handleDownloadCV = () => {
+    const link = document.createElement('a');
+    link.href = '/CV_Bruno_Delgado_2025.pdf';
+    link.download = 'CV_Bruno_Delgado_2025.pdf';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
+  const handleViewCV = () => {
+    window.open('/CV_Bruno_Delgado_2025.pdf', '_blank');
+  };
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -94,7 +109,7 @@ const Home: React.FC = () => {
 
             <motion.div
               variants={itemVariants}
-              className="flex flex-col sm:flex-row gap-4 justify-center"
+              className="flex flex-col sm:flex-row gap-4 justify-center flex-wrap"
             >
               <button
                 onClick={() => {
@@ -118,6 +133,20 @@ const Home: React.FC = () => {
                 className="btn-secondary inline-flex items-center"
               >
                 {t('home.contact')}
+              </button>
+              <button
+                onClick={handleDownloadCV}
+                className="btn-secondary inline-flex items-center"
+              >
+                <DocumentArrowDownIcon className="h-5 w-5 mr-2" />
+                {t('home.downloadCV')}
+              </button>
+              <button
+                onClick={handleViewCV}
+                className="btn-secondary inline-flex items-center"
+              >
+                <EyeIcon className="h-5 w-5 mr-2" />
+                {t('home.viewCV')}
               </button>
             </motion.div>
           </motion.div>
