@@ -329,27 +329,26 @@ const Contact: React.FC = () => {
             className="text-center"
           >
             <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">
-              Disponibilidad
+              {t('contact.availability.title')}
             </h2>
             <p className="text-lg text-gray-600 dark:text-gray-300 mb-8 max-w-2xl mx-auto">
-              Estoy disponible para proyectos freelance, colaboraciones y oportunidades laborales.
-              No dudes en contactarme para discutir tu proyecto.
+              {t('contact.availability.subtitle')}
             </p>
-            <div className="flex flex-wrap justify-center gap-4">
-              <div className="bg-white dark:bg-gray-700 rounded-lg p-6 text-center">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
+              <div className="bg-white dark:bg-gray-700 rounded-lg p-6 text-center h-full flex flex-col justify-center">
                 <div className="text-2xl mb-2">📅</div>
-                <h3 className="font-semibold text-gray-900 dark:text-white mb-2">Proyectos Freelance</h3>
-                <p className="text-gray-600 dark:text-gray-300">Disponible para proyectos a tiempo parcial</p>
+                <h3 className="font-semibold text-gray-900 dark:text-white mb-2 text-sm md:text-base">{t('contact.availability.freelance.title')}</h3>
+                <p className="text-gray-600 dark:text-gray-300 text-sm">{t('contact.availability.freelance.description')}</p>
               </div>
-              <div className="bg-white dark:bg-gray-700 rounded-lg p-6 text-center">
+              <div className="bg-white dark:bg-gray-700 rounded-lg p-6 text-center h-full flex flex-col justify-center">
                 <div className="text-2xl mb-2">🤝</div>
-                <h3 className="font-semibold text-gray-900 dark:text-white mb-2">Colaboraciones</h3>
-                <p className="text-gray-600 dark:text-gray-300">Abierto a colaborar en proyectos interesantes</p>
+                <h3 className="font-semibold text-gray-900 dark:text-white mb-2 text-sm md:text-base">{t('contact.availability.collaboration.title')}</h3>
+                <p className="text-gray-600 dark:text-gray-300 text-sm">{t('contact.availability.collaboration.description')}</p>
               </div>
-              <div className="bg-white dark:bg-gray-700 rounded-lg p-6 text-center">
+              <div className="bg-white dark:bg-gray-700 rounded-lg p-6 text-center h-full flex flex-col justify-center">
                 <div className="text-2xl mb-2">💼</div>
-                <h3 className="font-semibold text-gray-900 dark:text-white mb-2">Oportunidades Laborales</h3>
-                <p className="text-gray-600 dark:text-gray-300">Buscando nuevas oportunidades profesionales</p>
+                <h3 className="font-semibold text-gray-900 dark:text-white mb-2 text-sm md:text-base">{t('contact.availability.opportunities.title')}</h3>
+                <p className="text-gray-600 dark:text-gray-300 text-sm">{t('contact.availability.opportunities.description')}</p>
               </div>
             </div>
           </motion.div>

@@ -24,6 +24,22 @@ export const translations = {
         frontend: 'Frontend',
         cloud: 'Cloud',
         database: 'Database'
+      },
+      services: {
+        title: 'Lo que hago',
+        subtitle: 'Servicios que ofrezco para ayudarte a alcanzar tus objetivos',
+        web: {
+          title: 'Desarrollo Web',
+          description: 'Creo aplicaciones web modernas y responsivas usando las últimas tecnologías.'
+        },
+        backend: {
+          title: 'Desarrollo Backend',
+          description: 'Desarrollo APIs robustas y escalables con las mejores prácticas.'
+        },
+        consulting: {
+          title: 'Consultoría',
+          description: 'Te ayudo a elegir las mejores tecnologías para tu proyecto.'
+        }
       }
     },
 
@@ -70,6 +86,22 @@ export const translations = {
           software: 'Ingeniería del Software, Bases de Datos Avanzadas, Ingeniería del Software Avanzada.',
           azure: 'Certificación en fundamentos de datos de Azure.'
         }
+      },
+      interests: {
+        title: 'Mis Intereses',
+        subtitle: 'Áreas que me apasionan y en las que me gusta trabajar',
+        web: {
+          title: 'Desarrollo Web',
+          description: 'Creación de aplicaciones web modernas y responsivas'
+        },
+        emerging: {
+          title: 'Tecnologías Emergentes',
+          description: 'Exploración de nuevas tecnologías y frameworks'
+        },
+        collaboration: {
+          title: 'Colaboración',
+          description: 'Trabajo en equipo y metodologías ágiles'
+        }
       }
     },
 
@@ -85,6 +117,20 @@ export const translations = {
       featured: 'Destacado',
       noProjects: 'No hay proyectos en esta categoría',
       noProjectsSubtitle: 'Pronto agregaré más proyectos en esta categoría.',
+      projects: {
+        lagrada: {
+          title: 'La Grada',
+          description: 'Aplicación web completa para la gestión y visualización de eventos deportivos en un bar dedicado. Permite a los usuarios registrarse, seleccionar su equipo favorito, comprar entradas y gestionar su perfil de usuario.'
+        },
+        lagradaFront: {
+          title: 'La Grada Frontend',
+          description: 'Frontend de la aplicación La Grada desarrollado con Angular que proporciona una interfaz moderna y funcional para la gestión de eventos deportivos.'
+        },
+        pipocapp: {
+          title: 'PipocApp',
+          description: 'Aplicación web para la gestión y organización de eventos sociales y reuniones.'
+        }
+      }
 
     },
 
@@ -109,6 +155,22 @@ export const translations = {
         phone: 'Teléfono',
         location: 'Ubicación',
         social: 'Sígueme en redes sociales'
+      },
+      availability: {
+        title: 'Disponibilidad',
+        subtitle: 'Estoy disponible para proyectos freelance, colaboraciones y oportunidades laborales. No dudes en contactarme para discutir tu proyecto.',
+        freelance: {
+          title: 'Proyectos Freelance',
+          description: 'Disponible para proyectos a tiempo parcial'
+        },
+        collaboration: {
+          title: 'Colaboraciones',
+          description: 'Abierto a colaborar en proyectos interesantes'
+        },
+        opportunities: {
+          title: 'Oportunidades Laborales',
+          description: 'Buscando nuevas oportunidades profesionales'
+        }
       }
     },
 
@@ -145,6 +207,22 @@ export const translations = {
         frontend: 'Frontend',
         cloud: 'Cloud',
         database: 'Database'
+      },
+      services: {
+        title: 'What I Do',
+        subtitle: 'Services I offer to help you achieve your goals',
+        web: {
+          title: 'Web Development',
+          description: 'I create modern and responsive web applications using the latest technologies.'
+        },
+        backend: {
+          title: 'Backend Development',
+          description: 'I develop robust and scalable APIs with best practices.'
+        },
+        consulting: {
+          title: 'Consulting',
+          description: 'I help you choose the best technologies for your project.'
+        }
       }
     },
 
@@ -191,6 +269,22 @@ export const translations = {
           software: 'Software Engineering, Advanced Databases, Advanced Software Engineering.',
           azure: 'Certification in Azure data fundamentals.'
         }
+      },
+      interests: {
+        title: 'My Interests',
+        subtitle: 'Areas that I am passionate about and enjoy working in',
+        web: {
+          title: 'Web Development',
+          description: 'Creation of modern and responsive web applications'
+        },
+        emerging: {
+          title: 'Emerging Technologies',
+          description: 'Exploration of new technologies and frameworks'
+        },
+        collaboration: {
+          title: 'Collaboration',
+          description: 'Teamwork and agile methodologies'
+        }
       }
     },
 
@@ -206,6 +300,20 @@ export const translations = {
       featured: 'Featured',
       noProjects: 'No projects in this category',
       noProjectsSubtitle: 'I will add more projects in this category soon.',
+      projects: {
+        lagrada: {
+          title: 'La Grada',
+          description: 'Complete web application for managing and viewing sports events at a dedicated bar. Allows users to register, select their favorite team, purchase tickets and manage their user profile.'
+        },
+        lagradaFront: {
+          title: 'La Grada Frontend',
+          description: 'Frontend of the La Grada application developed with Angular that provides a modern and functional interface for managing sports events.'
+        },
+        pipocapp: {
+          title: 'PipocApp',
+          description: 'Web application for managing and organizing social events and meetings.'
+        }
+      }
 
     },
 
@@ -230,6 +338,22 @@ export const translations = {
         phone: 'Phone',
         location: 'Location',
         social: 'Follow me on social media'
+      },
+      availability: {
+        title: 'Availability',
+        subtitle: 'I am available for freelance projects, collaborations and job opportunities. Do not hesitate to contact me to discuss your project.',
+        freelance: {
+          title: 'Freelance Projects',
+          description: 'Available for part-time projects'
+        },
+        collaboration: {
+          title: 'Collaborations',
+          description: 'Open to collaborating on interesting projects'
+        },
+        opportunities: {
+          title: 'Job Opportunities',
+          description: 'Looking for new professional opportunities'
+        }
       }
     },
 
@@ -266,6 +390,22 @@ export const translations = {
         frontend: 'Frontend',
         cloud: 'Cloud',
         database: 'Datenbank'
+      },
+      services: {
+        title: 'Was ich mache',
+        subtitle: 'Dienstleistungen, die ich anbiete, um Ihnen zu helfen, Ihre Ziele zu erreichen',
+        web: {
+          title: 'Web-Entwicklung',
+          description: 'Ich erstelle moderne und responsive Webanwendungen mit den neuesten Technologien.'
+        },
+        backend: {
+          title: 'Backend-Entwicklung',
+          description: 'Ich entwickle robuste und skalierbare APIs mit bewährten Praktiken.'
+        },
+        consulting: {
+          title: 'Beratung',
+          description: 'Ich helfe Ihnen bei der Auswahl der besten Technologien für Ihr Projekt.'
+        }
       }
     },
 
@@ -312,6 +452,22 @@ export const translations = {
           software: 'Softwaretechnik, Erweiterte Datenbanken, Erweiterte Softwaretechnik.',
           azure: 'Zertifizierung in Azure-Datenfundamenten.'
         }
+      },
+      interests: {
+        title: 'Meine Interessen',
+        subtitle: 'Bereiche, für die ich mich begeistere und in denen ich gerne arbeite',
+        web: {
+          title: 'Web-Entwicklung',
+          description: 'Erstellung moderner und responsiver Webanwendungen'
+        },
+        emerging: {
+          title: 'Aufstrebende Technologien',
+          description: 'Erkundung neuer Technologien und Frameworks'
+        },
+        collaboration: {
+          title: 'Zusammenarbeit',
+          description: 'Teamarbeit und agile Methoden'
+        }
       }
     },
 
@@ -327,6 +483,20 @@ export const translations = {
       featured: 'Hervorgehoben',
       noProjects: 'Keine Projekte in dieser Kategorie',
       noProjectsSubtitle: 'Ich werde bald weitere Projekte in dieser Kategorie hinzufügen.',
+      projects: {
+        lagrada: {
+          title: 'La Grada',
+          description: 'Vollständige Webanwendung zur Verwaltung und Anzeige von Sportereignissen in einer spezialisierten Bar. Ermöglicht es Benutzern, sich zu registrieren, ihr Lieblingsteam auszuwählen, Tickets zu kaufen und ihr Benutzerprofil zu verwalten.'
+        },
+        lagradaFront: {
+          title: 'La Grada Frontend',
+          description: 'Frontend der La Grada-Anwendung, entwickelt mit Angular, das eine moderne und funktionale Benutzeroberfläche für die Verwaltung von Sportereignissen bietet.'
+        },
+        pipocapp: {
+          title: 'PipocApp',
+          description: 'Webanwendung zur Verwaltung und Organisation von sozialen Veranstaltungen und Treffen.'
+        }
+      }
 
     },
 
@@ -351,6 +521,22 @@ export const translations = {
         phone: 'Telefon',
         location: 'Standort',
         social: 'Folge mir in sozialen Medien'
+      },
+      availability: {
+        title: 'Verfügbarkeit',
+        subtitle: 'Ich bin verfügbar für Freelance-Projekte, Kooperationen und Jobmöglichkeiten. Zögere nicht, mich zu kontaktieren, um über Ihr Projekt zu sprechen.',
+        freelance: {
+          title: 'Freelance-Projekte',
+          description: 'Verfügbar für Teilzeitprojekte'
+        },
+        collaboration: {
+          title: 'Kooperationen',
+          description: 'Offen für die Zusammenarbeit an interessanten Projekten'
+        },
+        opportunities: {
+          title: 'Jobmöglichkeiten',
+          description: 'Suche nach neuen beruflichen Möglichkeiten'
+        }
       }
     },
 

@@ -170,7 +170,7 @@ const Home: React.FC = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 viewport={{ once: true }}
-                className="bg-gray-50 dark:bg-gray-800 rounded-lg p-6 hover:shadow-md transition-shadow"
+                className="bg-gray-50 dark:bg-gray-800 rounded-lg p-6 hover:shadow-md transition-shadow h-full flex flex-col justify-center"
               >
                 <div className="text-center">
                   <h3 className="font-semibold text-gray-900 dark:text-white text-lg mb-2">{skill.name}</h3>
@@ -195,28 +195,28 @@ const Home: React.FC = () => {
             className="text-center mb-12"
           >
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
-              Lo que hago
+              {t('home.services.title')}
             </h2>
             <p className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
-              Servicios que ofrezco para ayudarte a alcanzar tus objetivos
+              {t('home.services.subtitle')}
             </p>
           </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {[
               {
-                title: 'Desarrollo Web',
-                description: 'Creo aplicaciones web modernas y responsivas usando las últimas tecnologías.',
+                title: t('home.services.web.title'),
+                description: t('home.services.web.description'),
                 icon: '🌐'
               },
               {
-                title: 'Desarrollo Backend',
-                description: 'Desarrollo APIs robustas y escalables con las mejores prácticas.',
+                title: t('home.services.backend.title'),
+                description: t('home.services.backend.description'),
                 icon: '⚙️'
               },
               {
-                title: 'Consultoría',
-                description: 'Te ayudo a elegir las mejores tecnologías para tu proyecto.',
+                title: t('home.services.consulting.title'),
+                description: t('home.services.consulting.description'),
                 icon: '💡'
               }
             ].map((service, index) => (
@@ -226,13 +226,13 @@ const Home: React.FC = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 viewport={{ once: true }}
-                className="bg-white dark:bg-gray-700 rounded-lg p-6 text-center hover:shadow-lg transition-shadow"
+                className="bg-white dark:bg-gray-700 rounded-lg p-6 text-center hover:shadow-lg transition-shadow h-full flex flex-col justify-center"
               >
                 <div className="text-4xl mb-4">{service.icon}</div>
                 <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">
                   {service.title}
                 </h3>
-                <p className="text-gray-600 dark:text-gray-300">
+                <p className="text-gray-600 dark:text-gray-300 text-sm">
                   {service.description}
                 </p>
               </motion.div>

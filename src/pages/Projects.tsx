@@ -17,8 +17,8 @@ const Projects: React.FC = () => {
   const projects = [
     {
       id: 1,
-      title: 'La Grada',
-      description: 'Aplicación web completa para la gestión y visualización de eventos deportivos en un bar dedicado. Permite a los usuarios registrarse, seleccionar su equipo favorito, comprar entradas y gestionar su perfil de usuario.',
+      title: t('projects.projects.lagrada.title'),
+      description: t('projects.projects.lagrada.description'),
       image: lagradaBack,
       technologies: ['Java/Spring', 'Angular', 'TypeScript', 'MySQL'],
       category: 'web',
@@ -28,8 +28,8 @@ const Projects: React.FC = () => {
     },
     {
       id: 2,
-      title: 'La Grada Frontend',
-      description: 'Frontend de la aplicación La Grada desarrollado con Angular que proporciona una interfaz moderna y funcional para la gestión de eventos deportivos.',
+      title: t('projects.projects.lagradaFront.title'),
+      description: t('projects.projects.lagradaFront.description'),
       image: lagradaFront,
       technologies: ['Angular', 'TypeScript', 'RxJS', 'Angular Material'],
       category: 'web',
@@ -39,8 +39,8 @@ const Projects: React.FC = () => {
     },
     {
       id: 3,
-      title: 'PipocApp',
-      description: 'Aplicación web para la gestión y organización de eventos sociales y reuniones.',
+      title: t('projects.projects.pipocapp.title'),
+      description: t('projects.projects.pipocapp.description'),
       image: pipocapp,
       technologies: ['React', 'JavaScript', 'Firebase', 'Node.js'],
       category: 'web',
