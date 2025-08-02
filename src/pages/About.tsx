@@ -9,7 +9,6 @@ import {
 } from '@heroicons/react/24/outline';
 import { useTranslation } from '../hooks/useTranslation';
 
-// Import local images
 import brunoProfile from '../assets/images/bruno-profile.jpg';
 
 const About: React.FC = () => {
@@ -76,7 +75,6 @@ const About: React.FC = () => {
 
   return (
     <div id="about" className="min-h-screen">
-      {/* Hero Section */}
       <section className="section-padding bg-gradient-to-br from-primary-50 to-blue-50 dark:from-gray-900 dark:to-gray-800">
         <div className="container-custom">
           <motion.div
@@ -92,7 +90,6 @@ const About: React.FC = () => {
         </div>
       </section>
 
-      {/* Personal Info */}
       <section className="section-padding bg-white dark:bg-gray-900">
         <div className="container-custom">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
@@ -125,7 +122,6 @@ const About: React.FC = () => {
               viewport={{ once: true }}
               className="bg-gray-50 dark:bg-gray-800 rounded-lg p-8"
             >
-              {/* Foto de Perfil */}
               <div className="text-center mb-6">
                 <div className="w-32 h-32 mx-auto mb-4 rounded-full overflow-hidden border-4 border-primary-100 dark:border-primary-800 shadow-lg">
                   <img
@@ -173,7 +169,6 @@ const About: React.FC = () => {
         </div>
       </section>
 
-      {/* Experience */}
       <section className="section-padding bg-gray-50 dark:bg-gray-800">
         <div className="container-custom">
           <motion.div
@@ -240,7 +235,6 @@ const About: React.FC = () => {
         </div>
       </section>
 
-      {/* Education */}
       <section className="section-padding bg-white dark:bg-gray-900">
         <div className="container-custom">
           <motion.div
@@ -299,7 +293,6 @@ const About: React.FC = () => {
         </div>
       </section>
 
-      {/* Interests */}
       <section className="section-padding bg-gray-50 dark:bg-gray-800">
         <div className="container-custom">
           <motion.div

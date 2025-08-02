@@ -1,17 +1,27 @@
-import React, { useState } from 'react';
-import { motion } from 'framer-motion';
+import React, { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { 
-  CodeBracketIcon
+  CodeBracketIcon,
+  XMarkIcon,
+  ChevronLeftIcon,
+  ChevronRightIcon
 } from '@heroicons/react/24/outline';
 import { useTranslation } from '../hooks/useTranslation';
 
-// Import local images
 import lagradaBack from '../assets/images/lagrada-back.png';
 import lagradaFront from '../assets/images/lagrada-front.jpg';
 import pipocapp from '../assets/images/pipocapp.jpeg';
+import lagrada1 from '../assets/images/lagrada1.png';
+import lagrada2 from '../assets/images/lagrada2.png';
+import lagrada3 from '../assets/images/lagrada3.png';
+import pipocapp1 from '../assets/images/pipocapp1.png';
+import pipocapp2 from '../assets/images/pipocapp2.png';
+import pipocapp3 from '../assets/images/pipocapp3.png';
 
 const Projects: React.FC = () => {
   const [activeFilter, setActiveFilter] = useState('all');
+  const [selectedProject, setSelectedProject] = useState<any>(null);
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const { t } = useTranslation();
 
   const projects = [
@@ -19,26 +29,17 @@ const Projects: React.FC = () => {
       id: 1,
       title: t('projects.projects.lagrada.title'),
       description: t('projects.projects.lagrada.description'),
-      image: lagradaBack,
-      technologies: ['Java/Spring', 'Angular', 'TypeScript', 'MySQL'],
+      image: lagradaFront,
+      technologies: ['Java/Spring', 'Angular', 'TypeScript', 'MySQL', 'RxJS', 'Angular Material'],
       category: 'web',
       liveUrl: null,
-      githubUrl: 'https://github.com/brrrr1/La-Grada',
-      featured: true
+      githubUrlBack: 'https://github.com/brrrr1/La-Grada',
+      githubUrlFront: 'https://github.com/brrrr1/La-Grada-FRONT',
+      featured: true,
+      modalImages: [lagrada1, lagrada2, lagrada3]
     },
     {
       id: 2,
-      title: t('projects.projects.lagradaFront.title'),
-      description: t('projects.projects.lagradaFront.description'),
-      image: lagradaFront,
-      technologies: ['Angular', 'TypeScript', 'RxJS', 'Angular Material'],
-      category: 'web',
-      liveUrl: null,
-      githubUrl: 'https://github.com/brrrr1/La-Grada-FRONT',
-      featured: true
-    },
-    {
-      id: 3,
       title: t('projects.projects.pipocapp.title'),
       description: t('projects.projects.pipocapp.description'),
       image: pipocapp,
@@ -46,7 +47,8 @@ const Projects: React.FC = () => {
       category: 'web',
       liveUrl: null,
       githubUrl: 'https://github.com/brrrr1/PipocApp',
-      featured: false
+      featured: false,
+      modalImages: [pipocapp1, pipocapp2, pipocapp3]
     }
   ];
 
@@ -80,9 +82,87 @@ const Projects: React.FC = () => {
     }
   };
 
+  const modalVariants = {
+    hidden: { opacity: 0, scale: 0.8 },
+    visible: {
+      opacity: 1,
+      scale: 1,
+      transition: {
+        duration: 0.3
+      }
+    },
+    exit: {
+      opacity: 0,
+      scale: 0.8,
+      transition: {
+        duration: 0.2
+      }
+    }
+  };
+
+  const handleProjectClick = (project: any) => {
+    setSelectedProject(project);
+  };
+
+  const closeModal = () => {
+    setSelectedProject(null);
+  };
+
+  const openImage = (image: string) => {
+    setSelectedImage(image);
+  };
+
+  const closeImage = () => {
+    setSelectedImage(null);
+  };
+
+  const nextImage = () => {
+    if (selectedProject && selectedImage) {
+      const currentIndex = selectedProject.modalImages.indexOf(selectedImage);
+      const nextIndex = (currentIndex + 1) % selectedProject.modalImages.length;
+      setSelectedImage(selectedProject.modalImages[nextIndex]);
+    }
+  };
+
+  const previousImage = () => {
+    if (selectedProject && selectedImage) {
+      const currentIndex = selectedProject.modalImages.indexOf(selectedImage);
+      const prevIndex = currentIndex === 0 ? selectedProject.modalImages.length - 1 : currentIndex - 1;
+      setSelectedImage(selectedProject.modalImages[prevIndex]);
+    }
+  };
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (selectedImage) {
+        if (e.key === 'Escape') {
+          closeImage();
+        } else if (e.key === 'ArrowRight') {
+          nextImage();
+        } else if (e.key === 'ArrowLeft') {
+          previousImage();
+        }
+      }
+    };
+
+    document.addEventListener('keydown', handleKeyDown);
+    return () => document.removeEventListener('keydown', handleKeyDown);
+  }, [selectedImage, selectedProject]);
+
+  useEffect(() => {
+    if (selectedProject || selectedImage) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [selectedProject, selectedImage]);
+
   return (
     <div id="projects" className="min-h-screen">
-      {/* Hero Section */}
       <section className="section-padding bg-gradient-to-br from-primary-50 to-blue-50 dark:from-gray-900 dark:to-gray-800">
         <div className="container-custom">
           <motion.div
@@ -101,7 +181,6 @@ const Projects: React.FC = () => {
         </div>
       </section>
 
-      {/* Filters */}
       <section className="section-padding bg-white dark:bg-gray-900">
         <div className="container-custom">
           <motion.div
@@ -126,20 +205,19 @@ const Projects: React.FC = () => {
             ))}
           </motion.div>
 
-          {/* Projects Grid */}
           <motion.div
             variants={containerVariants}
             initial="hidden"
             animate="visible"
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+            className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto"
           >
             {filteredProjects.map((project) => (
               <motion.div
                 key={project.id}
                 variants={itemVariants}
-                className="bg-white dark:bg-gray-800 rounded-lg shadow-sm hover:shadow-lg transition-shadow duration-300 overflow-hidden"
-              >
-                {/* Project Image */}
+                className="bg-white dark:bg-gray-800 rounded-lg shadow-sm hover:shadow-lg transition-shadow duration-300 overflow-hidden flex flex-col h-full cursor-pointer"
+                onClick={() => handleProjectClick(project)}
+                              >
                 <div className="relative h-48 overflow-hidden">
                   <img
                     src={project.image}
@@ -153,47 +231,69 @@ const Projects: React.FC = () => {
                   )}
                 </div>
 
-                {/* Project Content */}
-                <div className="p-6">
-                  <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">
-                    {project.title}
-                  </h3>
-                  <p className="text-gray-600 dark:text-gray-300 mb-4 line-clamp-3">
-                    {project.description}
-                  </p>
+                <div className="p-6 flex flex-col flex-grow bg-gray-100 dark:bg-gray-800">
+                  <div className="flex-grow">
+                    <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">
+                      {project.title}
+                    </h3>
+                    <p className="text-gray-600 dark:text-gray-300 mb-4">
+                      {project.description}
+                    </p>
 
-                  {/* Technologies */}
-                  <div className="flex flex-wrap gap-2 mb-4">
-                    {project.technologies.map((tech) => (
-                      <span
-                        key={tech}
-                        className="bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 px-3 py-1 rounded-full text-sm"
-                      >
-                        {tech}
-                      </span>
-                    ))}
+                    <div className="flex flex-wrap gap-2 mb-4">
+                      {project.technologies.map((tech) => (
+                        <span
+                          key={tech}
+                          className="bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 px-3 py-1 rounded-full text-sm"
+                        >
+                          {tech}
+                        </span>
+                      ))}
+                    </div>
                   </div>
 
-                  {/* Project Links */}
-                  <div className="flex gap-3">
-                    {project.githubUrl && (
+                  <div className="mt-auto pt-4 flex justify-center gap-2">
+                    {project.githubUrlBack && project.githubUrlFront ? (
+                      <>
+                        <a
+                          href={project.githubUrlBack}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex items-center gap-2 bg-primary-600 hover:bg-primary-700 text-white font-medium transition-colors px-4 py-2 rounded-full text-center"
+                          onClick={(e) => e.stopPropagation()}
+                        >
+                          <CodeBracketIcon className="h-4 w-4" />
+                          {t('projects.viewCodeBack')}
+                        </a>
+                        <a
+                          href={project.githubUrlFront}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex items-center gap-2 bg-primary-600 hover:bg-primary-700 text-white font-medium transition-colors px-4 py-2 rounded-full text-center"
+                          onClick={(e) => e.stopPropagation()}
+                        >
+                          <CodeBracketIcon className="h-4 w-4" />
+                          {t('projects.viewCodeFront')}
+                        </a>
+                      </>
+                    ) : project.githubUrl ? (
                       <a
                         href={project.githubUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex items-center gap-2 text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 font-medium transition-colors"
+                        className="flex items-center gap-2 bg-primary-600 hover:bg-primary-700 text-white font-medium transition-colors px-4 py-2 rounded-full text-center"
+                        onClick={(e) => e.stopPropagation()}
                       >
                         <CodeBracketIcon className="h-4 w-4" />
                         {t('projects.viewCode')}
                       </a>
-                    )}
+                    ) : null}
                   </div>
                 </div>
               </motion.div>
             ))}
           </motion.div>
 
-          {/* Empty State */}
           {filteredProjects.length === 0 && (
             <motion.div
               initial={{ opacity: 0 }}
@@ -214,7 +314,171 @@ const Projects: React.FC = () => {
         </div>
       </section>
 
+      <AnimatePresence>
+        {selectedProject && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="absolute inset-0 bg-black bg-opacity-50 backdrop-blur-sm"
+              onClick={closeModal}
+            />
+            
+            <motion.div
+              variants={modalVariants}
+              initial="hidden"
+              animate="visible"
+              exit="exit"
+              className="relative bg-white dark:bg-gray-800 rounded-lg shadow-xl max-w-6xl w-full max-h-[90vh] overflow-hidden"
+              onClick={(e) => e.stopPropagation()}
+                          >
+              <button
+                onClick={closeModal}
+                className="absolute top-4 right-4 z-10 p-2 rounded-full bg-gray-800 bg-opacity-50 text-white hover:bg-opacity-75 transition-all duration-200"
+              >
+                <XMarkIcon className="h-6 w-6" />
+              </button>
 
+              <div className="flex flex-col lg:flex-row h-full">
+                <div className="flex-1 p-8 overflow-y-auto">
+                  <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">
+                    {selectedProject.title}
+                  </h2>
+                  <p className="text-gray-600 dark:text-gray-300 mb-6 text-lg whitespace-pre-line">
+                    {t(`projects.projects.${selectedProject.title.toLowerCase().replace(/\s+/g, '')}.detailedDescription`)}
+                  </p>
+                  
+                  <div className="mb-6">
+                    <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-3">
+                      Tecnologías utilizadas:
+                    </h3>
+                    <div className="flex flex-wrap gap-2">
+                      {selectedProject.technologies.map((tech: string) => (
+                        <span
+                          key={tech}
+                          className="bg-primary-100 dark:bg-primary-900 text-primary-800 dark:text-primary-200 px-3 py-1 rounded-full text-sm font-medium"
+                        >
+                          {tech}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div className="flex flex-wrap gap-3">
+                    {selectedProject.githubUrlBack && selectedProject.githubUrlFront ? (
+                      <>
+                        <a
+                          href={selectedProject.githubUrlBack}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex items-center gap-2 bg-primary-600 hover:bg-primary-700 text-white font-medium transition-colors px-6 py-3 rounded-full"
+                        >
+                          <CodeBracketIcon className="h-5 w-5" />
+                          {t('projects.viewCodeBack')}
+                        </a>
+                        <a
+                          href={selectedProject.githubUrlFront}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex items-center gap-2 bg-primary-600 hover:bg-primary-700 text-white font-medium transition-colors px-6 py-3 rounded-full"
+                        >
+                          <CodeBracketIcon className="h-5 w-5" />
+                          {t('projects.viewCodeFront')}
+                        </a>
+                      </>
+                    ) : selectedProject.githubUrl ? (
+                      <a
+                        href={selectedProject.githubUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center gap-2 bg-primary-600 hover:bg-primary-700 text-white font-medium transition-colors px-6 py-3 rounded-full"
+                      >
+                        <CodeBracketIcon className="h-5 w-5" />
+                        {t('projects.viewCode')}
+                      </a>
+                    ) : null}
+                  </div>
+                </div>
+
+                <div className="lg:w-1/3 p-6 bg-gray-50 dark:bg-gray-700">
+                  <div className="flex flex-col gap-4 h-full">
+                    {selectedProject.modalImages?.map((image: string, index: number) => (
+                      <div key={index} className="flex-1">
+                        <img
+                          src={image}
+                          alt={`${selectedProject.title} screenshot ${index + 1}`}
+                          className="w-full h-full object-contain rounded-lg shadow-md cursor-pointer hover:scale-105 transition-transform duration-200"
+                          onClick={() => openImage(image)}
+                        />
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
+
+      <AnimatePresence>
+        {selectedImage && (
+          <div className="fixed inset-0 z-[60] flex items-center justify-center p-4">
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="absolute inset-0 bg-black bg-opacity-90 backdrop-blur-sm"
+              onClick={closeImage}
+            />
+            
+            <motion.div
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.8 }}
+              transition={{ duration: 0.2 }}
+              className="relative max-w-[90vw] max-h-[90vh]"
+              onClick={(e) => e.stopPropagation()}
+                          >
+              <button
+                onClick={closeImage}
+                className="absolute top-4 right-4 z-10 p-2 rounded-full bg-gray-800 bg-opacity-50 text-white hover:bg-opacity-75 transition-all duration-200"
+              >
+                <XMarkIcon className="h-6 w-6" />
+              </button>
+
+              {selectedProject && selectedProject.modalImages.length > 1 && (
+                <>
+                  <button
+                    onClick={previousImage}
+                    className="absolute left-4 top-1/2 transform -translate-y-1/2 z-10 p-3 rounded-full bg-gray-800 bg-opacity-50 text-white hover:bg-opacity-75 transition-all duration-200"
+                  >
+                    <ChevronLeftIcon className="h-6 w-6" />
+                  </button>
+                  <button
+                    onClick={nextImage}
+                    className="absolute right-4 top-1/2 transform -translate-y-1/2 z-10 p-3 rounded-full bg-gray-800 bg-opacity-50 text-white hover:bg-opacity-75 transition-all duration-200"
+                  >
+                    <ChevronRightIcon className="h-6 w-6" />
+                  </button>
+                </>
+              )}
+
+              <img
+                src={selectedImage}
+                alt="Full size project screenshot"
+                className="w-full h-full object-contain rounded-lg shadow-2xl"
+              />
+
+              {selectedProject && selectedProject.modalImages.length > 1 && (
+                <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 z-10 px-4 py-2 rounded-full bg-gray-800 bg-opacity-50 text-white text-sm">
+                  {selectedProject.modalImages.indexOf(selectedImage) + 1} / {selectedProject.modalImages.length}
+                </div>
+              )}
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
     </div>
   );
 };

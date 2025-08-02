@@ -45,7 +45,6 @@ const Navbar: React.FC = () => {
     <nav className="bg-white dark:bg-gray-800 shadow-sm sticky top-0 z-50 transition-colors duration-200">
       <div className="container-custom">
         <div className="flex justify-between items-center h-16">
-          {/* Logo */}
           <button
             onClick={() => scrollToSection('home')}
             className="flex items-center space-x-2 cursor-pointer"
@@ -56,7 +55,6 @@ const Navbar: React.FC = () => {
             <span className="text-xl font-bold text-gray-900 dark:text-white">Bruno</span>
           </button>
 
-          {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
             {navItems.map((item) => (
               <button
@@ -69,9 +67,7 @@ const Navbar: React.FC = () => {
             ))}
           </div>
 
-          {/* Desktop Controls */}
           <div className="hidden md:flex items-center space-x-4">
-            {/* Language Selector */}
             <div className="relative">
               <button
                 onClick={() => setIsLanguageOpen(!isLanguageOpen)}
@@ -108,7 +104,6 @@ const Navbar: React.FC = () => {
               )}
             </div>
 
-            {/* Theme Toggle */}
             <button
               onClick={toggleTheme}
               className="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
@@ -121,7 +116,6 @@ const Navbar: React.FC = () => {
             </button>
           </div>
 
-          {/* Mobile menu button */}
           <button
             onClick={() => setIsOpen(!isOpen)}
             className="md:hidden p-2 rounded-md text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
@@ -134,7 +128,6 @@ const Navbar: React.FC = () => {
           </button>
         </div>
 
-        {/* Mobile Navigation */}
         {isOpen && (
           <motion.div
             initial={{ opacity: 0, y: -20 }}
@@ -153,9 +146,7 @@ const Navbar: React.FC = () => {
                 </button>
               ))}
 
-              {/* Mobile Controls */}
               <div className="flex items-center justify-between px-3 py-2">
-                {/* Language Selector Mobile */}
                 <div className="relative">
                   <button
                     onClick={() => setIsLanguageOpen(!isLanguageOpen)}
@@ -192,7 +183,6 @@ const Navbar: React.FC = () => {
                   )}
                 </div>
 
-                {/* Theme Toggle Mobile */}
                 <button
                   onClick={toggleTheme}
                   className="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"

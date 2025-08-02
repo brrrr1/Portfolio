@@ -52,10 +52,8 @@ const Footer: React.FC = () => {
   return (
     <footer className="bg-gray-900 dark:bg-black text-white">
       <div className="container-custom">
-        {/* Main Footer Content */}
         <div className="py-12">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {/* Brand Section */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -73,7 +71,6 @@ const Footer: React.FC = () => {
                 {t('footer.description')}
               </p>
 
-              {/* Social Links */}
               <div className="flex space-x-4">
                 {socialLinks.map((social, index) => (
                   <motion.a
@@ -94,7 +91,6 @@ const Footer: React.FC = () => {
               </div>
             </motion.div>
 
-            {/* Footer Links */}
             {footerLinks.map((section, sectionIndex) => (
               <motion.div
                 key={sectionIndex}
@@ -121,7 +117,6 @@ const Footer: React.FC = () => {
           </div>
         </div>
 
-        {/* Bottom Bar */}
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}

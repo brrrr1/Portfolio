@@ -1,6 +1,5 @@
 export const translations = {
   es: {
-    // Navbar
     nav: {
       home: 'Inicio',
       about: 'Sobre mí',
@@ -8,7 +7,6 @@ export const translations = {
       contact: 'Contacto'
     },
     
-    // Home
     home: {
       greeting: 'Hola, soy',
       name: 'Bruno',
@@ -43,7 +41,6 @@ export const translations = {
       }
     },
 
-    // About
     about: {
       title: 'Sobre mí',
       story: {
@@ -105,7 +102,6 @@ export const translations = {
       }
     },
 
-    // Projects
     projects: {
       title: 'Mis Proyectos',
       subtitle: 'Una colección de proyectos que demuestran mis habilidades y pasión por crear soluciones tecnológicas innovadoras.',
@@ -113,28 +109,27 @@ export const translations = {
         all: 'Todos',
         web: 'Web'
       },
-      viewCode: 'Ver Código',
+      viewCode: 'Ver Proyecto',
+      viewCodeBack: 'Ver Backend',
+      viewCodeFront: 'Ver Frontend',
       featured: 'Destacado',
       noProjects: 'No hay proyectos en esta categoría',
       noProjectsSubtitle: 'Pronto agregaré más proyectos en esta categoría.',
       projects: {
         lagrada: {
           title: 'La Grada',
-          description: 'Aplicación web completa para la gestión y visualización de eventos deportivos en un bar dedicado. Permite a los usuarios registrarse, seleccionar su equipo favorito, comprar entradas y gestionar su perfil de usuario.'
-        },
-        lagradaFront: {
-          title: 'La Grada Frontend',
-          description: 'Frontend de la aplicación La Grada desarrollado con Angular que proporciona una interfaz moderna y funcional para la gestión de eventos deportivos.'
+          description: 'Aplicación web para un bar ficticio que retransmite eventos deportivos. Permite registro de usuarios, selección de equipos favoritos, compra de entradas y gestión de perfiles. Incluye códigos QR, emails y autenticación JWT.',
+          detailedDescription: 'Aplicación web completa para la gestión y visualización de eventos deportivos en un bar dedicado. Permite a los usuarios registrarse, seleccionar su equipo favorito, comprar entradas y gestionar su perfil de usuario. Incluye ZXing para generación de códigos QR, Jakarta Mail para envío de emails y autenticación JWT. El frontend desarrollado con Angular proporciona una interfaz moderna y funcional para la gestión de eventos deportivos.\n\nEl proyecto está estructurado en dos partes principales:\n\n• Frontend (Angular 18.2.0): Arquitectura modular con componentes reutilizables, servicios para lógica de negocio, sistema de rutas e integración con Angular Material. Utiliza TypeScript 5.5.2, RxJS 7.8.0 y JWT para autenticación.\n\n• Backend (Spring Boot 3.4.2): API RESTful con Java 17, Spring Security, Spring Data JPA, PostgreSQL, Lombok, SpringDoc OpenAPI para documentación, ZXing para códigos QR y Jakarta Mail para emails. Incluye manejo de archivos, validación de datos, testing automatizado y soporte Docker para producción.'
         },
         pipocapp: {
           title: 'PipocApp',
-          description: 'Aplicación web para la gestión y organización de eventos sociales y reuniones.'
+          description: 'Aplicación web sobre películas y series aprovechando la API de TMDB. Ofrece experiencia personalizada gracias a la posibilidad de utilizar cuentas de TMDB para guardar favoritos y listas personalizadas.',
+          detailedDescription: 'Aplicación web desarrollada con Angular para explorar películas y series utilizando la API de TMDB. La aplicación ofrece una experiencia personalizada permitiendo a los usuarios utilizar sus cuentas de TMDB para guardar favoritos y crear listas personalizadas.\n\nCaracterísticas técnicas:\n\n• Frontend: Angular con TypeScript, HTML y CSS\n• Integración con TMDB API para obtener datos de películas y series\n• Sistema de autenticación con cuentas de TMDB\n• Funcionalidades de favoritos y listas personalizadas\n• Interfaz moderna y responsiva\n• Arquitectura modular y componentes reutilizables'
         }
       }
 
     },
 
-    // Contact
     contact: {
       title: 'Contacto',
       subtitle: '¿Tienes un proyecto en mente? ¿Quieres colaborar? No dudes en contactarme, estaré encantado de hablar contigo.',
@@ -174,7 +169,6 @@ export const translations = {
       }
     },
 
-    // Footer
     footer: {
       description: 'Desarrollador Full Stack apasionado por innovar y dar soluciones que marcan la diferencia.',
       navigation: 'Navegación',
@@ -183,7 +177,6 @@ export const translations = {
   },
 
   en: {
-    // Navbar
     nav: {
       home: 'Home',
       about: 'About',
@@ -191,7 +184,6 @@ export const translations = {
       contact: 'Contact'
     },
     
-    // Home
     home: {
       greeting: 'Hello, I am',
       name: 'Bruno',
@@ -226,7 +218,6 @@ export const translations = {
       }
     },
 
-    // About
     about: {
       title: 'About Me',
       story: {
@@ -288,7 +279,6 @@ export const translations = {
       }
     },
 
-    // Projects
     projects: {
       title: 'My Projects',
       subtitle: 'A collection of projects that demonstrate my skills and passion for creating innovative technological solutions.',
@@ -296,28 +286,27 @@ export const translations = {
         all: 'All',
         web: 'Web'
       },
-      viewCode: 'View Code',
+      viewCode: 'View Project',
+      viewCodeBack: 'View Backend',
+      viewCodeFront: 'View Frontend',
       featured: 'Featured',
       noProjects: 'No projects in this category',
       noProjectsSubtitle: 'I will add more projects in this category soon.',
       projects: {
         lagrada: {
           title: 'La Grada',
-          description: 'Complete web application for managing and viewing sports events at a dedicated bar. Allows users to register, select their favorite team, purchase tickets and manage their user profile.'
-        },
-        lagradaFront: {
-          title: 'La Grada Frontend',
-          description: 'Frontend of the La Grada application developed with Angular that provides a modern and functional interface for managing sports events.'
+          description: 'Web application for a fictional bar that broadcasts sports events. Allows user registration, favorite team selection, ticket purchasing and profile management. Includes QR codes, emails and JWT authentication.',
+          detailedDescription: 'Complete web application for managing and viewing sports events at a dedicated bar. Allows users to register, select their favorite team, purchase tickets and manage their user profile. Includes ZXing for QR code generation, Jakarta Mail for email sending and JWT authentication. The frontend developed with Angular provides a modern and functional interface for managing sports events.\n\nThe project is structured in two main parts:\n\n• Frontend (Angular 18.2.0): Modular architecture with reusable components, services for business logic, routing system and Angular Material integration. Uses TypeScript 5.5.2, RxJS 7.8.0 and JWT for authentication.\n\n• Backend (Spring Boot 3.4.2): RESTful API with Java 17, Spring Security, Spring Data JPA, PostgreSQL, Lombok, SpringDoc OpenAPI for documentation, ZXing for QR codes and Jakarta Mail for emails. Includes file handling, data validation, automated testing and Docker support for production.'
         },
         pipocapp: {
           title: 'PipocApp',
-          description: 'Web application for managing and organizing social events and meetings.'
+          description: 'Web application about movies and series using the TMDB API. Offers personalized experience thanks to the possibility of using TMDB accounts to save favorites and custom lists.',
+          detailedDescription: 'Web application developed with Angular to explore movies and series using the TMDB API. The application offers a personalized experience allowing users to use their TMDB accounts to save favorites and create custom lists.\n\nTechnical features:\n\n• Frontend: Angular with TypeScript, HTML and CSS\n• TMDB API integration to get movie and series data\n• Authentication system with TMDB accounts\n• Favorites and custom lists functionality\n• Modern and responsive interface\n• Modular architecture and reusable components'
         }
       }
 
     },
 
-    // Contact
     contact: {
       title: 'Contact',
       subtitle: 'Do you have a project in mind? Do you want to collaborate? Do not hesitate to contact me, I will be happy to talk to you.',
@@ -357,7 +346,6 @@ export const translations = {
       }
     },
 
-    // Footer
     footer: {
       description: 'Full Stack Developer passionate about innovating and delivering solutions that make a difference.',
       navigation: 'Navigation',
@@ -366,7 +354,6 @@ export const translations = {
   },
 
   de: {
-    // Navbar
     nav: {
       home: 'Startseite',
       about: 'Über mich',
@@ -374,7 +361,6 @@ export const translations = {
       contact: 'Kontakt'
     },
     
-    // Home
     home: {
       greeting: 'Hallo, ich bin',
       name: 'Bruno',
@@ -409,7 +395,6 @@ export const translations = {
       }
     },
 
-    // About
     about: {
       title: 'Über mich',
       story: {
@@ -471,7 +456,6 @@ export const translations = {
       }
     },
 
-    // Projects
     projects: {
       title: 'Meine Projekte',
       subtitle: 'Eine Sammlung von Projekten, die meine Fähigkeiten und Leidenschaft für die Erstellung innovativer technologischer Lösungen demonstrieren.',
@@ -479,28 +463,27 @@ export const translations = {
         all: 'Alle',
         web: 'Web'
       },
-      viewCode: 'Code ansehen',
+      viewCode: 'Projekt ansehen',
+      viewCodeBack: 'Backend ansehen',
+      viewCodeFront: 'Frontend ansehen',
       featured: 'Hervorgehoben',
       noProjects: 'Keine Projekte in dieser Kategorie',
       noProjectsSubtitle: 'Ich werde bald weitere Projekte in dieser Kategorie hinzufügen.',
       projects: {
         lagrada: {
           title: 'La Grada',
-          description: 'Vollständige Webanwendung zur Verwaltung und Anzeige von Sportereignissen in einer spezialisierten Bar. Ermöglicht es Benutzern, sich zu registrieren, ihr Lieblingsteam auszuwählen, Tickets zu kaufen und ihr Benutzerprofil zu verwalten.'
-        },
-        lagradaFront: {
-          title: 'La Grada Frontend',
-          description: 'Frontend der La Grada-Anwendung, entwickelt mit Angular, das eine moderne und funktionale Benutzeroberfläche für die Verwaltung von Sportereignissen bietet.'
+          description: 'Webanwendung für eine fiktive Bar, die Sportereignisse überträgt. Ermöglicht Benutzerregistrierung, Auswahl von Lieblingsteams, Ticketkauf und Profilverwaltung. Enthält QR-Codes, E-Mails und JWT-Authentifizierung.',
+          detailedDescription: 'Vollständige Webanwendung zur Verwaltung und Anzeige von Sportereignissen in einer spezialisierten Bar. Ermöglicht es Benutzern, sich zu registrieren, ihr Lieblingsteam auszuwählen, Tickets zu kaufen und ihr Benutzerprofil zu verwalten. Enthält ZXing für QR-Code-Generierung, Jakarta Mail für E-Mail-Versand und JWT-Authentifizierung. Das mit Angular entwickelte Frontend bietet eine moderne und funktionale Benutzeroberfläche für die Verwaltung von Sportereignissen.\n\nDas Projekt ist in zwei Hauptteile strukturiert:\n\n• Frontend (Angular 18.2.0): Modulare Architektur mit wiederverwendbaren Komponenten, Services für Geschäftslogik, Routing-System und Angular Material Integration. Verwendet TypeScript 5.5.2, RxJS 7.8.0 und JWT für Authentifizierung.\n\n• Backend (Spring Boot 3.4.2): RESTful API mit Java 17, Spring Security, Spring Data JPA, PostgreSQL, Lombok, SpringDoc OpenAPI für Dokumentation, ZXing für QR-Codes und Jakarta Mail für E-Mails. Enthält Dateiverwaltung, Datenvalidierung, automatisierte Tests und Docker-Support für Produktion.'
         },
         pipocapp: {
           title: 'PipocApp',
-          description: 'Webanwendung zur Verwaltung und Organisation von sozialen Veranstaltungen und Treffen.'
+          description: 'Webanwendung über Filme und Serien unter Nutzung der TMDB API. Bietet personalisierte Erfahrung dank der Möglichkeit, TMDB-Konten zu verwenden, um Favoriten und benutzerdefinierte Listen zu speichern.',
+          detailedDescription: 'Webanwendung entwickelt mit Angular zur Erkundung von Filmen und Serien unter Nutzung der TMDB API. Die Anwendung bietet eine personalisierte Erfahrung, die es Benutzern ermöglicht, ihre TMDB-Konten zu verwenden, um Favoriten zu speichern und benutzerdefinierte Listen zu erstellen.\n\nTechnische Merkmale:\n\n• Frontend: Angular mit TypeScript, HTML und CSS\n• TMDB API Integration zur Beschaffung von Film- und Seriendaten\n• Authentifizierungssystem mit TMDB-Konten\n• Favoriten und benutzerdefinierte Listen Funktionalität\n• Moderne und responsive Benutzeroberfläche\n• Modulare Architektur und wiederverwendbare Komponenten'
         }
       }
 
     },
 
-    // Contact
     contact: {
       title: 'Kontakt',
       subtitle: 'Hast du ein Projekt im Sinn? Möchtest du zusammenarbeiten? Zögere nicht, mich zu kontaktieren, ich freue mich darauf, mit dir zu sprechen.',
@@ -540,7 +523,6 @@ export const translations = {
       }
     },
 
-    // Footer
     footer: {
       description: 'Full Stack Entwickler mit Leidenschaft für Innovation und Lösungen, die einen Unterschied machen.',
       navigation: 'Navigation',

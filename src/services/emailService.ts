@@ -9,7 +9,6 @@ export interface EmailData {
 
 export const sendEmail = async (data: EmailData): Promise<{ success: boolean; message: string }> => {
   try {
-    // Usando Formspree con el Form ID del usuario
     const formId = process.env.REACT_APP_FORMSPREE_FORM_ID || 'mkgzzjzb';
     const response = await fetch(`https://formspree.io/f/${formId}`, {
       method: 'POST',
@@ -45,30 +44,8 @@ export const sendEmail = async (data: EmailData): Promise<{ success: boolean; me
   }
 };
 
-// Función alternativa usando EmailJS (requiere configuración adicional)
 export const sendEmailWithEmailJS = async (data: EmailData): Promise<{ success: boolean; message: string }> => {
   try {
-    // Esta función requiere que instales @emailjs/browser
-    // y configures las credenciales en emailConfig
-    // const templateParams = {
-    //   from_name: data.name,
-    //   from_email: data.email,
-    //   subject: data.subject,
-    //   message: data.message,
-    //   to_name: emailConfig.default.recipientName,
-    //   to_email: emailConfig.default.recipientEmail,
-    // };
-
-    // Descomenta las siguientes líneas cuando tengas EmailJS configurado
-    // import emailjs from '@emailjs/browser';
-    // const response = await emailjs.send(
-    //   emailConfig.emailjs.serviceId,
-    //   emailConfig.emailjs.templateId,
-    //   templateParams,
-    //   emailConfig.emailjs.publicKey
-    // );
-
-    // Por ahora, simulamos el envío
     await new Promise(resolve => setTimeout(resolve, 1000));
     
     return {
@@ -84,7 +61,6 @@ export const sendEmailWithEmailJS = async (data: EmailData): Promise<{ success: 
   }
 };
 
-// Función de respaldo que abre el cliente de email del usuario
 export const openEmailClient = (data: EmailData): void => {
   const subject = encodeURIComponent(data.subject);
   const body = encodeURIComponent(`Hola Bruno,\n\n${data.message}\n\nSaludos,\n${data.name}\n${data.email}`);

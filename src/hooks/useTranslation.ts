@@ -12,7 +12,7 @@ export const useTranslation = () => {
       if (value && typeof value === 'object' && k in value) {
         value = value[k];
       } else {
-        return key; // Return the key if translation not found
+        return key;
       }
     }
     

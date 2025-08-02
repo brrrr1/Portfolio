@@ -45,7 +45,6 @@ const Contact: React.FC = () => {
           message: result.message
         });
         
-        // Reset form
         setFormData({
           name: '',
           email: '',
@@ -112,7 +111,6 @@ const Contact: React.FC = () => {
 
   return (
     <div id="contact" className="min-h-screen">
-      {/* Hero Section */}
       <section className="section-padding bg-gradient-to-br from-primary-50 to-blue-50 dark:from-gray-900 dark:to-gray-800">
         <div className="container-custom">
           <motion.div
@@ -131,11 +129,9 @@ const Contact: React.FC = () => {
         </div>
       </section>
 
-      {/* Contact Form & Info */}
       <section className="section-padding bg-white dark:bg-gray-900">
         <div className="container-custom">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-            {/* Contact Form */}
             <motion.div
               initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -146,7 +142,6 @@ const Contact: React.FC = () => {
                 {t('contact.form.title')}
               </h2>
               
-              {/* Status Message */}
               {submitStatus.type && (
                 <motion.div
                   initial={{ opacity: 0, y: -10 }}
@@ -241,7 +236,6 @@ const Contact: React.FC = () => {
               </form>
             </motion.div>
 
-            {/* Contact Info */}
             <motion.div
               initial={{ opacity: 0, x: 20 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -258,7 +252,6 @@ const Contact: React.FC = () => {
                 </p>
               </div>
 
-              {/* Contact Details */}
               <div className="space-y-6">
                 {contactInfo.map((info, index) => (
                   <motion.div
@@ -289,7 +282,6 @@ const Contact: React.FC = () => {
                 ))}
               </div>
 
-              {/* Social Links */}
               <div>
                 <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">
                   {t('contact.info.social')}
@@ -318,7 +310,6 @@ const Contact: React.FC = () => {
         </div>
       </section>
 
-      {/* Availability Section */}
       <section className="section-padding bg-gray-50 dark:bg-gray-800">
         <div className="container-custom">
           <motion.div

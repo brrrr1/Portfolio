@@ -6,7 +6,6 @@ import {
 } from '@heroicons/react/24/outline';
 import { useTranslation } from '../hooks/useTranslation';
 
-// Import local images
 import brunoProfile from '../assets/images/bruno-profile.jpg';
 import cvFile from '../assets/docs/CV 2025.pdf';
 
@@ -56,7 +55,6 @@ const Home: React.FC = () => {
 
   return (
     <div id="home" className="min-h-screen">
-      {/* Hero Section */}
       <section className="section-padding bg-gradient-to-br from-primary-50 to-blue-50 dark:from-gray-900 dark:to-gray-800">
         <div className="container-custom">
           <motion.div
@@ -64,9 +62,8 @@ const Home: React.FC = () => {
             initial="hidden"
             animate="visible"
             className="text-center"
-          >
-            {/* Foto de Perfil */}
-            <motion.div
+                      >
+              <motion.div
               variants={itemVariants}
               className="mb-8"
             >
@@ -145,7 +142,6 @@ const Home: React.FC = () => {
         </div>
       </section>
 
-      {/* Skills Section */}
       <section className="section-padding bg-white dark:bg-gray-900">
         <div className="container-custom">
           <motion.div
@@ -185,7 +181,6 @@ const Home: React.FC = () => {
         </div>
       </section>
 
-      {/* Services Section */}
       <section className="section-padding bg-gray-50 dark:bg-gray-800">
         <div className="container-custom">
           <motion.div
