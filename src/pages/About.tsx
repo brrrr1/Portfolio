@@ -196,35 +196,51 @@ const About: React.FC = () => {
                 viewport={{ once: true }}
                 className="bg-white dark:bg-gray-700 rounded-lg p-6 shadow-sm hover:shadow-md transition-shadow"
               >
-                <div className="flex items-start space-x-4">
-                  <div className="bg-primary-100 dark:bg-primary-900 p-3 rounded-lg">
+                <div className="flex items-start space-x-3">
+                  <div className="bg-primary-100 dark:bg-primary-900 p-2 rounded-lg flex-shrink-0">
                     {exp.logo ? (
-                      <img src={exp.logo} alt={exp.company} className="h-6 w-6 object-contain" />
+                      <a 
+                        href="https://www.ordio.com/" 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="block hover:opacity-80 transition-opacity"
+                      >
+                        <img src={exp.logo} alt={exp.company} className="h-5 w-5 object-contain" />
+                      </a>
                     ) : (
-                      <BriefcaseIcon className="h-6 w-6 text-primary-600 dark:text-primary-400" />
+                      <BriefcaseIcon className="h-5 w-5 text-primary-600 dark:text-primary-400" />
                     )}
                   </div>
-                  <div className="flex-1">
-                    <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start mb-2">
-                      <h3 className="text-xl font-semibold text-gray-900 dark:text-white">
-                        {exp.title}
-                      </h3>
-                      <div className="flex flex-col items-end">
-                        <span className="text-sm text-primary-600 dark:text-primary-400 font-medium mb-1">
+                  <div className="flex-1 min-w-0">
+                    <div className="flex justify-between items-start gap-2 mb-1">
+                      <div className="flex-1">
+                        <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-1">
+                          {exp.title}
+                        </h3>
+                        <a 
+                          href="https://www.ordio.com/" 
+                          target="_blank" 
+                          rel="noopener noreferrer"
+                          className="block hover:text-primary-700 dark:hover:text-primary-300 transition-colors"
+                        >
+                          <p className="text-primary-600 dark:text-primary-400 font-medium">
+                            {exp.company}
+                          </p>
+                        </a>
+                      </div>
+                      <div className="flex flex-col items-end gap-1">
+                        <span className="text-sm text-primary-600 dark:text-primary-400 font-medium">
                           {exp.year}
                         </span>
-                        <span className="inline-block bg-green-100 dark:bg-green-900 text-green-700 dark:text-green-300 px-2 py-1 rounded-full text-xs font-medium">
+                        <span className="inline-block bg-green-100 dark:bg-green-900 text-green-700 dark:text-green-300 px-2 py-0.5 rounded-full text-xs font-medium">
                           {t('about.experience.onSite')}
                         </span>
                       </div>
                     </div>
-                    <p className="text-primary-600 dark:text-primary-400 font-medium mb-2">
-                      {exp.company}
-                    </p>
-                    <p className="text-gray-600 dark:text-gray-300 mb-2">
+                    <p className="text-gray-600 dark:text-gray-300 text-sm mb-1">
                       {exp.description}
                     </p>
-                    <p className="text-sm text-gray-500 dark:text-gray-400 mb-2">
+                    <p className="text-xs text-gray-500 dark:text-gray-400">
                       {t('about.experience.location')}
                     </p>
                   </div>
@@ -270,12 +286,12 @@ const About: React.FC = () => {
                       <AcademicCapIcon className="h-6 w-6 text-primary-600 dark:text-primary-400" />
                     )}
                   </div>
-                  <div className="flex-1">
-                    <div className="flex justify-between items-start mb-2">
-                      <h3 className="text-xl font-semibold text-gray-900 dark:text-white">
+                  <div className="flex-1 min-w-0">
+                    <div className="flex justify-between items-start gap-3 mb-2">
+                      <h3 className="text-xl font-semibold text-gray-900 dark:text-white flex-1 min-w-0">
                         {edu.degree}
                       </h3>
-                      <span className="text-sm text-primary-600 dark:text-primary-400 font-medium">
+                      <span className="text-sm text-primary-600 dark:text-primary-400 font-medium flex-shrink-0 whitespace-nowrap">
                         {edu.year}
                       </span>
                     </div>
