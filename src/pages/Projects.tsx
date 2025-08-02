@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
   CodeBracketIcon,
@@ -8,7 +8,6 @@ import {
 } from '@heroicons/react/24/outline';
 import { useTranslation } from '../hooks/useTranslation';
 
-import lagradaBack from '../assets/images/lagrada-back.png';
 import lagradaFront from '../assets/images/lagrada-front.jpg';
 import pipocapp from '../assets/images/pipocapp.jpeg';
 import lagrada1 from '../assets/images/lagrada1.png';
@@ -112,25 +111,25 @@ const Projects: React.FC = () => {
     setSelectedImage(image);
   };
 
-  const closeImage = () => {
+  const closeImage = useCallback(() => {
     setSelectedImage(null);
-  };
+  }, []);
 
-  const nextImage = () => {
+  const nextImage = useCallback(() => {
     if (selectedProject && selectedImage) {
       const currentIndex = selectedProject.modalImages.indexOf(selectedImage);
       const nextIndex = (currentIndex + 1) % selectedProject.modalImages.length;
       setSelectedImage(selectedProject.modalImages[nextIndex]);
     }
-  };
+  }, [selectedProject, selectedImage]);
 
-  const previousImage = () => {
+  const previousImage = useCallback(() => {
     if (selectedProject && selectedImage) {
       const currentIndex = selectedProject.modalImages.indexOf(selectedImage);
       const prevIndex = currentIndex === 0 ? selectedProject.modalImages.length - 1 : currentIndex - 1;
       setSelectedImage(selectedProject.modalImages[prevIndex]);
     }
-  };
+  }, [selectedProject, selectedImage]);
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -147,7 +146,7 @@ const Projects: React.FC = () => {
 
     document.addEventListener('keydown', handleKeyDown);
     return () => document.removeEventListener('keydown', handleKeyDown);
-  }, [selectedImage, selectedProject]);
+  }, [selectedImage, selectedProject, nextImage, previousImage, closeImage]);
 
   useEffect(() => {
     if (selectedProject || selectedImage) {

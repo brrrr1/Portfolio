@@ -1,77 +1,76 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import { 
-  BriefcaseIcon, 
+import React from "react";
+import { motion } from "framer-motion";
+import {
+  BriefcaseIcon,
   AcademicCapIcon,
   CodeBracketIcon,
   RocketLaunchIcon,
-  UserGroupIcon
-} from '@heroicons/react/24/outline';
-import { useTranslation } from '../hooks/useTranslation';
+  UserGroupIcon,
+} from "@heroicons/react/24/outline";
+import { useTranslation } from "../hooks/useTranslation";
 
-import brunoProfile from '../assets/images/bruno-profile.jpg';
+import brunoProfile from "../assets/images/bruno-profile.jpg";
 
 const About: React.FC = () => {
   const { t } = useTranslation();
 
-  
   const experience = [
     {
-      year: 'Mar. 2025 - Jul. 2025',
-      title: t('about.experience.internship'),
-      company: 'Ordio GmbH',
-      description: t('about.experience.description'),
-      logo: 'https://www.ordio.com/wp-content/uploads/2022/07/ordio.png'
-    }
+      year: "Mar. 2025 - Jul. 2025",
+      title: t("about.experience.internship"),
+      company: "Ordio GmbH",
+      description: t("about.experience.description"),
+      logo: "https://www.ordio.com/wp-content/uploads/2022/07/ordio.png",
+    },
   ];
 
   const education = [
     {
-      year: '2023-2025',
-      degree: t('about.education.programs.multiPlatform'),
-      institution: 'Salesianos San Pedro',
-      description: t('about.education.descriptions.multiPlatform'),
-      logo: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTK9GfPg7Uf1cgFs_nlr_5GTcZiW8VyivN-lg&s'
+      year: "2023-2025",
+      degree: t("about.education.programs.multiPlatform"),
+      institution: "Salesianos San Pedro",
+      description: t("about.education.descriptions.multiPlatform"),
+      logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTK9GfPg7Uf1cgFs_nlr_5GTcZiW8VyivN-lg&s",
     },
     {
-      year: 'Octubre 2024 - Junio 2025',
-      degree: t('about.education.programs.ai'),
-      institution: 'UNIR',
-      description: t('about.education.descriptions.ai'),
-      logo: 'https://yt3.googleusercontent.com/KLi8T391TBxKyUecknywtrrvG9tUHX7qhitaW47a-4n6CDUakZHZyZOYJZ2TKCuav_mB8XR4oBA=s900-c-k-c0x00ffffff-no-rj'
+      year: "Octubre 2024 - Junio 2025",
+      degree: t("about.education.programs.ai"),
+      institution: "UNIR",
+      description: t("about.education.descriptions.ai"),
+      logo: "https://yt3.googleusercontent.com/KLi8T391TBxKyUecknywtrrvG9tUHX7qhitaW47a-4n6CDUakZHZyZOYJZ2TKCuav_mB8XR4oBA=s900-c-k-c0x00ffffff-no-rj",
     },
     {
-      year: 'Octubre 2024 - Junio 2025',
-      degree: t('about.education.programs.software'),
-      institution: 'UNIR',
-      description: t('about.education.descriptions.software'),
-      logo: 'https://yt3.googleusercontent.com/KLi8T391TBxKyUecknywtrrvG9tUHX7qhitaW47a-4n6CDUakZHZyZOYJZ2TKCuav_mB8XR4oBA=s900-c-k-c0x00ffffff-no-rj'
+      year: "Octubre 2024 - Junio 2025",
+      degree: t("about.education.programs.software"),
+      institution: "UNIR",
+      description: t("about.education.descriptions.software"),
+      logo: "https://yt3.googleusercontent.com/KLi8T391TBxKyUecknywtrrvG9tUHX7qhitaW47a-4n6CDUakZHZyZOYJZ2TKCuav_mB8XR4oBA=s900-c-k-c0x00ffffff-no-rj",
     },
     {
-      year: '2024',
-      degree: t('about.education.programs.azure'),
-      institution: 'Microsoft',
-      description: t('about.education.descriptions.azure'),
-      logo: 'https://foroalfa.org/imagenes/ilustraciones/1296.jpg'
-    }
+      year: "2024",
+      degree: t("about.education.programs.azure"),
+      institution: "Microsoft",
+      description: t("about.education.descriptions.azure"),
+      logo: "https://foroalfa.org/imagenes/ilustraciones/1296.jpg",
+    },
   ];
 
   const interests = [
     {
-      title: t('about.interests.web.title'),
-      description: t('about.interests.web.description'),
-      icon: CodeBracketIcon
+      title: t("about.interests.web.title"),
+      description: t("about.interests.web.description"),
+      icon: CodeBracketIcon,
     },
     {
-      title: t('about.interests.emerging.title'),
-      description: t('about.interests.emerging.description'),
-      icon: RocketLaunchIcon
+      title: t("about.interests.emerging.title"),
+      description: t("about.interests.emerging.description"),
+      icon: RocketLaunchIcon,
     },
     {
-      title: t('about.interests.collaboration.title'),
-      description: t('about.interests.collaboration.description'),
-      icon: UserGroupIcon
-    }
+      title: t("about.interests.collaboration.title"),
+      description: t("about.interests.collaboration.description"),
+      icon: UserGroupIcon,
+    },
   ];
 
   return (
@@ -85,7 +84,7 @@ const About: React.FC = () => {
             className="text-center"
           >
             <h1 className="text-4xl md:text-6xl font-bold text-gray-900 dark:text-white mb-6">
-              {t('about.title')}
+              {t("about.title")}
             </h1>
           </motion.div>
         </div>
@@ -101,18 +100,12 @@ const About: React.FC = () => {
               viewport={{ once: true }}
             >
               <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-6">
-                {t('about.story.title')}
+                {t("about.story.title")}
               </h2>
               <div className="space-y-4 text-gray-600 dark:text-gray-300">
-                <p>
-                  {t('about.story.p1')}
-                </p>
-                <p>
-                  {t('about.story.p2')}
-                </p>
-                <p>
-                  {t('about.story.p3')}
-                </p>
+                <p>{t("about.story.p1")}</p>
+                <p>{t("about.story.p2")}</p>
+                <p>{t("about.story.p3")}</p>
               </div>
             </motion.div>
 
@@ -133,36 +126,55 @@ const About: React.FC = () => {
                       const target = e.currentTarget;
                       const fallback = target.nextElementSibling as HTMLElement;
                       if (target && fallback) {
-                        target.style.display = 'none';
-                        fallback.style.display = 'flex';
+                        target.style.display = "none";
+                        fallback.style.display = "flex";
                       }
                     }}
                   />
-                  <div className="w-full h-full bg-primary-100 dark:bg-primary-900 flex items-center justify-center text-primary-600 dark:text-primary-400 font-bold text-2xl" style={{display: 'none'}}>
+                  <div
+                    className="w-full h-full bg-primary-100 dark:bg-primary-900 flex items-center justify-center text-primary-600 dark:text-primary-400 font-bold text-2xl"
+                    style={{ display: "none" }}
+                  >
                     BD
                   </div>
                 </div>
               </div>
 
               <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">
-                {t('about.personal.title')}
+                {t("about.personal.title")}
               </h3>
               <div className="space-y-3">
                 <div className="flex justify-between">
-                  <span className="font-medium text-gray-700 dark:text-gray-300">{t('about.personal.name')}:</span>
-                  <span className="text-gray-600 dark:text-gray-400">{t('about.personal.nameValue')}</span>
+                  <span className="font-medium text-gray-700 dark:text-gray-300">
+                    {t("about.personal.name")}:
+                  </span>
+                  <span className="text-gray-600 dark:text-gray-400">
+                    {t("about.personal.nameValue")}
+                  </span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="font-medium text-gray-700 dark:text-gray-300">{t('about.personal.age')}:</span>
-                  <span className="text-gray-600 dark:text-gray-400">{t('about.personal.ageValue')}</span>
+                  <span className="font-medium text-gray-700 dark:text-gray-300">
+                    {t("about.personal.age")}:
+                  </span>
+                  <span className="text-gray-600 dark:text-gray-400">
+                    {t("about.personal.ageValue")}
+                  </span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="font-medium text-gray-700 dark:text-gray-300">{t('about.personal.location')}:</span>
-                  <span className="text-gray-600 dark:text-gray-400">{t('about.personal.locationValue')}</span>
+                  <span className="font-medium text-gray-700 dark:text-gray-300">
+                    {t("about.personal.location")}:
+                  </span>
+                  <span className="text-gray-600 dark:text-gray-400">
+                    {t("about.personal.locationValue")}
+                  </span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="font-medium text-gray-700 dark:text-gray-300">{t('about.personal.availability')}:</span>
-                  <span className="text-gray-600 dark:text-gray-400">{t('about.personal.availabilityValue')}</span>
+                  <span className="font-medium text-gray-700 dark:text-gray-300">
+                    {t("about.personal.availability")}:
+                  </span>
+                  <span className="text-gray-600 dark:text-gray-400">
+                    {t("about.personal.availabilityValue")}
+                  </span>
                 </div>
               </div>
             </motion.div>
@@ -180,10 +192,10 @@ const About: React.FC = () => {
             className="text-center mb-12"
           >
             <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">
-              {t('about.experience.title')}
+              {t("about.experience.title")}
             </h2>
             <p className="text-lg text-gray-600 dark:text-gray-300">
-              {t('about.experience.subtitle')}
+              {t("about.experience.subtitle")}
             </p>
           </motion.div>
 
@@ -200,13 +212,17 @@ const About: React.FC = () => {
                 <div className="flex items-start space-x-3">
                   <div className="bg-primary-100 dark:bg-primary-900 p-2 rounded-lg flex-shrink-0">
                     {exp.logo ? (
-                      <a 
-                        href="https://www.ordio.com/" 
-                        target="_blank" 
+                      <a
+                        href="https://www.ordio.com/"
+                        target="_blank"
                         rel="noopener noreferrer"
                         className="block hover:opacity-80 transition-opacity"
                       >
-                        <img src={exp.logo} alt={exp.company} className="h-5 w-5 object-contain" />
+                        <img
+                          src={exp.logo}
+                          alt={exp.company}
+                          className="h-5 w-5 object-contain"
+                        />
                       </a>
                     ) : (
                       <BriefcaseIcon className="h-5 w-5 text-primary-600 dark:text-primary-400" />
@@ -218,9 +234,9 @@ const About: React.FC = () => {
                         <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-1">
                           {exp.title}
                         </h3>
-                        <a 
-                          href="https://www.ordio.com/" 
-                          target="_blank" 
+                        <a
+                          href="https://www.ordio.com/"
+                          target="_blank"
                           rel="noopener noreferrer"
                           className="block hover:text-primary-700 dark:hover:text-primary-300 transition-colors"
                         >
@@ -234,7 +250,7 @@ const About: React.FC = () => {
                           {exp.year}
                         </span>
                         <span className="inline-block bg-green-100 dark:bg-green-900 text-green-700 dark:text-green-300 px-2 py-0.5 rounded-full text-xs font-medium">
-                          {t('about.experience.onSite')}
+                          {t("about.experience.onSite")}
                         </span>
                       </div>
                     </div>
@@ -242,7 +258,7 @@ const About: React.FC = () => {
                       {exp.description}
                     </p>
                     <p className="text-xs text-gray-500 dark:text-gray-400">
-                      {t('about.experience.location')}
+                      {t("about.experience.location")}
                     </p>
                   </div>
                 </div>
@@ -262,10 +278,10 @@ const About: React.FC = () => {
             className="text-center mb-12"
           >
             <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">
-              {t('about.education.title')}
+              {t("about.education.title")}
             </h2>
             <p className="text-lg text-gray-600 dark:text-gray-300">
-              {t('about.education.subtitle')}
+              {t("about.education.subtitle")}
             </p>
           </motion.div>
 
@@ -282,7 +298,11 @@ const About: React.FC = () => {
                 <div className="flex items-start space-x-4">
                   <div className="bg-primary-100 dark:bg-primary-900 p-3 rounded-lg">
                     {edu.logo ? (
-                      <img src={edu.logo} alt={edu.institution} className="h-6 w-6 object-contain" />
+                      <img
+                        src={edu.logo}
+                        alt={edu.institution}
+                        className="h-6 w-6 object-contain"
+                      />
                     ) : (
                       <AcademicCapIcon className="h-6 w-6 text-primary-600 dark:text-primary-400" />
                     )}
@@ -320,10 +340,10 @@ const About: React.FC = () => {
             className="text-center mb-12"
           >
             <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">
-              {t('about.interests.title')}
+              {t("about.interests.title")}
             </h2>
             <p className="text-lg text-gray-600 dark:text-gray-300">
-              {t('about.interests.subtitle')}
+              {t("about.interests.subtitle")}
             </p>
           </motion.div>
 
@@ -355,4 +375,4 @@ const About: React.FC = () => {
   );
 };
 
-export default About; 
+export default About;
