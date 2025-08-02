@@ -8,6 +8,7 @@ import { useTranslation } from '../hooks/useTranslation';
 
 // Import local images
 import brunoProfile from '../assets/images/bruno-profile.jpg';
+import cvFile from '../assets/docs/CV 2025.pdf';
 
 const Home: React.FC = () => {
   const { t } = useTranslation();
@@ -23,7 +24,7 @@ const Home: React.FC = () => {
 
   const handleDownloadCV = () => {
     const link = document.createElement('a');
-    link.href = '/CV_Bruno_Delgado_2025.pdf';
+    link.href = cvFile;
     link.download = 'CV_Bruno_Delgado_2025.pdf';
     document.body.appendChild(link);
     link.click();
