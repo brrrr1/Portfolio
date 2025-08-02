@@ -14,6 +14,7 @@ import brunoProfile from '../assets/images/bruno-profile.jpg';
 const About: React.FC = () => {
   const { t } = useTranslation();
 
+  
   const experience = [
     {
       year: 'Mar. 2025 - Jul. 2025',
