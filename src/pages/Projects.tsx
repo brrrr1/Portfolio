@@ -230,12 +230,12 @@ const Projects: React.FC = () => {
                   )}
                 </div>
 
-                <div className="p-6 flex flex-col flex-grow bg-gray-100 dark:bg-gray-800">
+                <div className="p-4 sm:p-6 flex flex-col flex-grow bg-gray-100 dark:bg-gray-800">
                   <div className="flex-grow">
-                    <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">
+                    <h3 className="text-lg sm:text-xl font-semibold text-gray-900 dark:text-white mb-2">
                       {project.title}
                     </h3>
-                    <p className="text-gray-600 dark:text-gray-300 mb-4">
+                    <p className="text-gray-600 dark:text-gray-300 mb-4 text-sm sm:text-base">
                       {project.description}
                     </p>
 
@@ -243,7 +243,7 @@ const Projects: React.FC = () => {
                       {project.technologies.map((tech) => (
                         <span
                           key={tech}
-                          className="bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 px-3 py-1 rounded-full text-sm"
+                          className="bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm"
                         >
                           {tech}
                         </span>
@@ -251,14 +251,14 @@ const Projects: React.FC = () => {
                     </div>
                   </div>
 
-                  <div className="mt-auto pt-4 flex justify-center gap-2">
+                  <div className="mt-auto pt-4 flex flex-col sm:flex-row justify-center gap-2">
                     {project.githubUrlBack && project.githubUrlFront ? (
                       <>
                         <a
                           href={project.githubUrlBack}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="flex items-center gap-2 bg-primary-600 hover:bg-primary-700 text-white font-medium transition-colors px-4 py-2 rounded-full text-center"
+                          className="flex items-center justify-center gap-2 bg-primary-600 hover:bg-primary-700 text-white font-medium transition-colors px-3 sm:px-4 py-2 rounded-full text-center text-sm sm:text-base"
                           onClick={(e) => e.stopPropagation()}
                         >
                           <CodeBracketIcon className="h-4 w-4" />
@@ -268,7 +268,7 @@ const Projects: React.FC = () => {
                           href={project.githubUrlFront}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="flex items-center gap-2 bg-primary-600 hover:bg-primary-700 text-white font-medium transition-colors px-4 py-2 rounded-full text-center"
+                          className="flex items-center justify-center gap-2 bg-primary-600 hover:bg-primary-700 text-white font-medium transition-colors px-3 sm:px-4 py-2 rounded-full text-center text-sm sm:text-base"
                           onClick={(e) => e.stopPropagation()}
                         >
                           <CodeBracketIcon className="h-4 w-4" />
@@ -280,7 +280,7 @@ const Projects: React.FC = () => {
                         href={project.githubUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex items-center gap-2 bg-primary-600 hover:bg-primary-700 text-white font-medium transition-colors px-4 py-2 rounded-full text-center"
+                        className="flex items-center justify-center gap-2 bg-primary-600 hover:bg-primary-700 text-white font-medium transition-colors px-3 sm:px-4 py-2 rounded-full text-center text-sm sm:text-base"
                         onClick={(e) => e.stopPropagation()}
                       >
                         <CodeBracketIcon className="h-4 w-4" />
@@ -329,9 +329,9 @@ const Projects: React.FC = () => {
               initial="hidden"
               animate="visible"
               exit="exit"
-              className="relative bg-white dark:bg-gray-800 rounded-lg shadow-xl max-w-6xl w-full max-h-[90vh] overflow-hidden"
+              className="relative bg-white dark:bg-gray-800 rounded-lg shadow-xl max-w-[95vw] sm:max-w-4xl lg:max-w-6xl w-full max-h-[95vh] sm:max-h-[90vh] overflow-hidden flex flex-col"
               onClick={(e) => e.stopPropagation()}
-                          >
+            >
               <button
                 onClick={closeModal}
                 className="absolute top-4 right-4 z-10 p-2 rounded-full bg-gray-800 bg-opacity-50 text-white hover:bg-opacity-75 transition-all duration-200"
@@ -339,12 +339,12 @@ const Projects: React.FC = () => {
                 <XMarkIcon className="h-6 w-6" />
               </button>
 
-              <div className="flex flex-col lg:flex-row h-full">
-                <div className="flex-1 p-8 overflow-y-auto">
-                  <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">
+              <div className="flex flex-col lg:flex-row h-full overflow-hidden">
+                <div className="flex-1 p-4 sm:p-6 lg:p-8 overflow-y-auto">
+                  <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white mb-4">
                     {selectedProject.title}
                   </h2>
-                  <p className="text-gray-600 dark:text-gray-300 mb-6 text-lg whitespace-pre-line">
+                  <p className="text-gray-600 dark:text-gray-300 mb-6 text-base sm:text-lg whitespace-pre-line">
                     {t(`projects.projects.${selectedProject.title.toLowerCase().replace(/\s+/g, '')}.detailedDescription`)}
                   </p>
                   
@@ -364,25 +364,25 @@ const Projects: React.FC = () => {
                     </div>
                   </div>
 
-                  <div className="flex flex-wrap gap-3">
+                  <div className="flex flex-col sm:flex-row flex-wrap gap-3">
                     {selectedProject.githubUrlBack && selectedProject.githubUrlFront ? (
                       <>
                         <a
                           href={selectedProject.githubUrlBack}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="flex items-center gap-2 bg-primary-600 hover:bg-primary-700 text-white font-medium transition-colors px-6 py-3 rounded-full"
+                          className="flex items-center justify-center gap-2 bg-primary-600 hover:bg-primary-700 text-white font-medium transition-colors px-4 sm:px-6 py-3 rounded-full text-sm sm:text-base"
                         >
-                          <CodeBracketIcon className="h-5 w-5" />
+                          <CodeBracketIcon className="h-4 w-4 sm:h-5 sm:w-5" />
                           {t('projects.viewCodeBack')}
                         </a>
                         <a
                           href={selectedProject.githubUrlFront}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="flex items-center gap-2 bg-primary-600 hover:bg-primary-700 text-white font-medium transition-colors px-6 py-3 rounded-full"
+                          className="flex items-center justify-center gap-2 bg-primary-600 hover:bg-primary-700 text-white font-medium transition-colors px-4 sm:px-6 py-3 rounded-full text-sm sm:text-base"
                         >
-                          <CodeBracketIcon className="h-5 w-5" />
+                          <CodeBracketIcon className="h-4 w-4 sm:h-5 sm:w-5" />
                           {t('projects.viewCodeFront')}
                         </a>
                       </>
@@ -391,19 +391,39 @@ const Projects: React.FC = () => {
                         href={selectedProject.githubUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex items-center gap-2 bg-primary-600 hover:bg-primary-700 text-white font-medium transition-colors px-6 py-3 rounded-full"
+                        className="flex items-center justify-center gap-2 bg-primary-600 hover:bg-primary-700 text-white font-medium transition-colors px-4 sm:px-6 py-3 rounded-full text-sm sm:text-base"
                       >
-                        <CodeBracketIcon className="h-5 w-5" />
+                        <CodeBracketIcon className="h-4 w-4 sm:h-5 sm:w-5" />
                         {t('projects.viewCode')}
                       </a>
                     ) : null}
                   </div>
+
+                  {/* Mobile Images Section */}
+                  <div className="lg:hidden mt-8">
+                    <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
+                      Capturas de pantalla:
+                    </h3>
+                    <div className="space-y-4">
+                      {selectedProject.modalImages?.map((image: string, index: number) => (
+                        <div key={index} className="bg-gray-50 dark:bg-gray-700 rounded-lg p-2">
+                          <img
+                            src={image}
+                            alt={`${selectedProject.title} screenshot ${index + 1}`}
+                            className="w-full h-auto max-h-[300px] object-contain rounded-lg shadow-md cursor-pointer hover:scale-105 transition-transform duration-200"
+                            onClick={() => openImage(image)}
+                          />
+                        </div>
+                      ))}
+                    </div>
+                  </div>
                 </div>
 
-                <div className="lg:w-1/3 p-6 bg-gray-50 dark:bg-gray-700">
+                {/* Desktop Images Section */}
+                <div className="hidden lg:block lg:w-1/3 p-4 sm:p-6 bg-gray-50 dark:bg-gray-700">
                   <div className="flex flex-col gap-4 h-full">
                     {selectedProject.modalImages?.map((image: string, index: number) => (
-                      <div key={index} className="flex-1">
+                      <div key={index} className="flex-1 min-h-[200px] sm:min-h-[250px]">
                         <img
                           src={image}
                           alt={`${selectedProject.title} screenshot ${index + 1}`}
@@ -436,29 +456,29 @@ const Projects: React.FC = () => {
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.8 }}
               transition={{ duration: 0.2 }}
-              className="relative max-w-[90vw] max-h-[90vh]"
+              className="relative max-w-[95vw] sm:max-w-[90vw] max-h-[95vh] sm:max-h-[90vh]"
               onClick={(e) => e.stopPropagation()}
-                          >
+            >
               <button
                 onClick={closeImage}
-                className="absolute top-4 right-4 z-10 p-2 rounded-full bg-gray-800 bg-opacity-50 text-white hover:bg-opacity-75 transition-all duration-200"
+                className="absolute top-2 sm:top-4 right-2 sm:right-4 z-10 p-2 rounded-full bg-gray-800 bg-opacity-50 text-white hover:bg-opacity-75 transition-all duration-200"
               >
-                <XMarkIcon className="h-6 w-6" />
+                <XMarkIcon className="h-5 w-5 sm:h-6 sm:w-6" />
               </button>
 
               {selectedProject && selectedProject.modalImages.length > 1 && (
                 <>
                   <button
                     onClick={previousImage}
-                    className="absolute left-4 top-1/2 transform -translate-y-1/2 z-10 p-3 rounded-full bg-gray-800 bg-opacity-50 text-white hover:bg-opacity-75 transition-all duration-200"
+                    className="absolute left-2 sm:left-4 top-1/2 transform -translate-y-1/2 z-10 p-2 sm:p-3 rounded-full bg-gray-800 bg-opacity-50 text-white hover:bg-opacity-75 transition-all duration-200"
                   >
-                    <ChevronLeftIcon className="h-6 w-6" />
+                    <ChevronLeftIcon className="h-5 w-5 sm:h-6 sm:w-6" />
                   </button>
                   <button
                     onClick={nextImage}
-                    className="absolute right-4 top-1/2 transform -translate-y-1/2 z-10 p-3 rounded-full bg-gray-800 bg-opacity-50 text-white hover:bg-opacity-75 transition-all duration-200"
+                    className="absolute right-2 sm:right-4 top-1/2 transform -translate-y-1/2 z-10 p-2 sm:p-3 rounded-full bg-gray-800 bg-opacity-50 text-white hover:bg-opacity-75 transition-all duration-200"
                   >
-                    <ChevronRightIcon className="h-6 w-6" />
+                    <ChevronRightIcon className="h-5 w-5 sm:h-6 sm:w-6" />
                   </button>
                 </>
               )}
@@ -470,7 +490,7 @@ const Projects: React.FC = () => {
               />
 
               {selectedProject && selectedProject.modalImages.length > 1 && (
-                <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 z-10 px-4 py-2 rounded-full bg-gray-800 bg-opacity-50 text-white text-sm">
+                <div className="absolute bottom-2 sm:bottom-4 left-1/2 transform -translate-x-1/2 z-10 px-3 sm:px-4 py-1 sm:py-2 rounded-full bg-gray-800 bg-opacity-50 text-white text-xs sm:text-sm">
                   {selectedProject.modalImages.indexOf(selectedImage) + 1} / {selectedProject.modalImages.length}
                 </div>
               )}

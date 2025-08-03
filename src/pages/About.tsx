@@ -207,10 +207,10 @@ const About: React.FC = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 viewport={{ once: true }}
-                className="bg-white dark:bg-gray-700 rounded-lg p-6 shadow-sm hover:shadow-md transition-shadow"
+                className="bg-white dark:bg-gray-700 rounded-lg p-4 sm:p-6 shadow-sm hover:shadow-md transition-shadow"
               >
-                <div className="flex items-start space-x-3">
-                  <div className="bg-primary-100 dark:bg-primary-900 p-2 rounded-lg flex-shrink-0">
+                <div className="flex flex-col sm:flex-row sm:items-start gap-3 sm:space-x-3">
+                  <div className="bg-primary-100 dark:bg-primary-900 p-2 rounded-lg flex-shrink-0 self-start">
                     {exp.logo ? (
                       <a
                         href="https://www.ordio.com/"
@@ -229,7 +229,7 @@ const About: React.FC = () => {
                     )}
                   </div>
                   <div className="flex-1 min-w-0">
-                    <div className="flex justify-between items-start gap-2 mb-1">
+                    <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-2 mb-1">
                       <div className="flex-1">
                         <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-1">
                           {exp.title}
@@ -245,7 +245,7 @@ const About: React.FC = () => {
                           </p>
                         </a>
                       </div>
-                      <div className="flex flex-col items-end gap-1">
+                      <div className="flex flex-col items-start sm:items-end gap-1">
                         <span className="text-sm text-primary-600 dark:text-primary-400 font-medium">
                           {exp.year}
                         </span>
@@ -293,10 +293,10 @@ const About: React.FC = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 viewport={{ once: true }}
-                className="bg-gray-50 dark:bg-gray-800 rounded-lg p-6 h-full"
+                className="bg-gray-50 dark:bg-gray-800 rounded-lg p-4 sm:p-6 h-full"
               >
-                <div className="flex items-start space-x-4">
-                  <div className="bg-primary-100 dark:bg-primary-900 p-3 rounded-lg">
+                <div className="flex flex-col sm:flex-row sm:items-start gap-3 sm:space-x-4">
+                  <div className="bg-primary-100 dark:bg-primary-900 p-3 rounded-lg flex-shrink-0 self-start">
                     {edu.logo ? (
                       <img
                         src={edu.logo}
@@ -308,8 +308,8 @@ const About: React.FC = () => {
                     )}
                   </div>
                   <div className="flex-1 min-w-0">
-                    <div className="flex justify-between items-start gap-3 mb-2">
-                      <h3 className="text-xl font-semibold text-gray-900 dark:text-white flex-1 min-w-0">
+                    <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-2 sm:gap-3 mb-2">
+                      <h3 className="text-lg sm:text-xl font-semibold text-gray-900 dark:text-white flex-1 min-w-0">
                         {edu.degree}
                       </h3>
                       <span className="text-sm text-primary-600 dark:text-primary-400 font-medium flex-shrink-0 whitespace-nowrap">
@@ -319,7 +319,7 @@ const About: React.FC = () => {
                     <p className="text-primary-600 dark:text-primary-400 font-medium mb-2">
                       {edu.institution}
                     </p>
-                    <p className="text-gray-600 dark:text-gray-300">
+                    <p className="text-gray-600 dark:text-gray-300 text-sm sm:text-base">
                       {edu.description}
                     </p>
                   </div>
