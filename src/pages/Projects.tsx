@@ -350,7 +350,7 @@ const Projects: React.FC = () => {
                   
                   <div className="mb-6">
                     <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-3">
-                      Tecnologías utilizadas:
+                      {t('projects.technologiesUsed')}
                     </h3>
                     <div className="flex flex-wrap gap-2">
                       {selectedProject.technologies.map((tech: string) => (

@@ -113,6 +113,7 @@ export const translations = {
       viewCodeBack: 'Ver Backend',
       viewCodeFront: 'Ver Frontend',
       featured: 'Destacado',
+      technologiesUsed: 'Tecnologías utilizadas:',
       noProjects: 'No hay proyectos en esta categoría',
       noProjectsSubtitle: 'Pronto agregaré más proyectos en esta categoría.',
       projects: {
@@ -290,6 +291,7 @@ export const translations = {
       viewCodeBack: 'View Backend',
       viewCodeFront: 'View Frontend',
       featured: 'Featured',
+      technologiesUsed: 'Technologies used:',
       noProjects: 'No projects in this category',
       noProjectsSubtitle: 'I will add more projects in this category soon.',
       projects: {
@@ -467,6 +469,7 @@ export const translations = {
       viewCodeBack: 'Backend ansehen',
       viewCodeFront: 'Frontend ansehen',
       featured: 'Hervorgehoben',
+      technologiesUsed: 'Verwendete Technologien:',
       noProjects: 'Keine Projekte in dieser Kategorie',
       noProjectsSubtitle: 'Ich werde bald weitere Projekte in dieser Kategorie hinzufügen.',
       projects: {
