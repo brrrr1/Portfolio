@@ -1,16 +1,33 @@
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { 
   ArrowRightIcon,
-  DocumentArrowDownIcon
+  DocumentArrowDownIcon,
+  ChevronDownIcon
 } from '@heroicons/react/24/outline';
 import { useTranslation } from '../hooks/useTranslation';
 
 import brunoProfile from '../assets/images/bruno-profile.jpg';
-import cvFile from '../assets/docs/CV 2025.pdf';
+import cvFileEnglish from '../assets/docs/CV 2025.pdf';
+import cvFileSpanish from '../assets/docs/CV Español.pdf';
 
 const Home: React.FC = () => {
   const { t } = useTranslation();
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setIsDropdownOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
 
   const skills = [
     { name: 'Java/Spring', category: t('home.skills.backend') },
@@ -21,13 +38,19 @@ const Home: React.FC = () => {
     { name: 'SQL', category: t('home.skills.database') },
   ];
 
-  const handleDownloadCV = () => {
+  const handleDownloadCV = (language: 'english' | 'spanish') => {
     const link = document.createElement('a');
-    link.href = cvFile;
-    link.download = 'CV_Bruno_Delgado_2025.pdf';
+    if (language === 'english') {
+      link.href = cvFileEnglish;
+      link.download = 'CV_Bruno_Delgado_2025.pdf';
+    } else {
+      link.href = cvFileSpanish;
+      link.download = 'CV_Bruno_Delgado_Espanol.pdf';
+    }
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
+    setIsDropdownOpen(false);
   };
 
 
@@ -129,13 +152,42 @@ const Home: React.FC = () => {
               >
                 {t('home.contact')}
               </button>
-              <button
-                onClick={handleDownloadCV}
-                className="btn-secondary inline-flex items-center"
-              >
-                <DocumentArrowDownIcon className="h-5 w-5 mr-2" />
-                {t('home.downloadCV')}
-              </button>
+              <div className="relative" ref={dropdownRef}>
+                <button
+                  onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+                  className="btn-secondary inline-flex items-center"
+                >
+                  <DocumentArrowDownIcon className="h-5 w-5 mr-2" />
+                  {t('home.downloadCV')}
+                  <ChevronDownIcon className="ml-2 h-5 w-5" />
+                </button>
+                
+                {isDropdownOpen && (
+                  <motion.div
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -10 }}
+                    className="absolute top-full left-0 mt-2 w-48 bg-white dark:bg-gray-800 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700 z-50"
+                  >
+                    <div className="py-1">
+                      <button
+                        onClick={() => handleDownloadCV('english')}
+                        className="w-full px-4 py-2 text-left text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 flex items-center"
+                      >
+                        <span className="mr-2">🇺🇸</span>
+                        English CV
+                      </button>
+                      <button
+                        onClick={() => handleDownloadCV('spanish')}
+                        className="w-full px-4 py-2 text-left text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 flex items-center"
+                      >
+                        <span className="mr-2">🇪🇸</span>
+                        CV Español
+                      </button>
+                    </div>
+                  </motion.div>
+                )}
+              </div>
 
             </motion.div>
           </motion.div>
