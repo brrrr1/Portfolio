@@ -11,7 +11,6 @@ const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isLanguageOpen, setIsLanguageOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const [isEmojiAnimating, setIsEmojiAnimating] = useState(false);
   const { isDark, toggleTheme } = useTheme();
   const { language, setLanguage } = useLanguage();
   const { t } = useTranslation();
@@ -57,13 +56,9 @@ const Navbar: React.FC = () => {
   };
 
   const handleLanguageChange = (langCode: string) => {
-    setIsEmojiAnimating(true);
     setTimeout(() => {
       setLanguage(langCode as 'es' | 'en' | 'de');
       setIsLanguageOpen(false);
-      setTimeout(() => {
-        setIsEmojiAnimating(false);
-      }, 300);
     }, 150);
   };
 

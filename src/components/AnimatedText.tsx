@@ -17,15 +17,11 @@ const AnimatedText: React.FC<AnimatedTextProps> = ({
 }) => {
   const { language } = useLanguage();
   const [currentText, setCurrentText] = useState(children);
-  const [isAnimating, setIsAnimating] = useState(false);
 
   useEffect(() => {
     if (children !== currentText) {
-      setIsAnimating(true);
-      
       setTimeout(() => {
         setCurrentText(children);
-        setIsAnimating(false);
       }, 150 + delay);
     }
   }, [children, currentText, delay]);
