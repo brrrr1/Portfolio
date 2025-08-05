@@ -11,6 +11,21 @@ import brunoProfile from '../assets/images/bruno-profile.jpg';
 import cvFileEnglish from '../assets/docs/CV 2025.pdf';
 import cvFileSpanish from '../assets/docs/CV Español.pdf';
 
+// Componente para el nombre con degradado animado
+const AnimatedGradientName: React.FC<{ name: string }> = ({ name }) => {
+  return (
+    <span 
+      className="bg-gradient-to-r from-blue-400 via-blue-500 via-blue-600 to-blue-700 bg-clip-text text-transparent"
+      style={{
+        backgroundSize: '200% 200%',
+        animation: 'gradient-x 3.5s ease infinite'
+      }}
+    >
+      {name}
+    </span>
+  );
+};
+
 const Home: React.FC = () => {
   const { t } = useTranslation();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -115,7 +130,7 @@ const Home: React.FC = () => {
               className="text-5xl md:text-7xl font-bold text-gray-900 dark:text-white mb-6"
             >
               {t('home.greeting')}{' '}
-              <span className="text-primary-600 dark:text-primary-400">{t('home.name')}</span>
+              <AnimatedGradientName name={t('home.name')} />
             </motion.h1>
 
             <motion.p
