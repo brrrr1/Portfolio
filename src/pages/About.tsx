@@ -8,6 +8,7 @@ import {
   UserGroupIcon,
 } from "@heroicons/react/24/outline";
 import { useTranslation } from "../hooks/useTranslation";
+import AnimatedText from "../components/AnimatedText";
 
 import brunoProfile from "../assets/images/bruno-profile.jpg";
 
@@ -84,7 +85,9 @@ const About: React.FC = () => {
             className="text-center"
           >
             <h1 className="text-4xl md:text-6xl font-bold text-gray-900 dark:text-white mb-6">
-              {t("about.title")}
+              <AnimatedText as="span" delay={0}>
+                {t("about.title")}
+              </AnimatedText>
             </h1>
           </motion.div>
         </div>

@@ -8,6 +8,7 @@ import {
 } from '@heroicons/react/24/outline';
 import { useTranslation } from '../hooks/useTranslation';
 import { sendEmail, EmailData } from '../services/emailService';
+import AnimatedText from '../components/AnimatedText';
 
 const Contact: React.FC = () => {
   const { t } = useTranslation();
@@ -120,10 +121,14 @@ const Contact: React.FC = () => {
             className="text-center"
           >
             <h1 className="text-4xl md:text-6xl font-bold text-gray-900 dark:text-white mb-6">
-              {t('contact.title')}
+              <AnimatedText as="span" delay={0}>
+                {t('contact.title')}
+              </AnimatedText>
             </h1>
             <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
-              {t('contact.subtitle')}
+              <AnimatedText as="span" delay={1}>
+                {t('contact.subtitle')}
+              </AnimatedText>
             </p>
           </motion.div>
         </div>
@@ -139,7 +144,9 @@ const Contact: React.FC = () => {
               viewport={{ once: true }}
             >
               <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-6">
-                {t('contact.form.title')}
+                <AnimatedText as="span" delay={0}>
+                  {t('contact.form.title')}
+                </AnimatedText>
               </h2>
               
               {submitStatus.type && (

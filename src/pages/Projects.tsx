@@ -7,6 +7,7 @@ import {
   ChevronRightIcon
 } from '@heroicons/react/24/outline';
 import { useTranslation } from '../hooks/useTranslation';
+import AnimatedText from '../components/AnimatedText';
 
 import lagradaFront from '../assets/images/lagrada-front.jpg';
 import pipocapp from '../assets/images/pipocapp.jpeg';
@@ -171,10 +172,14 @@ const Projects: React.FC = () => {
             className="text-center"
           >
             <h1 className="text-4xl md:text-6xl font-bold text-gray-900 dark:text-white mb-6">
-              {t('projects.title')}
+              <AnimatedText as="span" delay={0}>
+                {t('projects.title')}
+              </AnimatedText>
             </h1>
             <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
-              {t('projects.subtitle')}
+              <AnimatedText as="span" delay={1}>
+                {t('projects.subtitle')}
+              </AnimatedText>
             </p>
           </motion.div>
         </div>
@@ -199,7 +204,9 @@ const Projects: React.FC = () => {
                     : 'bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700'
                 }`}
               >
-                {filter.name}
+                <AnimatedText as="span" delay={filter.id === 'all' ? 0 : 1}>
+                  {filter.name}
+                </AnimatedText>
               </button>
             ))}
           </motion.div>
@@ -399,7 +406,6 @@ const Projects: React.FC = () => {
                     ) : null}
                   </div>
 
-                  {/* Mobile Images Section */}
                   <div className="lg:hidden mt-8">
                     <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
                       Capturas de pantalla:
@@ -419,7 +425,6 @@ const Projects: React.FC = () => {
                   </div>
                 </div>
 
-                {/* Desktop Images Section */}
                 <div className="hidden lg:block lg:w-1/3 p-4 sm:p-6 bg-gray-50 dark:bg-gray-700">
                   <div className="flex flex-col gap-4 h-full">
                     {selectedProject.modalImages?.map((image: string, index: number) => (
