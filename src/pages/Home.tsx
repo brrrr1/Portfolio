@@ -112,7 +112,7 @@ const Home: React.FC = () => {
     <div id="home" className="min-h-screen">
       <section 
         ref={heroRef}
-        className="section-padding bg-gradient-to-br from-primary-50 to-blue-50 dark:from-gray-900 dark:to-gray-800 relative overflow-hidden"
+        className="section-padding bg-gradient-to-br from-primary-50 to-blue-50 dark:from-gray-900 dark:to-gray-800 relative"
       >
 
         <div className="absolute inset-0 opacity-10">
@@ -220,7 +220,7 @@ const Home: React.FC = () => {
             >
               <button
                 onClick={() => scrollToElement('projects', 80)}
-                className="btn-primary inline-flex items-center group"
+                className="btn-primary inline-flex items-center group w-full sm:w-auto"
               >
                 <AnimatedText as="span" delay={2}>
                   {t('home.viewProjects')}
@@ -229,17 +229,17 @@ const Home: React.FC = () => {
               </button>
               <button
                 onClick={() => scrollToElement('contact', 80)}
-                className="btn-secondary inline-flex items-center group"
+                className="btn-secondary inline-flex items-center group w-full sm:w-auto"
               >
                 <AnimatedText as="span" delay={3}>
                   {t('home.contact')}
                 </AnimatedText>
                 <ArrowRightIcon className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform duration-300" />
               </button>
-              <div className="relative" ref={dropdownRef}>
+              <div className="relative w-full sm:w-auto" ref={dropdownRef}>
                 <button
                   onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-                  className="btn-secondary inline-flex items-center group"
+                  className="btn-secondary inline-flex items-center group w-full sm:w-auto"
                 >
                   <DocumentArrowDownIcon className="h-5 w-5 mr-2" />
                   <AnimatedText as="span" delay={4}>
@@ -254,7 +254,11 @@ const Home: React.FC = () => {
                     animate={{ opacity: 1, y: 0, scale: 1 }}
                     exit={{ opacity: 0, y: -10, scale: 0.95 }}
                     transition={{ duration: 0.2 }}
-                    className="absolute top-full left-0 mt-2 w-48 bg-white dark:bg-gray-800 rounded-lg shadow-xl border border-gray-200 dark:border-gray-700 z-50 glass-effect"
+                    className="absolute top-full left-0 mt-2 w-full sm:w-48 bg-white dark:bg-gray-800 rounded-lg shadow-xl border border-gray-200 dark:border-gray-700 z-50 glass-effect"
+                    style={{ 
+                      maxHeight: '200px',
+                      overflowY: 'auto'
+                    }}
                   >
                     <div className="py-1">
                       <button
