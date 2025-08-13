@@ -109,15 +109,15 @@ const Home: React.FC = () => {
 
 
   return (
-    <div id="home" className="min-h-screen">
+    <div id="home" className="min-h-screen overflow-x-hidden">
       <section 
         ref={heroRef}
         className="section-padding bg-gradient-to-br from-primary-50 to-blue-50 dark:from-gray-900 dark:to-gray-800 relative"
       >
 
-        <div className="absolute inset-0 opacity-10">
+        <div className="absolute inset-0 opacity-10 overflow-hidden">
           <motion.div 
-            className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary-400 rounded-full mix-blend-multiply filter blur-xl"
+            className="absolute top-1/4 left-1/4 w-48 h-48 md:w-96 md:h-96 bg-primary-400 rounded-full mix-blend-multiply filter blur-xl"
             animate={{
               x: [0, 40, 0],
               y: [0, -30, 0],
@@ -130,7 +130,7 @@ const Home: React.FC = () => {
             }}
           />
           <motion.div 
-            className="absolute top-1/3 right-1/4 w-96 h-96 bg-blue-400 rounded-full mix-blend-multiply filter blur-xl"
+            className="absolute top-1/3 right-1/4 w-48 h-48 md:w-96 md:h-96 bg-blue-400 rounded-full mix-blend-multiply filter blur-xl"
             animate={{
               x: [0, -35, 0],
               y: [0, 25, 0],
@@ -144,7 +144,7 @@ const Home: React.FC = () => {
             }}
           />
           <motion.div 
-            className="absolute bottom-1/4 left-1/3 w-96 h-96 bg-purple-400 rounded-full mix-blend-multiply filter blur-xl"
+            className="absolute bottom-1/4 left-1/3 w-48 h-48 md:w-96 md:h-96 bg-purple-400 rounded-full mix-blend-multiply filter blur-xl"
             animate={{
               x: [0, 30, 0],
               y: [0, -20, 0],

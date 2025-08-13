@@ -111,7 +111,7 @@ const Contact: React.FC = () => {
   ];
 
   return (
-    <div id="contact" className="min-h-screen">
+    <div id="contact" className="min-h-screen overflow-x-hidden">
       <section className="section-padding bg-gradient-to-br from-primary-50 to-blue-50 dark:from-gray-900 dark:to-gray-800">
         <div className="container-custom">
           <motion.div
