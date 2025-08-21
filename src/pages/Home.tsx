@@ -10,8 +10,8 @@ import { useScrollAnimation, useParallax, useSmoothScroll } from '../hooks/useSc
 import AnimatedText from '../components/AnimatedText';
 
 import brunoProfile from '../assets/images/bruno-profile.jpg';
-import cvFileEnglish from '../assets/docs/CV 2025.pdf';
-import cvFileSpanish from '../assets/docs/CV Español.pdf';
+import cvFileEnglish from '../assets/docs/CV BRUNO ENGLISH.pdf';
+import cvFileSpanish from '../assets/docs/CV BRUNO ESPAÑOL.pdf';
 
 
 const AnimatedGradientName: React.FC<{ name: string }> = ({ name }) => {
@@ -71,10 +71,10 @@ const Home: React.FC = () => {
     const link = document.createElement('a');
     if (language === 'english') {
       link.href = cvFileEnglish;
-      link.download = 'CV_Bruno_Delgado_2025.pdf';
+      link.download = 'CV_BRUNO_ENGLISH.pdf';
     } else {
       link.href = cvFileSpanish;
-      link.download = 'CV_Bruno_Delgado_Espanol.pdf';
+      link.download = 'CV_BRUNO_ESPAÑOL.pdf';
     }
     document.body.appendChild(link);
     link.click();
@@ -109,7 +109,7 @@ const Home: React.FC = () => {
 
 
   return (
-    <div id="home" className="min-h-screen overflow-x-hidden w-full">
+    <div id="home" className="min-h-screen">
       <section 
         ref={heroRef}
         className="section-padding bg-gradient-to-br from-primary-50 to-blue-50 dark:from-gray-900 dark:to-gray-800 relative overflow-hidden"
