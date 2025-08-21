@@ -12,9 +12,9 @@ function App() {
   return (
     <ThemeProvider>
       <LanguageProvider>
-        <div className="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors duration-200">
+        <div className="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors duration-200 overflow-x-hidden w-full max-w-full">
           <Navbar />
-          <main>
+          <main className="overflow-x-hidden w-full">
             <Home />
             <About />
             <Projects />

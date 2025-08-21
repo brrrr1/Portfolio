@@ -162,8 +162,8 @@ const Projects: React.FC = () => {
   }, [selectedProject, selectedImage]);
 
   return (
-    <div id="projects" className="min-h-screen">
-      <section className="section-padding bg-gradient-to-br from-primary-50 to-blue-50 dark:from-gray-900 dark:to-gray-800">
+    <div id="projects" className="min-h-screen overflow-x-hidden w-full">
+      <section className="section-padding bg-gradient-to-br from-primary-50 to-blue-50 dark:from-gray-900 dark:to-gray-800 overflow-hidden">
         <div className="container-custom">
           <motion.div
             initial={{ opacity: 0, y: 20 }}

@@ -109,13 +109,13 @@ const Home: React.FC = () => {
 
 
   return (
-    <div id="home" className="min-h-screen">
+    <div id="home" className="min-h-screen overflow-x-hidden w-full">
       <section 
         ref={heroRef}
-        className="section-padding bg-gradient-to-br from-primary-50 to-blue-50 dark:from-gray-900 dark:to-gray-800 relative"
+        className="section-padding bg-gradient-to-br from-primary-50 to-blue-50 dark:from-gray-900 dark:to-gray-800 relative overflow-hidden"
       >
 
-        <div className="absolute inset-0 opacity-10">
+        <div className="absolute inset-0 opacity-10 overflow-hidden">
           <motion.div 
             className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary-400 rounded-full mix-blend-multiply filter blur-xl"
             animate={{

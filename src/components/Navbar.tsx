@@ -37,6 +37,19 @@ const Navbar: React.FC = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Prevent body scroll when mobile menu is open
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [isOpen]);
+
   const navItems = [
     { name: t('nav.home'), id: 'home' },
     { name: t('nav.about'), id: 'about' },
@@ -53,6 +66,7 @@ const Navbar: React.FC = () => {
   const scrollToSection = (sectionId: string) => {
     scrollToElement(sectionId, 80);
     setIsOpen(false);
+    setIsLanguageOpen(false);
   };
 
   const handleLanguageChange = (langCode: string) => {
@@ -214,118 +228,140 @@ const Navbar: React.FC = () => {
           </motion.button>
         </div>
 
-        {isOpen && (
-          <motion.div
-            initial={{ opacity: 0, y: -20, height: 0 }}
-            animate={{ opacity: 1, y: 0, height: 'auto' }}
-            exit={{ opacity: 0, y: -20, height: 0 }}
-            transition={{ duration: 0.3 }}
-            className="md:hidden overflow-hidden"
-          >
-            <div className="px-2 pt-2 pb-3 space-y-1 bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700 backdrop-blur-md">
-              {navItems.map((item, index) => (
+        <AnimatePresence>
+          {isOpen && (
+            <>
+              {/* Backdrop overlay */}
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.2 }}
+                className="md:hidden fixed inset-0 bg-black bg-opacity-50 z-30"
+                onClick={() => {
+                  setIsOpen(false);
+                  setIsLanguageOpen(false);
+                }}
+              />
+              
+              {/* Mobile menu */}
+              <motion.div
+                initial={{ opacity: 0, y: -20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{ duration: 0.3 }}
+                className="md:hidden fixed inset-x-0 top-16 bottom-0 z-40 overflow-y-auto"
+              >
+              <div className="min-h-full px-4 pt-4 pb-6 space-y-2 bg-white dark:bg-gray-800 shadow-xl">
+                {navItems.map((item, index) => (
                 <motion.button
                   key={item.id}
                   onClick={() => scrollToSection(item.id)}
-                  className="block w-full text-left px-3 py-2 rounded-md text-base font-medium transition-all duration-200 text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 hover:bg-gray-50 dark:hover:bg-gray-700"
+                  className="block w-full text-left px-4 py-4 rounded-lg text-lg font-medium transition-all duration-200 text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 hover:bg-gray-50 dark:hover:bg-gray-700"
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: index * 0.1 }}
                   whileHover={{ x: 5 }}
+                  whileTap={{ scale: 0.98 }}
                 >
                   <AnimatedText as="span" delay={index}>
                     {item.name}
                   </AnimatedText>
                 </motion.button>
-              ))}
+                ))}
 
-              <div className="flex items-center justify-between px-3 py-2">
-                <div className="relative">
-                  <motion.button
-                    onClick={() => setIsLanguageOpen(!isLanguageOpen)}
-                    className="flex items-center space-x-2 p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-all duration-200"
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                  >
-                    <GlobeAltIcon className="h-5 w-5 text-gray-600 dark:text-gray-300" />
-                    <div className="relative w-6 h-6 flex items-center justify-center">
-                      <AnimatePresence mode="wait">
-                        <motion.span
-                          key={language}
-                          className="text-sm font-medium text-gray-700 dark:text-gray-300 absolute"
-                          initial={{ 
-                            opacity: 0, 
-                            scale: 0.5, 
-                            rotate: -180,
-                            y: -10
-                          }}
-                          animate={{ 
-                            opacity: 1, 
-                            scale: 1, 
-                            rotate: 0,
-                            y: 0
-                          }}
-                          exit={{ 
-                            opacity: 0, 
-                            scale: 0.5, 
-                            rotate: 180,
-                            y: 10
-                          }}
-                          transition={{ 
-                            duration: 0.3,
-                            ease: [0.25, 0.46, 0.45, 0.94]
-                          }}
+                <div className="mt-8 pt-6 border-t border-gray-200 dark:border-gray-700">
+                  <div className="flex items-center justify-between px-4 py-3">
+                    <div className="relative">
+                      <motion.button
+                        onClick={() => setIsLanguageOpen(!isLanguageOpen)}
+                        className="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-all duration-200"
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
+                      >
+                        <GlobeAltIcon className="h-6 w-6 text-gray-600 dark:text-gray-300" />
+                        <div className="relative w-8 h-8 flex items-center justify-center">
+                          <AnimatePresence mode="wait">
+                            <motion.span
+                              key={language}
+                              className="text-lg font-medium text-gray-700 dark:text-gray-300 absolute"
+                              initial={{ 
+                                opacity: 0, 
+                                scale: 0.5, 
+                                rotate: -180,
+                                y: -10
+                              }}
+                              animate={{ 
+                                opacity: 1, 
+                                scale: 1, 
+                                rotate: 0,
+                                y: 0
+                              }}
+                              exit={{ 
+                                opacity: 0, 
+                                scale: 0.5, 
+                                rotate: 180,
+                                y: 10
+                              }}
+                              transition={{ 
+                                duration: 0.3,
+                                ease: [0.25, 0.46, 0.45, 0.94]
+                              }}
+                            >
+                              {languages.find(lang => lang.code === language)?.flag}
+                            </motion.span>
+                          </AnimatePresence>
+                        </div>
+                      </motion.button>
+
+                      {isLanguageOpen && (
+                        <motion.div
+                          initial={{ opacity: 0, y: 10, scale: 0.95 }}
+                          animate={{ opacity: 1, y: 0, scale: 1 }}
+                          exit={{ opacity: 0, y: 10, scale: 0.95 }}
+                          transition={{ duration: 0.2 }}
+                          className="absolute left-0 top-full mt-2 w-52 bg-white dark:bg-gray-800 rounded-lg shadow-xl border border-gray-200 dark:border-gray-700 py-2 backdrop-blur-md"
                         >
-                          {languages.find(lang => lang.code === language)?.flag}
-                        </motion.span>
-                      </AnimatePresence>
+                          {languages.map((lang) => (
+                            <motion.button
+                              key={lang.code}
+                              onClick={() => handleLanguageChange(lang.code)}
+                              className={`w-full text-left px-4 py-3 text-base hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors ${
+                                language === lang.code ? 'text-primary-600 dark:text-primary-400' : 'text-gray-700 dark:text-gray-300'
+                              }`}
+                              whileHover={{ x: 5 }}
+                              whileTap={{ scale: 0.98 }}
+                            >
+                              <div className="flex items-center space-x-3">
+                                <span className="text-xl">{lang.flag}</span>
+                                <span>{lang.name}</span>
+                              </div>
+                            </motion.button>
+                          ))}
+                        </motion.div>
+                      )}
                     </div>
-                  </motion.button>
 
-                  {isLanguageOpen && (
-                    <motion.div
-                      initial={{ opacity: 0, y: -10, scale: 0.95 }}
-                      animate={{ opacity: 1, y: 0, scale: 1 }}
-                      exit={{ opacity: 0, y: -10, scale: 0.95 }}
-                      transition={{ duration: 0.2 }}
-                      className="absolute left-0 mt-2 w-48 bg-white dark:bg-gray-800 rounded-lg shadow-xl border border-gray-200 dark:border-gray-700 py-2 backdrop-blur-md"
+                    <motion.button
+                      onClick={toggleTheme}
+                      className="p-3 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-all duration-200"
+                      whileHover={{ scale: 1.1, rotate: 180 }}
+                      whileTap={{ scale: 0.9 }}
+                      transition={{ duration: 0.3 }}
                     >
-                      {languages.map((lang) => (
-                        <motion.button
-                          key={lang.code}
-                          onClick={() => handleLanguageChange(lang.code)}
-                          className={`w-full text-left px-4 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors ${
-                            language === lang.code ? 'text-primary-600 dark:text-primary-400' : 'text-gray-700 dark:text-gray-300'
-                          }`}
-                          whileHover={{ x: 5 }}
-                        >
-                          <div className="flex items-center space-x-3">
-                            <span className="text-lg">{lang.flag}</span>
-                            <span>{lang.name}</span>
-                          </div>
-                        </motion.button>
-                      ))}
-                    </motion.div>
-                  )}
+                      {isDark ? (
+                        <SunIcon className="h-6 w-6 text-gray-600 dark:text-gray-300" />
+                      ) : (
+                        <MoonIcon className="h-6 w-6 text-gray-600 dark:text-gray-300" />
+                      )}
+                    </motion.button>
+                  </div>
                 </div>
-
-                <motion.button
-                  onClick={toggleTheme}
-                  className="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-all duration-200"
-                  whileHover={{ scale: 1.1, rotate: 180 }}
-                  whileTap={{ scale: 0.9 }}
-                  transition={{ duration: 0.3 }}
-                >
-                  {isDark ? (
-                    <SunIcon className="h-5 w-5 text-gray-600 dark:text-gray-300" />
-                  ) : (
-                    <MoonIcon className="h-5 w-5 text-gray-600 dark:text-gray-300" />
-                  )}
-                </motion.button>
               </div>
-            </div>
-          </motion.div>
-        )}
+            </motion.div>
+            </>
+          )}
+        </AnimatePresence>
       </div>
     </motion.nav>
   );
