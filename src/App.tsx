@@ -14,7 +14,7 @@ function App() {
       <LanguageProvider>
         <div className="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors duration-200 overflow-x-hidden w-full max-w-full">
           <Navbar />
-          <main className="overflow-x-hidden w-full">
+          <main className="overflow-x-hidden w-full pt-16">
             <Home />
             <About />
             <Projects />

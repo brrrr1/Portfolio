@@ -30,23 +30,48 @@ const Navbar: React.FC = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 10);
+      // Solo actualizar el estado de scroll si el menú móvil no está abierto
+      if (!isOpen) {
+        setIsScrolled(window.scrollY > 10);
+      }
     };
 
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [isOpen]);
 
   // Prevent body scroll when mobile menu is open
   useEffect(() => {
     if (isOpen) {
+      // Guardar la posición actual del scroll
+      const scrollY = window.scrollY;
       document.body.style.overflow = 'hidden';
+      document.body.style.position = 'fixed';
+      document.body.style.top = `-${scrollY}px`;
+      document.body.style.width = '100%';
+      
+      // Guardar la posición para restaurarla después
+      document.body.setAttribute('data-scroll-y', scrollY.toString());
     } else {
-      document.body.style.overflow = 'unset';
+      // Restaurar el scroll a la posición original
+      const scrollY = document.body.getAttribute('data-scroll-y');
+      document.body.style.overflow = '';
+      document.body.style.position = '';
+      document.body.style.top = '';
+      document.body.style.width = '';
+      
+      if (scrollY) {
+        window.scrollTo(0, parseInt(scrollY));
+        document.body.removeAttribute('data-scroll-y');
+      }
     }
 
     return () => {
-      document.body.style.overflow = 'unset';
+      document.body.style.overflow = '';
+      document.body.style.position = '';
+      document.body.style.top = '';
+      document.body.style.width = '';
+      document.body.removeAttribute('data-scroll-y');
     };
   }, [isOpen]);
 
@@ -64,9 +89,14 @@ const Navbar: React.FC = () => {
   ];
 
   const scrollToSection = (sectionId: string) => {
-    scrollToElement(sectionId, 80);
+    // Cerrar el menú primero, esto activará el useEffect que restaura el scroll
     setIsOpen(false);
     setIsLanguageOpen(false);
+    
+    // Pequeño delay para asegurar que el menú se cierre y el scroll se restaure antes de navegar
+    setTimeout(() => {
+      scrollToElement(sectionId, 80);
+    }, 100);
   };
 
   const handleLanguageChange = (langCode: string) => {
@@ -77,16 +107,17 @@ const Navbar: React.FC = () => {
   };
 
   return (
-    <motion.nav 
-      className={`sticky top-0 z-50 transition-all duration-300 ${
-        isScrolled ? 'backdrop-blur-md shadow-lg' : ''
-      }`}
-      style={{
-        backgroundColor: isDark ? darkBackgroundColor : backgroundColor
-      }}
-    >
-      <div className="container-custom">
-        <div className="flex justify-between items-center h-16">
+    <>
+      <motion.nav 
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+          isScrolled ? 'backdrop-blur-md shadow-lg' : ''
+        }`}
+        style={{
+          backgroundColor: isDark ? darkBackgroundColor : backgroundColor
+        }}
+      >
+        <div className="container-custom">
+          <div className="flex justify-between items-center h-16">
           <motion.button
             onClick={() => scrollToSection('home')}
             className="flex items-center space-x-2 cursor-pointer group"
@@ -226,9 +257,11 @@ const Navbar: React.FC = () => {
               <Bars3Icon className="h-6 w-6" />
             )}
           </motion.button>
+          </div>
         </div>
+      </motion.nav>
 
-        <AnimatePresence>
+      <AnimatePresence>
           {isOpen && (
             <>
               {/* Backdrop overlay */}
@@ -237,7 +270,7 @@ const Navbar: React.FC = () => {
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.2 }}
-                className="md:hidden fixed inset-0 bg-black bg-opacity-50 z-30"
+                className="md:hidden fixed inset-0 bg-black bg-opacity-50 z-[60]"
                 onClick={() => {
                   setIsOpen(false);
                   setIsLanguageOpen(false);
@@ -250,7 +283,7 @@ const Navbar: React.FC = () => {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -20 }}
                 transition={{ duration: 0.3 }}
-                className="md:hidden fixed inset-x-0 top-16 bottom-0 z-40 overflow-y-auto"
+                className="md:hidden fixed inset-x-0 top-16 bottom-0 z-[70] overflow-y-auto"
               >
               <div className="min-h-full px-4 pt-4 pb-6 space-y-2 bg-white dark:bg-gray-800 shadow-xl">
                 {navItems.map((item, index) => (
@@ -361,9 +394,8 @@ const Navbar: React.FC = () => {
             </motion.div>
             </>
           )}
-        </AnimatePresence>
-      </div>
-    </motion.nav>
+      </AnimatePresence>
+    </>
   );
 };
 
