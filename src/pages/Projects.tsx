@@ -4,7 +4,8 @@ import {
   CodeBracketIcon,
   XMarkIcon,
   ChevronLeftIcon,
-  ChevronRightIcon
+  ChevronRightIcon,
+  EyeIcon
 } from '@heroicons/react/24/outline';
 import { useTranslation } from '../hooks/useTranslation';
 import AnimatedText from '../components/AnimatedText';
@@ -235,6 +236,16 @@ const Projects: React.FC = () => {
                       {t('projects.featured')}
                     </div>
                   )}
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleProjectClick(project);
+                    }}
+                    className="absolute top-4 right-4 bg-blue-600 hover:bg-blue-700 text-white p-2 rounded-full shadow-lg transition-all duration-200 hover:scale-110"
+                    title={t('projects.viewDetail')}
+                  >
+                    <EyeIcon className="h-5 w-5" />
+                  </button>
                 </div>
 
                 <div className="p-4 sm:p-6 flex flex-col flex-grow bg-gray-100 dark:bg-gray-800">
