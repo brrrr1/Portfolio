@@ -10,8 +10,8 @@ import { useScrollAnimation, useParallax, useSmoothScroll } from '../hooks/useSc
 import AnimatedText from '../components/AnimatedText';
 
 import brunoProfile from '../assets/images/bruno-profile.jpg';
-import cvFileEnglish from '../assets/docs/CV BRUNO ENGLISH.pdf';
-import cvFileSpanish from '../assets/docs/CV BRUNO ESPAÑOL.pdf';
+import cvFileEnglish from '../assets/docs/CV_BRUNO_ENGLISH.pdf';
+import cvFileSpanish from '../assets/docs/CV_BRUNO_ESPANOL.pdf';
 
 
 const AnimatedGradientName: React.FC<{ name: string }> = ({ name }) => {
