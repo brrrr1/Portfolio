@@ -254,11 +254,7 @@ const Home: React.FC = () => {
                     animate={{ opacity: 1, y: 0, scale: 1 }}
                     exit={{ opacity: 0, y: -10, scale: 0.95 }}
                     transition={{ duration: 0.2 }}
-                    className="absolute top-full left-0 mt-2 w-full sm:w-48 bg-white dark:bg-gray-800 rounded-lg shadow-xl border border-gray-200 dark:border-gray-700 z-50 glass-effect"
-                    style={{ 
-                      maxHeight: '200px',
-                      overflowY: 'auto'
-                    }}
+                    className="absolute bottom-full left-0 mb-2 w-full sm:w-48 bg-white dark:bg-gray-800 rounded-lg shadow-xl border border-gray-200 dark:border-gray-700 z-[9999] glass-effect"
                   >
                     <div className="py-1">
                       <button
