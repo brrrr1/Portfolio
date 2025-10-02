@@ -11,6 +11,7 @@ const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isLanguageOpen, setIsLanguageOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const languageDropdownRef = React.useRef<HTMLDivElement>(null);
   const { isDark, toggleTheme } = useTheme();
   const { language, setLanguage } = useLanguage();
   const { t } = useTranslation();
@@ -106,18 +107,35 @@ const Navbar: React.FC = () => {
     }, 150);
   };
 
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (languageDropdownRef.current && !languageDropdownRef.current.contains(event.target as Node)) {
+        setIsLanguageOpen(false);
+      }
+    };
+
+    if (isLanguageOpen) {
+      document.addEventListener('mousedown', handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [isLanguageOpen]);
+
   return (
     <>
       <motion.nav 
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
           isScrolled ? 'backdrop-blur-md shadow-lg' : ''
         }`}
-        style={{
-          backgroundColor: isDark ? darkBackgroundColor : backgroundColor
+        style={{ 
+          backgroundColor: isDark ? darkBackgroundColor : backgroundColor,
+          overflow: 'visible'
         }}
       >
-        <div className="container-custom">
-          <div className="flex justify-between items-center h-16">
+        <div className="container-custom" style={{ overflow: 'visible' }}>
+          <div className="flex justify-between items-center h-16" style={{ overflow: 'visible' }}>
           <motion.button
             onClick={() => scrollToSection('home')}
             className="flex items-center space-x-2 cursor-pointer group"
@@ -161,7 +179,7 @@ const Navbar: React.FC = () => {
           </div>
 
           <div className="hidden md:flex items-center space-x-4">
-            <div className="relative">
+            <div className="relative" ref={languageDropdownRef}>
               <motion.button
                 onClick={() => setIsLanguageOpen(!isLanguageOpen)}
                 className="flex items-center space-x-2 p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-all duration-200"
@@ -203,14 +221,15 @@ const Navbar: React.FC = () => {
                 </div>
               </motion.button>
 
-              {isLanguageOpen && (
-                <motion.div
-                  initial={{ opacity: 0, y: -10, scale: 0.95 }}
-                  animate={{ opacity: 1, y: 0, scale: 1 }}
-                  exit={{ opacity: 0, y: -10, scale: 0.95 }}
-                  transition={{ duration: 0.2 }}
-                  className="absolute right-0 mt-2 w-48 bg-white dark:bg-gray-800 rounded-lg shadow-xl border border-gray-200 dark:border-gray-700 py-2 backdrop-blur-md"
-                >
+              <AnimatePresence>
+                {isLanguageOpen && (
+                  <motion.div
+                    initial={{ opacity: 0, y: -10, scale: 0.95 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    exit={{ opacity: 0, y: -10, scale: 0.95 }}
+                    transition={{ duration: 0.2 }}
+                    className="absolute right-0 mt-2 w-48 bg-white dark:bg-gray-800 rounded-lg shadow-xl border border-gray-200 dark:border-gray-700 py-2 backdrop-blur-md z-[100]"
+                  >
                   {languages.map((lang) => (
                     <motion.button
                       key={lang.code}
@@ -226,8 +245,9 @@ const Navbar: React.FC = () => {
                       </div>
                     </motion.button>
                   ))}
-                </motion.div>
-              )}
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </div>
 
             <motion.button
