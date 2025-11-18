@@ -206,7 +206,16 @@ El portfolio está optimizado para:
 ### Vercel
 1. Instala Vercel CLI: `npm i -g vercel`
 2. Ejecuta: `vercel`
-3. Configura las variables de entorno
+3. **Configura las variables de entorno en el dashboard de Vercel:**
+   - Ve a tu proyecto en [Vercel Dashboard](https://vercel.com/dashboard)
+   - Settings → Environment Variables
+   - Añade las siguientes variables:
+     - `REACT_APP_API_BASE_URL`: URL de tu backend desplegado (ej: `https://tu-backend.herokuapp.com/api` o `https://api.tudominio.com/api`)
+     - `REACT_APP_FORMSPREE_FORM_ID`: (Opcional) Tu Form ID de Formspree para el formulario de contacto
+   
+   **⚠️ IMPORTANTE:** Después de añadir las variables, necesitas hacer un nuevo deploy para que se apliquen.
+
+   📖 **Para más detalles y solución de problemas, consulta [VERCEL_DEPLOY.md](./VERCEL_DEPLOY.md)**
 
 ### GitHub Pages
 1. Instala: `npm install --save-dev gh-pages`

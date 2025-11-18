@@ -14,10 +14,22 @@ const PUBLIC_BASE = `${API_BASE_URL}/public`;
 const ADMIN_BASE = `${API_BASE_URL}/admin`;
 const AUTH_BASE = `${API_BASE_URL}/auth`;
 
+// Log de la URL del backend (solo en desarrollo)
+if (process.env.NODE_ENV === 'development') {
+  console.log('🔗 Backend API URL:', API_BASE_URL);
+}
+
 async function handleResponse<T>(response: Response): Promise<T> {
   if (!response.ok) {
     const message = await response.text();
-    throw new Error(message || 'Error en la comunicación con el servidor');
+    const errorMsg = message || `Error en la comunicación con el servidor (${response.status})`;
+    console.error('❌ Error del backend:', {
+      status: response.status,
+      statusText: response.statusText,
+      url: response.url,
+      message: errorMsg
+    });
+    throw new Error(errorMsg);
   }
   if (response.status === 204) {
     return {} as T;
@@ -26,23 +38,71 @@ async function handleResponse<T>(response: Response): Promise<T> {
 }
 
 export async function fetchEducations(): Promise<Education[]> {
-  const response = await fetch(`${PUBLIC_BASE}/educations`);
-  return handleResponse<Education[]>(response);
+  try {
+    const response = await fetch(`${PUBLIC_BASE}/educations`);
+    return handleResponse<Education[]>(response);
+  } catch (error) {
+    if (error instanceof TypeError && error.message.includes('fetch')) {
+      console.error('❌ Error de conexión:', {
+        url: `${PUBLIC_BASE}/educations`,
+        message: 'No se pudo conectar con el backend. Verifica que REACT_APP_API_BASE_URL esté configurada correctamente.',
+        apiBaseUrl: API_BASE_URL
+      });
+      throw new Error('No se pudo conectar con el backend. Verifica la configuración de REACT_APP_API_BASE_URL.');
+    }
+    throw error;
+  }
 }
 
 export async function fetchExperiences(): Promise<Experience[]> {
-  const response = await fetch(`${PUBLIC_BASE}/experiences`);
-  return handleResponse<Experience[]>(response);
+  try {
+    const response = await fetch(`${PUBLIC_BASE}/experiences`);
+    return handleResponse<Experience[]>(response);
+  } catch (error) {
+    if (error instanceof TypeError && error.message.includes('fetch')) {
+      console.error('❌ Error de conexión:', {
+        url: `${PUBLIC_BASE}/experiences`,
+        message: 'No se pudo conectar con el backend. Verifica que REACT_APP_API_BASE_URL esté configurada correctamente.',
+        apiBaseUrl: API_BASE_URL
+      });
+      throw new Error('No se pudo conectar con el backend. Verifica la configuración de REACT_APP_API_BASE_URL.');
+    }
+    throw error;
+  }
 }
 
 export async function fetchProjects(): Promise<Project[]> {
-  const response = await fetch(`${PUBLIC_BASE}/projects`);
-  return handleResponse<Project[]>(response);
+  try {
+    const response = await fetch(`${PUBLIC_BASE}/projects`);
+    return handleResponse<Project[]>(response);
+  } catch (error) {
+    if (error instanceof TypeError && error.message.includes('fetch')) {
+      console.error('❌ Error de conexión:', {
+        url: `${PUBLIC_BASE}/projects`,
+        message: 'No se pudo conectar con el backend. Verifica que REACT_APP_API_BASE_URL esté configurada correctamente.',
+        apiBaseUrl: API_BASE_URL
+      });
+      throw new Error('No se pudo conectar con el backend. Verifica la configuración de REACT_APP_API_BASE_URL.');
+    }
+    throw error;
+  }
 }
 
 export async function fetchCvMetadata(): Promise<CvMetadata[]> {
-  const response = await fetch(`${PUBLIC_BASE}/cv/metadata`);
-  return handleResponse<CvMetadata[]>(response);
+  try {
+    const response = await fetch(`${PUBLIC_BASE}/cv/metadata`);
+    return handleResponse<CvMetadata[]>(response);
+  } catch (error) {
+    if (error instanceof TypeError && error.message.includes('fetch')) {
+      console.error('❌ Error de conexión:', {
+        url: `${PUBLIC_BASE}/cv/metadata`,
+        message: 'No se pudo conectar con el backend. Verifica que REACT_APP_API_BASE_URL esté configurada correctamente.',
+        apiBaseUrl: API_BASE_URL
+      });
+      throw new Error('No se pudo conectar con el backend. Verifica la configuración de REACT_APP_API_BASE_URL.');
+    }
+    throw error;
+  }
 }
 
 export async function downloadCv(language: 'english' | 'spanish'): Promise<Blob> {
