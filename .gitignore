@@ -24,3 +24,5 @@ yarn-error.log*
 
 # Windows reserved names (cannot be tracked by git)
 nul
+# Windows reserved names
+nul

@@ -6,6 +6,7 @@ import { useLanguage } from '../contexts/LanguageContext';
 import { useTranslation } from '../hooks/useTranslation';
 import { useSmoothScroll } from '../hooks/useScrollAnimation';
 import AnimatedText from './AnimatedText';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -16,6 +17,8 @@ const Navbar: React.FC = () => {
   const { language, setLanguage } = useLanguage();
   const { t } = useTranslation();
   const { scrollToElement } = useSmoothScroll();
+  const navigate = useNavigate();
+  const location = useLocation();
 
   const { scrollY } = useScroll();
   const backgroundColor = useTransform(
@@ -90,14 +93,16 @@ const Navbar: React.FC = () => {
   ];
 
   const scrollToSection = (sectionId: string) => {
-    // Cerrar el menú primero, esto activará el useEffect que restaura el scroll
     setIsOpen(false);
     setIsLanguageOpen(false);
-    
-    // Pequeño delay para asegurar que el menú se cierre y el scroll se restaure antes de navegar
-    setTimeout(() => {
-      scrollToElement(sectionId, 80);
-    }, 100);
+
+    if (location.pathname === '/') {
+      setTimeout(() => {
+        scrollToElement(sectionId, 80);
+      }, 100);
+    } else {
+      navigate('/', { state: { scrollTo: sectionId } });
+    }
   };
 
   const handleLanguageChange = (langCode: string) => {

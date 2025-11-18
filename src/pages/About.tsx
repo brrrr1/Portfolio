@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import {
   BriefcaseIcon,
@@ -8,53 +8,56 @@ import {
   UserGroupIcon,
 } from "@heroicons/react/24/outline";
 import { useTranslation } from "../hooks/useTranslation";
+import { fetchEducations, fetchExperiences } from "../services/api";
+import type { Education, Experience } from "../types/api";
+import { useLanguage } from "../contexts/LanguageContext";
+import { getLocalizedText } from "../utils/localizedText";
+import { ensureExternalUrl } from "../utils/url";
 import AnimatedText from "../components/AnimatedText";
 
 import brunoProfile from "../assets/images/bruno-profile.jpg";
 
 const About: React.FC = () => {
   const { t } = useTranslation();
+  const { language } = useLanguage();
+  const [education, setEducation] = useState<Education[]>([]);
+  const [experiences, setExperiences] = useState<Experience[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [hasError, setHasError] = useState(false);
 
-  const experience = [
-    {
-      year: "Mar. 2025 - Jul. 2025",
-      title: t("about.experience.internship"),
-      company: "Ordio GmbH",
-      description: t("about.experience.description"),
-      logo: "https://www.ordio.com/wp-content/uploads/2022/07/ordio.png",
-    },
-  ];
+  const loadingMessage = {
+    es: "Cargando información...",
+    en: "Loading information...",
+    de: "Informationen werden geladen..."
+  }[language];
 
-  const education = [
-    {
-      year: "2023-2025",
-      degree: t("about.education.programs.multiPlatform"),
-      institution: "Salesianos San Pedro",
-      description: t("about.education.descriptions.multiPlatform"),
-      logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTK9GfPg7Uf1cgFs_nlr_5GTcZiW8VyivN-lg&s",
-    },
-    {
-      year: "Octubre 2024 - Junio 2025",
-      degree: t("about.education.programs.ai"),
-      institution: "UNIR",
-      description: t("about.education.descriptions.ai"),
-      logo: "https://yt3.googleusercontent.com/KLi8T391TBxKyUecknywtrrvG9tUHX7qhitaW47a-4n6CDUakZHZyZOYJZ2TKCuav_mB8XR4oBA=s900-c-k-c0x00ffffff-no-rj",
-    },
-    {
-      year: "Octubre 2024 - Junio 2025",
-      degree: t("about.education.programs.software"),
-      institution: "UNIR",
-      description: t("about.education.descriptions.software"),
-      logo: "https://yt3.googleusercontent.com/KLi8T391TBxKyUecknywtrrvG9tUHX7qhitaW47a-4n6CDUakZHZyZOYJZ2TKCuav_mB8XR4oBA=s900-c-k-c0x00ffffff-no-rj",
-    },
-    {
-      year: "2024",
-      degree: t("about.education.programs.azure"),
-      institution: "Microsoft",
-      description: t("about.education.descriptions.azure"),
-      logo: "https://foroalfa.org/imagenes/ilustraciones/1296.jpg",
-    },
-  ];
+  const errorMessage = {
+    es: "No se pudo cargar la información desde el backend.",
+    en: "Unable to load information from the backend.",
+    de: "Informationen konnten nicht vom Backend geladen werden."
+  }[language];
+
+  useEffect(() => {
+    const loadContent = async () => {
+      try {
+        setIsLoading(true);
+        const [educationResponse, experienceResponse] = await Promise.all([
+          fetchEducations(),
+          fetchExperiences(),
+        ]);
+        setEducation(educationResponse);
+        setExperiences(experienceResponse);
+        setHasError(false);
+      } catch (error) {
+        console.error(error);
+        setHasError(true);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    loadContent();
+  }, []);
 
   const interests = [
     {
@@ -203,9 +206,15 @@ const About: React.FC = () => {
           </motion.div>
 
           <div className="space-y-8">
-            {experience.map((exp, index) => (
+            {isLoading && (
+              <p className="text-center text-gray-500 dark:text-gray-400">{loadingMessage}</p>
+            )}
+            {hasError && !isLoading && (
+              <p className="text-center text-red-500">{errorMessage}</p>
+            )}
+            {!isLoading && !hasError && experiences.map((exp, index) => (
               <motion.div
-                key={index}
+                key={exp.id}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
@@ -214,19 +223,33 @@ const About: React.FC = () => {
               >
                 <div className="flex flex-col sm:flex-row sm:items-start gap-3 sm:space-x-3">
                   <div className="bg-primary-100 dark:bg-primary-900 p-2 rounded-lg flex-shrink-0 self-start">
-                    {exp.logo ? (
-                      <a
-                        href="https://www.ordio.com/"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="block hover:opacity-80 transition-opacity"
-                      >
-                        <img
-                          src={exp.logo}
-                          alt={exp.company}
-                          className="h-5 w-5 object-contain"
-                        />
-                      </a>
+                    {exp.logoUrl ? (
+                      (() => {
+                        const companyLink = ensureExternalUrl(exp.companyUrl);
+                        if (companyLink) {
+                          return (
+                            <a
+                              href={companyLink}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="block hover:opacity-80 transition-opacity"
+                            >
+                              <img
+                                src={exp.logoUrl}
+                                alt={exp.company}
+                                className="h-5 w-5 object-contain"
+                              />
+                            </a>
+                          );
+                        }
+                        return (
+                          <img
+                            src={exp.logoUrl}
+                            alt={exp.company}
+                            className="h-5 w-5 object-contain"
+                          />
+                        );
+                      })()
                     ) : (
                       <BriefcaseIcon className="h-5 w-5 text-primary-600 dark:text-primary-400" />
                     )}
@@ -235,33 +258,45 @@ const About: React.FC = () => {
                     <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-2 mb-1">
                       <div className="flex-1">
                         <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-1">
-                          {exp.title}
+                          {getLocalizedText(exp.role, language)}
                         </h3>
-                        <a
-                          href="https://www.ordio.com/"
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="block hover:text-primary-700 dark:hover:text-primary-300 transition-colors"
-                        >
-                          <p className="text-primary-600 dark:text-primary-400 font-medium">
-                            {exp.company}
-                          </p>
-                        </a>
+                        {(() => {
+                          const companyLink = ensureExternalUrl(exp.companyUrl);
+                          if (companyLink) {
+                            return (
+                              <a
+                                href={companyLink}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="block hover:text-primary-700 dark:hover:text-primary-300 transition-colors"
+                              >
+                                <p className="text-primary-600 dark:text-primary-400 font-medium">
+                                  {exp.company}
+                                </p>
+                              </a>
+                            );
+                          }
+                          return (
+                            <p className="text-primary-600 dark:text-primary-400 font-medium">
+                              {exp.company}
+                            </p>
+                          );
+                        })()}
                       </div>
                       <div className="flex flex-col items-start sm:items-end gap-1">
                         <span className="text-sm text-primary-600 dark:text-primary-400 font-medium">
-                          {exp.year}
+                          {getLocalizedText(exp.dateRange, language)}
                         </span>
                         <span className="inline-block bg-green-100 dark:bg-green-900 text-green-700 dark:text-green-300 px-2 py-0.5 rounded-full text-xs font-medium">
-                          {t("about.experience.onSite")}
+                          {getLocalizedText(exp.workMode, language)}
                         </span>
                       </div>
                     </div>
-                    <p className="text-gray-600 dark:text-gray-300 text-sm mb-1">
-                      {exp.description}
+                    <p className="text-gray-600 dark:text-gray-300 text-sm mb-1 whitespace-pre-line">
+                      {getLocalizedText(exp.description, language)}
                     </p>
                     <p className="text-xs text-gray-500 dark:text-gray-400">
-                      {t("about.experience.location")}
+                      {getLocalizedText(exp.location, language)}
                     </p>
                   </div>
                 </div>
@@ -289,9 +324,15 @@ const About: React.FC = () => {
           </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {education.map((edu, index) => (
+            {isLoading && (
+              <p className="text-center text-gray-500 dark:text-gray-400 col-span-2">{loadingMessage}</p>
+            )}
+            {hasError && !isLoading && (
+              <p className="text-center text-red-500 col-span-2">{errorMessage}</p>
+            )}
+            {!isLoading && !hasError && education.map((edu, index) => (
               <motion.div
-                key={index}
+                key={edu.id}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
@@ -300,9 +341,9 @@ const About: React.FC = () => {
               >
                 <div className="flex flex-col sm:flex-row sm:items-start gap-3 sm:space-x-4">
                   <div className="bg-primary-100 dark:bg-primary-900 p-3 rounded-lg flex-shrink-0 self-start">
-                    {edu.logo ? (
+                    {edu.logoUrl ? (
                       <img
-                        src={edu.logo}
+                        src={edu.logoUrl}
                         alt={edu.institution}
                         className="h-6 w-6 object-contain"
                       />
@@ -313,17 +354,17 @@ const About: React.FC = () => {
                   <div className="flex-1 min-w-0">
                     <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-2 sm:gap-3 mb-2">
                       <h3 className="text-lg sm:text-xl font-semibold text-gray-900 dark:text-white flex-1 min-w-0">
-                        {edu.degree}
+                        {getLocalizedText(edu.degree, language)}
                       </h3>
                       <span className="text-sm text-primary-600 dark:text-primary-400 font-medium flex-shrink-0 whitespace-nowrap">
-                        {edu.year}
+                        {edu.yearRange}
                       </span>
                     </div>
                     <p className="text-primary-600 dark:text-primary-400 font-medium mb-2">
                       {edu.institution}
                     </p>
                     <p className="text-gray-600 dark:text-gray-300 text-sm sm:text-base">
-                      {edu.description}
+                      {getLocalizedText(edu.description, language)}
                     </p>
                   </div>
                 </div>
