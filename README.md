@@ -33,6 +33,12 @@ Un portfolio moderno y profesional desarrollado con React, TypeScript, Tailwind 
 - Secciones bien organizadas
 - Controles responsivos para móvil y desktop
 
+### 🔐 **Panel de administración**
+- Acceso seguro desde el footer con contraseña cifrada
+- CRUD completo de educación, experiencia y proyectos
+- Subida de CVs en español e inglés
+- Datos persistidos en base de datos PostgreSQL
+
 ## 🚀 Tecnologías Utilizadas
 
 - **React 18** - Biblioteca de interfaz de usuario
@@ -42,6 +48,9 @@ Un portfolio moderno y profesional desarrollado con React, TypeScript, Tailwind 
 - **React Router** - Navegación (convertido a SPA)
 - **Heroicons** - Iconos SVG
 - **Formspree** - Envío de emails
+- **Spring Boot 3** - Backend REST
+- **PostgreSQL** - Base de datos relacional
+- **Spring Security + JWT** - Autenticación del panel
 
 ## 📁 Estructura del Proyecto
 
@@ -82,18 +91,68 @@ src/
    npm install
    ```
 
-3. **Configura el envío de emails** (Opcional)
+3. **Configura la API**  
+   - Ajusta el backend en `backend/src/main/resources/application.properties` o mediante variables de entorno (ver sección PostgreSQL).
+   - Define la URL de la API para el frontend: crea un archivo `.env` (añádelo al `.gitignore` si subes credenciales) con:
+     ```env
+     REACT_APP_API_BASE_URL=http://localhost:8080/api
+     ```
+
+4. **Configura el envío de emails** (Opcional)
    - Crea una cuenta en [Formspree](https://formspree.io)
    - Obtén tu Form ID
-   - Crea un archivo `.env` en la raíz:
+   - Añade la variable a tu `.env` (o `.env.local`):
      ```env
      REACT_APP_FORMSPREE_FORM_ID=tu_form_id_aqui
      ```
 
-4. **Ejecuta el proyecto**
+5. **Ejecuta el frontend**
    ```bash
    npm start
    ```
+
+6. **Levanta el backend**
+   ```bash
+   cd backend
+   ./mvnw spring-boot:run   # En Windows usar .\mvnw.cmd spring-boot:run
+   ```
+
+El frontend espera el backend en `http://localhost:8080/api`. Ajusta `REACT_APP_API_BASE_URL` si despliegas en otra URL.
+
+## 🗄️ Backend con Spring Boot (PostgreSQL)
+
+- API REST `/api/public` para educación, experiencia, proyectos y CVs.
+- Panel protegido `/api/admin` autenticado mediante JWT (contraseña `3443pf`, almacenada cifrada).
+- Seeding automático con el contenido existente del portfolio.
+- Gestor de CVs con almacenamiento en base de datos.
+- Documentación OpenAPI disponible en `/swagger-ui.html`.
+- Base de datos: PostgreSQL (driver incluido, H2 no se utiliza en producción).
+
+### Variables de entorno necesarias
+
+| Variable | Descripción | Valor por defecto |
+| --- | --- | --- |
+| `DATABASE_URL` | JDBC URL de PostgreSQL | `jdbc:postgresql://localhost:5432/portfolio_db` |
+| `DATABASE_USERNAME` | Usuario de la BD | `postgres` |
+| `DATABASE_PASSWORD` | Contraseña de la BD | `postgres` |
+
+En Windows ya se dejaron configuradas con valores genéricos mediante `setx`. Puedes cambiarlas con:
+
+```powershell
+setx DATABASE_URL "jdbc:postgresql://<host>:<puerto>/<db>"
+setx DATABASE_USERNAME "<usuario>"
+setx DATABASE_PASSWORD "<contraseña>"
+```
+
+### Ejecutar backend
+
+```bash
+cd backend
+./mvnw clean package   # construye el jar
+./mvnw spring-boot:run # levanta el servidor usando las variables anteriores
+```
+
+> Nota: si todavía no tienes un servidor de PostgreSQL disponible, crea la base `portfolio_db` y un usuario con permisos antes de arrancar la API.
 
 ## 📧 Configuración del Sistema de Emails
 

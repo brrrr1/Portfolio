@@ -8,50 +8,53 @@ import {
   EyeIcon
 } from '@heroicons/react/24/outline';
 import { useTranslation } from '../hooks/useTranslation';
+import { fetchProjects } from '../services/api';
+import type { Project as ProjectType } from '../types/api';
+import { useLanguage } from '../contexts/LanguageContext';
+import { getLocalizedText } from '../utils/localizedText';
+import { ensureExternalUrl } from '../utils/url';
 import AnimatedText from '../components/AnimatedText';
 
-import lagradaFront from '../assets/images/lagrada-front.jpg';
-import pipocapp from '../assets/images/pipocapp.jpeg';
-import lagrada1 from '../assets/images/lagrada1.png';
-import lagrada2 from '../assets/images/lagrada2.png';
-import lagrada3 from '../assets/images/lagrada3.png';
-import pipocapp1 from '../assets/images/pipocapp1.png';
-import pipocapp2 from '../assets/images/pipocapp2.png';
-import pipocapp3 from '../assets/images/pipocapp3.png';
 
 const Projects: React.FC = () => {
   const [activeFilter, setActiveFilter] = useState('all');
-  const [selectedProject, setSelectedProject] = useState<any>(null);
+  const [selectedProject, setSelectedProject] = useState<ProjectType | null>(null);
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
+  const [projects, setProjects] = useState<ProjectType[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [hasError, setHasError] = useState(false);
   const { t } = useTranslation();
+  const { language } = useLanguage();
 
-  const projects = [
-    {
-      id: 1,
-      title: t('projects.projects.lagrada.title'),
-      description: t('projects.projects.lagrada.description'),
-      image: lagradaFront,
-      technologies: ['Java/Spring', 'Angular', 'TypeScript', 'MySQL', 'RxJS', 'Angular Material'],
-      category: 'web',
-      liveUrl: null,
-      githubUrlBack: 'https://github.com/brrrr1/La-Grada',
-      githubUrlFront: 'https://github.com/brrrr1/La-Grada-FRONT',
-      featured: true,
-      modalImages: [lagrada1, lagrada2, lagrada3]
-    },
-    {
-      id: 2,
-      title: t('projects.projects.pipocapp.title'),
-      description: t('projects.projects.pipocapp.description'),
-      image: pipocapp,
-      technologies: ['React', 'JavaScript', 'Firebase', 'Node.js'],
-      category: 'web',
-      liveUrl: null,
-      githubUrl: 'https://github.com/brrrr1/PipocApp',
-      featured: false,
-      modalImages: [pipocapp1, pipocapp2, pipocapp3]
-    }
-  ];
+  useEffect(() => {
+    const loadProjects = async () => {
+      try {
+        setIsLoading(true);
+        const response = await fetchProjects();
+        setProjects(response);
+        setHasError(false);
+      } catch (error) {
+        console.error(error);
+        setHasError(true);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    loadProjects();
+  }, []);
+
+  const loadingMessage = {
+    es: 'Cargando proyectos...',
+    en: 'Loading projects...',
+    de: 'Projekte werden geladen...'
+  }[language];
+
+  const errorMessage = {
+    es: 'No se pudieron cargar los proyectos.',
+    en: 'Projects could not be loaded.',
+    de: 'Projekte konnten nicht geladen werden.'
+  }[language];
 
   const filters = [
     { id: 'all', name: t('projects.filters.all') },
@@ -101,7 +104,7 @@ const Projects: React.FC = () => {
     }
   };
 
-  const handleProjectClick = (project: any) => {
+  const handleProjectClick = (project: ProjectType) => {
     setSelectedProject(project);
   };
 
@@ -118,18 +121,18 @@ const Projects: React.FC = () => {
   }, []);
 
   const nextImage = useCallback(() => {
-    if (selectedProject && selectedImage) {
-      const currentIndex = selectedProject.modalImages.indexOf(selectedImage);
-      const nextIndex = (currentIndex + 1) % selectedProject.modalImages.length;
-      setSelectedImage(selectedProject.modalImages[nextIndex]);
+    if (selectedProject && selectedImage && selectedProject.galleryImages?.length) {
+      const currentIndex = selectedProject.galleryImages.indexOf(selectedImage);
+      const nextIndex = (currentIndex + 1) % selectedProject.galleryImages.length;
+      setSelectedImage(selectedProject.galleryImages[nextIndex]);
     }
   }, [selectedProject, selectedImage]);
 
   const previousImage = useCallback(() => {
-    if (selectedProject && selectedImage) {
-      const currentIndex = selectedProject.modalImages.indexOf(selectedImage);
-      const prevIndex = currentIndex === 0 ? selectedProject.modalImages.length - 1 : currentIndex - 1;
-      setSelectedImage(selectedProject.modalImages[prevIndex]);
+    if (selectedProject && selectedImage && selectedProject.galleryImages?.length) {
+      const currentIndex = selectedProject.galleryImages.indexOf(selectedImage);
+      const prevIndex = currentIndex === 0 ? selectedProject.galleryImages.length - 1 : currentIndex - 1;
+      setSelectedImage(selectedProject.galleryImages[prevIndex]);
     }
   }, [selectedProject, selectedImage]);
 
@@ -212,121 +215,142 @@ const Projects: React.FC = () => {
             ))}
           </motion.div>
 
-          <motion.div
-            variants={containerVariants}
-            initial="hidden"
-            animate="visible"
-            className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto"
-          >
-            {filteredProjects.map((project) => (
+          {isLoading ? (
+            <p className="text-center text-gray-500 dark:text-gray-400">{loadingMessage}</p>
+          ) : hasError ? (
+            <p className="text-center text-red-500">{errorMessage}</p>
+          ) : (
+            <>
               <motion.div
-                key={project.id}
-                variants={itemVariants}
-                className="bg-white dark:bg-gray-800 rounded-lg shadow-sm hover:shadow-lg transition-shadow duration-300 overflow-hidden flex flex-col h-full cursor-pointer"
-                onClick={() => handleProjectClick(project)}
-                              >
-                <div className="relative h-48 overflow-hidden">
-                  <img
-                    src={project.image}
-                    alt={project.title}
-                    className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
-                  />
-                  {project.featured && (
-                    <div className="absolute top-4 left-4 bg-primary-600 text-white px-3 py-1 rounded-full text-sm font-medium">
-                      {t('projects.featured')}
+                variants={containerVariants}
+                initial="hidden"
+                animate="visible"
+                className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto"
+              >
+            {filteredProjects.map((project) => {
+              const liveUrl = ensureExternalUrl(project.liveUrl);
+              return (
+                  <motion.div
+                    key={project.id}
+                    variants={itemVariants}
+                    className="bg-white dark:bg-gray-800 rounded-lg shadow-sm hover:shadow-lg transition-shadow duration-300 overflow-hidden flex flex-col h-full cursor-pointer"
+                    onClick={() => handleProjectClick(project)}
+                                  >
+                    <div className="relative h-48 overflow-hidden">
+                      <img
+                        src={project.coverImageUrl}
+                        alt={getLocalizedText(project.title, language)}
+                        className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+                      />
+                      {project.featured && (
+                        <div className="absolute top-4 left-4 bg-primary-600 text-white px-3 py-1 rounded-full text-sm font-medium">
+                          {t('projects.featured')}
+                        </div>
+                      )}
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleProjectClick(project);
+                        }}
+                        className="absolute top-4 right-4 bg-blue-600 hover:bg-blue-700 text-white p-2 rounded-full shadow-lg transition-all duration-200 hover:scale-110"
+                        title={t('projects.viewDetail')}
+                      >
+                        <EyeIcon className="h-5 w-5" />
+                      </button>
                     </div>
-                  )}
-                  <button
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      handleProjectClick(project);
-                    }}
-                    className="absolute top-4 right-4 bg-blue-600 hover:bg-blue-700 text-white p-2 rounded-full shadow-lg transition-all duration-200 hover:scale-110"
-                    title={t('projects.viewDetail')}
-                  >
-                    <EyeIcon className="h-5 w-5" />
-                  </button>
-                </div>
 
-                <div className="p-4 sm:p-6 flex flex-col flex-grow bg-gray-100 dark:bg-gray-800">
-                  <div className="flex-grow">
-                    <h3 className="text-lg sm:text-xl font-semibold text-gray-900 dark:text-white mb-2">
-                      {project.title}
-                    </h3>
-                    <p className="text-gray-600 dark:text-gray-300 mb-4 text-sm sm:text-base">
-                      {project.description}
-                    </p>
+                    <div className="p-4 sm:p-6 flex flex-col flex-grow bg-gray-100 dark:bg-gray-800">
+                      <div className="flex-grow">
+                        <h3 className="text-lg sm:text-xl font-semibold text-gray-900 dark:text-white mb-2">
+                          {getLocalizedText(project.title, language)}
+                        </h3>
+                        <p className="text-gray-600 dark:text-gray-300 mb-4 text-sm sm:text-base">
+                          {getLocalizedText(project.shortDescription, language)}
+                        </p>
 
-                    <div className="flex flex-wrap gap-2 mb-4">
-                      {project.technologies.map((tech) => (
-                        <span
-                          key={tech}
-                          className="bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm"
-                        >
-                          {tech}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
+                        <div className="flex flex-wrap gap-2 mb-4">
+                          {project.technologies.map((tech) => (
+                            <span
+                              key={tech}
+                              className="bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm"
+                            >
+                              {tech}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
 
                   <div className="mt-auto pt-4 flex flex-col sm:flex-row justify-center gap-2">
-                    {project.githubUrlBack && project.githubUrlFront ? (
-                      <>
-                        <a
-                          href={project.githubUrlBack}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="flex items-center justify-center gap-2 bg-primary-600 hover:bg-primary-700 text-white font-medium transition-colors px-3 sm:px-4 py-2 rounded-full text-center text-sm sm:text-base"
-                          onClick={(e) => e.stopPropagation()}
-                        >
-                          <CodeBracketIcon className="h-4 w-4" />
-                          {t('projects.viewCodeBack')}
-                        </a>
-                        <a
-                          href={project.githubUrlFront}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="flex items-center justify-center gap-2 bg-primary-600 hover:bg-primary-700 text-white font-medium transition-colors px-3 sm:px-4 py-2 rounded-full text-center text-sm sm:text-base"
-                          onClick={(e) => e.stopPropagation()}
-                        >
-                          <CodeBracketIcon className="h-4 w-4" />
-                          {t('projects.viewCodeFront')}
-                        </a>
-                      </>
-                    ) : project.githubUrl ? (
+                    {liveUrl && (
                       <a
-                        href={project.githubUrl}
+                        href={liveUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex items-center justify-center gap-2 bg-primary-600 hover:bg-primary-700 text-white font-medium transition-colors px-3 sm:px-4 py-2 rounded-full text-center text-sm sm:text-base"
+                        className="flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-medium transition-colors px-3 sm:px-4 py-2 rounded-full text-center text-sm sm:text-base"
                         onClick={(e) => e.stopPropagation()}
                       >
-                        <CodeBracketIcon className="h-4 w-4" />
-                        {t('projects.viewCode')}
+                        {t('projects.viewDemo')}
                       </a>
-                    ) : null}
-                  </div>
+                    )}
+                        {project.githubUrlBack && project.githubUrlFront ? (
+                          <>
+                            <a
+                              href={project.githubUrlBack}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="flex items-center justify-center gap-2 bg-primary-600 hover:bg-primary-700 text-white font-medium transition-colors px-3 sm:px-4 py-2 rounded-full text-center text-sm sm:text-base"
+                              onClick={(e) => e.stopPropagation()}
+                            >
+                              <CodeBracketIcon className="h-4 w-4" />
+                              {t('projects.viewCodeBack')}
+                            </a>
+                            <a
+                              href={project.githubUrlFront}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="flex items-center justify-center gap-2 bg-primary-600 hover:bg-primary-700 text-white font-medium transition-colors px-3 sm:px-4 py-2 rounded-full text-center text-sm sm:text-base"
+                              onClick={(e) => e.stopPropagation()}
+                            >
+                              <CodeBracketIcon className="h-4 w-4" />
+                              {t('projects.viewCodeFront')}
+                            </a>
+                          </>
+                        ) : project.githubUrl ? (
+                          <a
+                            href={project.githubUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex items-center justify-center gap-2 bg-primary-600 hover:bg-primary-700 text-white font-medium transition-colors px-3 sm:px-4 py-2 rounded-full text-center text-sm sm:text-base"
+                            onClick={(e) => e.stopPropagation()}
+                          >
+                            <CodeBracketIcon className="h-4 w-4" />
+                            {t('projects.viewCode')}
+                          </a>
+                        ) : null}
+                      </div>
                 </div>
               </motion.div>
-            ))}
-          </motion.div>
+            )})}
+              </motion.div>
 
-          {filteredProjects.length === 0 && (
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              className="text-center py-12"
-            >
-              <div className="bg-gray-100 dark:bg-gray-700 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                <CodeBracketIcon className="h-8 w-8 text-gray-400 dark:text-gray-500" />
-              </div>
-              <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">
-                {t('projects.noProjects')}
-              </h3>
-              <p className="text-gray-600 dark:text-gray-300">
-                {t('projects.noProjectsSubtitle')}
-              </p>
-            </motion.div>
+              {filteredProjects.length === 0 && (
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  className="text-center py-12"
+                >
+                  <div className="bg-gray-100 dark:bg-gray-700 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <CodeBracketIcon className="h-8 w-8 text-gray-400 dark:text-gray-500" />
+                  </div>
+                  <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">
+                    {t('projects.noProjects')}
+                  </h3>
+                  <p className="text-gray-600 dark:text-gray-300">
+                    {t('projects.noProjectsSubtitle')}
+                  </p>
+                </motion.div>
+              )}
+            </>
           )}
         </div>
       </section>
@@ -360,10 +384,10 @@ const Projects: React.FC = () => {
               <div className="flex flex-col lg:flex-row h-full overflow-hidden">
                 <div className="flex-1 p-4 sm:p-6 lg:p-8 overflow-y-auto">
                   <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white mb-4">
-                    {selectedProject.title}
+                    {getLocalizedText(selectedProject.title, language)}
                   </h2>
                   <p className="text-gray-600 dark:text-gray-300 mb-6 text-base sm:text-lg whitespace-pre-line">
-                    {t(`projects.projects.${selectedProject.title.toLowerCase().replace(/\s+/g, '')}.detailedDescription`)}
+                    {getLocalizedText(selectedProject.detailedDescription, language)}
                   </p>
                   
                   <div className="mb-6">
@@ -383,6 +407,16 @@ const Projects: React.FC = () => {
                   </div>
 
                   <div className="flex flex-col sm:flex-row flex-wrap gap-3">
+                    {ensureExternalUrl(selectedProject.liveUrl) && (
+                      <a
+                        href={ensureExternalUrl(selectedProject.liveUrl)}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-medium transition-colors px-4 sm:px-6 py-3 rounded-full text-sm sm:text-base"
+                      >
+                        {t('projects.viewDemo')}
+                      </a>
+                    )}
                     {selectedProject.githubUrlBack && selectedProject.githubUrlFront ? (
                       <>
                         <a
@@ -422,11 +456,11 @@ const Projects: React.FC = () => {
                       Capturas de pantalla:
                     </h3>
                     <div className="space-y-4">
-                      {selectedProject.modalImages?.map((image: string, index: number) => (
+                      {selectedProject.galleryImages?.map((image: string, index: number) => (
                         <div key={index} className="bg-gray-50 dark:bg-gray-700 rounded-lg p-2">
                           <img
                             src={image}
-                            alt={`${selectedProject.title} screenshot ${index + 1}`}
+                            alt={`${getLocalizedText(selectedProject.title, language)} screenshot ${index + 1}`}
                             className="w-full h-auto max-h-[300px] object-contain rounded-lg shadow-md cursor-pointer hover:scale-105 transition-transform duration-200"
                             onClick={() => openImage(image)}
                           />
@@ -438,11 +472,11 @@ const Projects: React.FC = () => {
 
                 <div className="hidden lg:block lg:w-1/3 p-4 sm:p-6 bg-gray-50 dark:bg-gray-700">
                   <div className="flex flex-col gap-4 h-full">
-                    {selectedProject.modalImages?.map((image: string, index: number) => (
+                    {selectedProject.galleryImages?.map((image: string, index: number) => (
                       <div key={index} className="flex-1 min-h-[200px] sm:min-h-[250px]">
                         <img
                           src={image}
-                          alt={`${selectedProject.title} screenshot ${index + 1}`}
+                          alt={`${getLocalizedText(selectedProject.title, language)} screenshot ${index + 1}`}
                           className="w-full h-full object-contain rounded-lg shadow-md cursor-pointer hover:scale-105 transition-transform duration-200"
                           onClick={() => openImage(image)}
                         />
@@ -482,7 +516,7 @@ const Projects: React.FC = () => {
                 <XMarkIcon className="h-5 w-5 sm:h-6 sm:w-6" />
               </button>
 
-              {selectedProject && selectedProject.modalImages.length > 1 && (
+              {selectedProject && selectedProject.galleryImages && selectedProject.galleryImages.length > 1 && (
                 <>
                   <button
                     onClick={previousImage}
@@ -505,9 +539,9 @@ const Projects: React.FC = () => {
                 className="w-full h-full object-contain rounded-lg shadow-2xl"
               />
 
-              {selectedProject && selectedProject.modalImages.length > 1 && (
+              {selectedProject && selectedProject.galleryImages && selectedProject.galleryImages.length > 1 && (
                 <div className="absolute bottom-2 sm:bottom-4 left-1/2 transform -translate-x-1/2 z-10 px-3 sm:px-4 py-1 sm:py-2 rounded-full bg-gray-800 bg-opacity-50 text-white text-xs sm:text-sm">
-                  {selectedProject.modalImages.indexOf(selectedImage) + 1} / {selectedProject.modalImages.length}
+                  {(selectedProject.galleryImages?.indexOf(selectedImage) ?? 0) + 1} / {selectedProject.galleryImages?.length}
                 </div>
               )}
             </motion.div>

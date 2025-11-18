@@ -10,8 +10,7 @@ import { useScrollAnimation, useParallax, useSmoothScroll } from '../hooks/useSc
 import AnimatedText from '../components/AnimatedText';
 
 import brunoProfile from '../assets/images/bruno-profile.jpg';
-import cvFileEnglish from '../assets/docs/CV_BRUNO_ENGLISH.pdf';
-import cvFileSpanish from '../assets/docs/CV_BRUNO_ESPANOL.pdf';
+import { downloadCv } from '../services/api';
 
 
 const AnimatedGradientName: React.FC<{ name: string }> = ({ name }) => {
@@ -31,6 +30,7 @@ const AnimatedGradientName: React.FC<{ name: string }> = ({ name }) => {
 const Home: React.FC = () => {
   const { t } = useTranslation();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [cvDownloading, setCvDownloading] = useState<'english' | 'spanish' | null>(null);
   const dropdownRef = useRef<HTMLDivElement>(null);
   const { scrollToElement } = useSmoothScroll();
   
@@ -67,19 +67,25 @@ const Home: React.FC = () => {
     { name: 'SQL', category: t('home.skills.database') },
   ];
 
-  const handleDownloadCV = (language: 'english' | 'spanish') => {
-    const link = document.createElement('a');
-    if (language === 'english') {
-      link.href = cvFileEnglish;
-      link.download = 'CV_BRUNO_ENGLISH.pdf';
-    } else {
-      link.href = cvFileSpanish;
-      link.download = 'CV_BRUNO_ESPAÑOL.pdf';
+  const handleDownloadCV = async (language: 'english' | 'spanish') => {
+    try {
+      setCvDownloading(language);
+      const blob = await downloadCv(language);
+      const url = window.URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = language === 'english' ? 'CV_BRUNO_ENGLISH.pdf' : 'CV_BRUNO_ESPANOL.pdf';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      window.URL.revokeObjectURL(url);
+    } catch (error) {
+      console.error(error);
+      alert('No se pudo descargar el CV. Inténtalo de nuevo más tarde.');
+    } finally {
+      setCvDownloading(null);
+      setIsDropdownOpen(false);
     }
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-    setIsDropdownOpen(false);
   };
 
   const containerVariants = {
@@ -259,17 +265,19 @@ const Home: React.FC = () => {
                     <div className="py-1">
                       <button
                         onClick={() => handleDownloadCV('english')}
-                        className="w-full px-4 py-2 text-left text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 flex items-center transition-colors duration-200"
+                        disabled={cvDownloading === 'english'}
+                        className="w-full px-4 py-2 text-left text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 flex items-center transition-colors duration-200 disabled:opacity-60"
                       >
                         <span className="mr-2">🇺🇸</span>
-                        English CV
+                        {cvDownloading === 'english' ? 'Descargando...' : 'English CV'}
                       </button>
                       <button
                         onClick={() => handleDownloadCV('spanish')}
-                        className="w-full px-4 py-2 text-left text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 flex items-center transition-colors duration-200"
+                        disabled={cvDownloading === 'spanish'}
+                        className="w-full px-4 py-2 text-left text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 flex items-center transition-colors duration-200 disabled:opacity-60"
                       >
                         <span className="mr-2">🇪🇸</span>
-                        CV Español
+                        {cvDownloading === 'spanish' ? 'Descargando...' : 'CV Español'}
                       </button>
                     </div>
                   </motion.div>

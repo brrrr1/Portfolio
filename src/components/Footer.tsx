@@ -1,9 +1,14 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { useTranslation } from '../hooks/useTranslation';
+import { useNavigate, useLocation } from 'react-router-dom';
+import { useSmoothScroll } from '../hooks/useScrollAnimation';
 
 const Footer: React.FC = () => {
   const { t } = useTranslation();
+  const navigate = useNavigate();
+  const location = useLocation();
+  const { scrollToElement } = useSmoothScroll();
   const currentYear = new Date().getFullYear();
 
   const footerLinks = [
@@ -19,12 +24,10 @@ const Footer: React.FC = () => {
   ];
 
   const scrollToSection = (sectionId: string) => {
-    const element = document.getElementById(sectionId);
-    if (element) {
-      element.scrollIntoView({
-        behavior: 'smooth',
-        block: 'start'
-      });
+    if (location.pathname === '/') {
+      scrollToElement(sectionId, 80);
+    } else {
+      navigate('/', { state: { scrollTo: sectionId } });
     }
   };
 
@@ -124,10 +127,16 @@ const Footer: React.FC = () => {
           viewport={{ once: true }}
           className="border-t border-gray-800 py-6"
         >
-          <div className="flex flex-col md:flex-row justify-between items-center">
+          <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <p className="text-gray-400 text-sm">
               © {currentYear} Bruno Delgado. {t('footer.rights')}
             </p>
+            <button
+              onClick={() => navigate('/admin')}
+              className="btn-secondary"
+            >
+              {t('footer.adminPanel')}
+            </button>
           </div>
         </motion.div>
       </div>

@@ -113,6 +113,7 @@ export const translations = {
       viewCodeBack: 'Ver Backend',
       viewCodeFront: 'Ver Frontend',
       viewDetail: 'Ver Detalle',
+      viewDemo: 'Ver Demo',
       featured: 'Destacado',
       technologiesUsed: 'Tecnologías utilizadas:',
       noProjects: 'No hay proyectos en esta categoría',
@@ -174,7 +175,8 @@ export const translations = {
     footer: {
       description: 'Desarrollador Full Stack apasionado por innovar y dar soluciones que marcan la diferencia.',
       navigation: 'Navegación',
-      rights: 'Todos los derechos reservados.'
+      rights: 'Todos los derechos reservados.',
+      adminPanel: 'Panel de administrador'
     }
   },
 
@@ -292,6 +294,7 @@ export const translations = {
       viewCodeBack: 'View Backend',
       viewCodeFront: 'View Frontend',
       viewDetail: 'View Detail',
+      viewDemo: 'Live Demo',
       featured: 'Featured',
       technologiesUsed: 'Technologies used:',
       noProjects: 'No projects in this category',
@@ -353,7 +356,8 @@ export const translations = {
     footer: {
       description: 'Full Stack Developer passionate about innovating and delivering solutions that make a difference.',
       navigation: 'Navigation',
-      rights: 'All rights reserved.'
+      rights: 'All rights reserved.',
+      adminPanel: 'Admin panel'
     }
   },
 
@@ -471,6 +475,7 @@ export const translations = {
       viewCodeBack: 'Backend ansehen',
       viewCodeFront: 'Frontend ansehen',
       viewDetail: 'Details ansehen',
+      viewDemo: 'Live-Demo',
       featured: 'Hervorgehoben',
       technologiesUsed: 'Verwendete Technologien:',
       noProjects: 'Keine Projekte in dieser Kategorie',
@@ -532,7 +537,8 @@ export const translations = {
     footer: {
       description: 'Full Stack Entwickler mit Leidenschaft für Innovation und Lösungen, die einen Unterschied machen.',
       navigation: 'Navigation',
-      rights: 'Alle Rechte vorbehalten.'
+      rights: 'Alle Rechte vorbehalten.',
+      adminPanel: 'Admin-Bereich'
     }
   }
 }; 
