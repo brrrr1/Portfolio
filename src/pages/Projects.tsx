@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { 
+import {
   CodeBracketIcon,
   XMarkIcon,
   ChevronLeftIcon,
@@ -61,8 +61,8 @@ const Projects: React.FC = () => {
     { id: 'web', name: t('projects.filters.web') }
   ];
 
-  const filteredProjects = activeFilter === 'all' 
-    ? projects 
+  const filteredProjects = activeFilter === 'all'
+    ? projects
     : projects.filter(project => project.category === activeFilter);
 
   const containerVariants = {
@@ -202,11 +202,10 @@ const Projects: React.FC = () => {
               <button
                 key={filter.id}
                 onClick={() => setActiveFilter(filter.id)}
-                className={`px-6 py-2 rounded-full font-medium transition-all duration-200 ${
-                  activeFilter === filter.id
-                    ? 'bg-primary-600 text-white'
-                    : 'bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700'
-                }`}
+                className={`px-6 py-2 rounded-full font-medium transition-all duration-200 ${activeFilter === filter.id
+                  ? 'bg-primary-600 text-white'
+                  : 'bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700'
+                  }`}
               >
                 <AnimatedText as="span" delay={filter.id === 'all' ? 0 : 1}>
                   {filter.name}
@@ -225,112 +224,113 @@ const Projects: React.FC = () => {
                 variants={containerVariants}
                 initial="hidden"
                 animate="visible"
-                className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto"
+                className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto"
               >
-            {filteredProjects.map((project) => {
-              const liveUrl = ensureExternalUrl(project.liveUrl);
-              return (
-                  <motion.div
-                    key={project.id}
-                    variants={itemVariants}
-                    className="bg-white dark:bg-gray-800 rounded-lg shadow-sm hover:shadow-lg transition-shadow duration-300 overflow-hidden flex flex-col h-full cursor-pointer"
-                    onClick={() => handleProjectClick(project)}
-                                  >
-                    <div className="relative h-48 overflow-hidden">
-                      <img
-                        src={project.coverImageUrl}
-                        alt={getLocalizedText(project.title, language)}
-                        className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
-                      />
-                      {project.featured && (
-                        <div className="absolute top-4 left-4 bg-primary-600 text-white px-3 py-1 rounded-full text-sm font-medium">
-                          {t('projects.featured')}
-                        </div>
-                      )}
-                      <button
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          handleProjectClick(project);
-                        }}
-                        className="absolute top-4 right-4 bg-blue-600 hover:bg-blue-700 text-white p-2 rounded-full shadow-lg transition-all duration-200 hover:scale-110"
-                        title={t('projects.viewDetail')}
-                      >
-                        <EyeIcon className="h-5 w-5" />
-                      </button>
-                    </div>
-
-                    <div className="p-4 sm:p-6 flex flex-col flex-grow bg-gray-100 dark:bg-gray-800">
-                      <div className="flex-grow">
-                        <h3 className="text-lg sm:text-xl font-semibold text-gray-900 dark:text-white mb-2">
-                          {getLocalizedText(project.title, language)}
-                        </h3>
-                        <p className="text-gray-600 dark:text-gray-300 mb-4 text-sm sm:text-base">
-                          {getLocalizedText(project.shortDescription, language)}
-                        </p>
-
-                        <div className="flex flex-wrap gap-2 mb-4">
-                          {project.technologies.map((tech) => (
-                            <span
-                              key={tech}
-                              className="bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm"
-                            >
-                              {tech}
-                            </span>
-                          ))}
-                        </div>
+                {filteredProjects.map((project) => {
+                  const liveUrl = ensureExternalUrl(project.liveUrl);
+                  return (
+                    <motion.div
+                      key={project.id}
+                      variants={itemVariants}
+                      className="bg-white dark:bg-gray-800 rounded-lg shadow-sm hover:shadow-lg transition-shadow duration-300 overflow-hidden flex flex-col h-full cursor-pointer"
+                      onClick={() => handleProjectClick(project)}
+                    >
+                      <div className="relative h-48 overflow-hidden">
+                        <img
+                          src={project.coverImageUrl}
+                          alt={getLocalizedText(project.title, language)}
+                          className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+                        />
+                        {project.featured && (
+                          <div className="absolute top-4 left-4 bg-primary-600 text-white px-3 py-1 rounded-full text-sm font-medium">
+                            {t('projects.featured')}
+                          </div>
+                        )}
+                        <button
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            handleProjectClick(project);
+                          }}
+                          className="absolute top-4 right-4 bg-blue-600 hover:bg-blue-700 text-white p-2 rounded-full shadow-lg transition-all duration-200 hover:scale-110"
+                          title={t('projects.viewDetail')}
+                        >
+                          <EyeIcon className="h-5 w-5" />
+                        </button>
                       </div>
 
-                  <div className="mt-auto pt-4 flex flex-col sm:flex-row justify-center gap-2">
-                    {liveUrl && (
-                      <a
-                        href={liveUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-medium transition-colors px-3 sm:px-4 py-2 rounded-full text-center text-sm sm:text-base"
-                        onClick={(e) => e.stopPropagation()}
-                      >
-                        {t('projects.viewDemo')}
-                      </a>
-                    )}
-                        {project.githubUrlBack && project.githubUrlFront ? (
-                          <>
+                      <div className="p-4 sm:p-6 flex flex-col flex-grow bg-gray-100 dark:bg-gray-800">
+                        <div className="flex-grow">
+                          <h3 className="text-lg sm:text-xl font-semibold text-gray-900 dark:text-white mb-2">
+                            {getLocalizedText(project.title, language)}
+                          </h3>
+                          <p className="text-gray-600 dark:text-gray-300 mb-4 text-sm sm:text-base">
+                            {getLocalizedText(project.shortDescription, language)}
+                          </p>
+
+                          <div className="flex flex-wrap gap-2 mb-4">
+                            {project.technologies.map((tech) => (
+                              <span
+                                key={tech}
+                                className="bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm"
+                              >
+                                {tech}
+                              </span>
+                            ))}
+                          </div>
+                        </div>
+
+                        <div className="mt-auto pt-4 flex flex-col sm:flex-row justify-center gap-2">
+                          {liveUrl && (
                             <a
-                              href={project.githubUrlBack}
+                              href={liveUrl}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-medium transition-colors px-3 sm:px-4 py-2 rounded-full text-center text-sm sm:text-base"
+                              onClick={(e) => e.stopPropagation()}
+                            >
+                              {t('projects.viewDemo')}
+                            </a>
+                          )}
+                          {project.githubUrlBack && project.githubUrlFront ? (
+                            <>
+                              <a
+                                href={project.githubUrlBack}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="flex items-center justify-center gap-2 bg-primary-600 hover:bg-primary-700 text-white font-medium transition-colors px-3 sm:px-4 py-2 rounded-full text-center text-sm sm:text-base"
+                                onClick={(e) => e.stopPropagation()}
+                              >
+                                <CodeBracketIcon className="h-4 w-4" />
+                                {t('projects.viewCodeBack')}
+                              </a>
+                              <a
+                                href={project.githubUrlFront}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="flex items-center justify-center gap-2 bg-primary-600 hover:bg-primary-700 text-white font-medium transition-colors px-3 sm:px-4 py-2 rounded-full text-center text-sm sm:text-base"
+                                onClick={(e) => e.stopPropagation()}
+                              >
+                                <CodeBracketIcon className="h-4 w-4" />
+                                {t('projects.viewCodeFront')}
+                              </a>
+                            </>
+                          ) : project.githubUrl ? (
+                            <a
+                              href={project.githubUrl}
                               target="_blank"
                               rel="noopener noreferrer"
                               className="flex items-center justify-center gap-2 bg-primary-600 hover:bg-primary-700 text-white font-medium transition-colors px-3 sm:px-4 py-2 rounded-full text-center text-sm sm:text-base"
                               onClick={(e) => e.stopPropagation()}
                             >
                               <CodeBracketIcon className="h-4 w-4" />
-                              {t('projects.viewCodeBack')}
+                              {t('projects.viewCode')}
                             </a>
-                            <a
-                              href={project.githubUrlFront}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="flex items-center justify-center gap-2 bg-primary-600 hover:bg-primary-700 text-white font-medium transition-colors px-3 sm:px-4 py-2 rounded-full text-center text-sm sm:text-base"
-                              onClick={(e) => e.stopPropagation()}
-                            >
-                              <CodeBracketIcon className="h-4 w-4" />
-                              {t('projects.viewCodeFront')}
-                            </a>
-                          </>
-                        ) : project.githubUrl ? (
-                          <a
-                            href={project.githubUrl}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="flex items-center justify-center gap-2 bg-primary-600 hover:bg-primary-700 text-white font-medium transition-colors px-3 sm:px-4 py-2 rounded-full text-center text-sm sm:text-base"
-                            onClick={(e) => e.stopPropagation()}
-                          >
-                            <CodeBracketIcon className="h-4 w-4" />
-                            {t('projects.viewCode')}
-                          </a>
-                        ) : null}
+                          ) : null}
+                        </div>
                       </div>
-                </div>
-              </motion.div>
-            )})}
+                    </motion.div>
+                  )
+                })}
               </motion.div>
 
               {filteredProjects.length === 0 && (
@@ -365,7 +365,7 @@ const Projects: React.FC = () => {
               className="absolute inset-0 bg-black bg-opacity-50 backdrop-blur-sm"
               onClick={closeModal}
             />
-            
+
             <motion.div
               variants={modalVariants}
               initial="hidden"
@@ -389,7 +389,7 @@ const Projects: React.FC = () => {
                   <p className="text-gray-600 dark:text-gray-300 mb-6 text-base sm:text-lg whitespace-pre-line">
                     {getLocalizedText(selectedProject.detailedDescription, language)}
                   </p>
-                  
+
                   <div className="mb-6">
                     <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-3">
                       {t('projects.technologiesUsed')}
@@ -453,15 +453,15 @@ const Projects: React.FC = () => {
 
                   <div className="lg:hidden mt-8">
                     <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
-                      Capturas de pantalla:
+                      {t('projects.screenshots') || 'Capturas de pantalla:'}
                     </h3>
                     <div className="space-y-4">
                       {selectedProject.galleryImages?.map((image: string, index: number) => (
-                        <div key={index} className="bg-gray-50 dark:bg-gray-700 rounded-lg p-2">
+                        <div key={index} className="rounded-lg overflow-hidden shadow-md">
                           <img
                             src={image}
                             alt={`${getLocalizedText(selectedProject.title, language)} screenshot ${index + 1}`}
-                            className="w-full h-auto max-h-[300px] object-contain rounded-lg shadow-md cursor-pointer hover:scale-105 transition-transform duration-200"
+                            className="w-full h-auto max-h-[300px] object-cover sm:object-contain cursor-pointer hover:scale-105 transition-transform duration-200"
                             onClick={() => openImage(image)}
                           />
                         </div>
@@ -470,14 +470,14 @@ const Projects: React.FC = () => {
                   </div>
                 </div>
 
-                <div className="hidden lg:block lg:w-1/3 p-4 sm:p-6 bg-gray-50 dark:bg-gray-700">
-                  <div className="flex flex-col gap-4 h-full">
+                <div className="hidden lg:block lg:w-1/3 p-4 sm:p-6 bg-gray-50 dark:bg-gray-700/50">
+                  <div className="flex flex-col gap-4 h-full overflow-y-auto">
                     {selectedProject.galleryImages?.map((image: string, index: number) => (
-                      <div key={index} className="flex-1 min-h-[200px] sm:min-h-[250px]">
+                      <div key={index} className="flex-1 min-h-[200px] sm:min-h-[250px] rounded-lg overflow-hidden shadow-md">
                         <img
                           src={image}
                           alt={`${getLocalizedText(selectedProject.title, language)} screenshot ${index + 1}`}
-                          className="w-full h-full object-contain rounded-lg shadow-md cursor-pointer hover:scale-105 transition-transform duration-200"
+                          className="w-full h-full object-cover cursor-pointer hover:scale-105 transition-transform duration-200"
                           onClick={() => openImage(image)}
                         />
                       </div>
@@ -500,50 +500,52 @@ const Projects: React.FC = () => {
               className="absolute inset-0 bg-black bg-opacity-90 backdrop-blur-sm"
               onClick={closeImage}
             />
-            
+
             <motion.div
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.8 }}
               transition={{ duration: 0.2 }}
-              className="relative max-w-[95vw] sm:max-w-[90vw] max-h-[95vh] sm:max-h-[90vh]"
+              className="relative flex items-center justify-center pointer-events-none"
               onClick={(e) => e.stopPropagation()}
             >
-              <button
-                onClick={closeImage}
-                className="absolute top-2 sm:top-4 right-2 sm:right-4 z-10 p-2 rounded-full bg-gray-800 bg-opacity-50 text-white hover:bg-opacity-75 transition-all duration-200"
-              >
-                <XMarkIcon className="h-5 w-5 sm:h-6 sm:w-6" />
-              </button>
+              <div className="relative pointer-events-auto">
+                <button
+                  onClick={closeImage}
+                  className="absolute -top-4 -right-4 md:-top-6 md:-right-6 z-20 p-2 rounded-full bg-gray-800 text-white hover:bg-opacity-75 transition-all duration-200 shadow-xl border border-gray-600"
+                >
+                  <XMarkIcon className="h-6 w-6" />
+                </button>
 
-              {selectedProject && selectedProject.galleryImages && selectedProject.galleryImages.length > 1 && (
-                <>
-                  <button
-                    onClick={previousImage}
-                    className="absolute left-2 sm:left-4 top-1/2 transform -translate-y-1/2 z-10 p-2 sm:p-3 rounded-full bg-gray-800 bg-opacity-50 text-white hover:bg-opacity-75 transition-all duration-200"
-                  >
-                    <ChevronLeftIcon className="h-5 w-5 sm:h-6 sm:w-6" />
-                  </button>
-                  <button
-                    onClick={nextImage}
-                    className="absolute right-2 sm:right-4 top-1/2 transform -translate-y-1/2 z-10 p-2 sm:p-3 rounded-full bg-gray-800 bg-opacity-50 text-white hover:bg-opacity-75 transition-all duration-200"
-                  >
-                    <ChevronRightIcon className="h-5 w-5 sm:h-6 sm:w-6" />
-                  </button>
-                </>
-              )}
+                {selectedProject && selectedProject.galleryImages && selectedProject.galleryImages.length > 1 && (
+                  <>
+                    <button
+                      onClick={previousImage}
+                      className="fixed left-4 top-1/2 transform -translate-y-1/2 z-20 p-3 rounded-full bg-gray-800 bg-opacity-50 text-white hover:bg-opacity-75 transition-all duration-200 pointer-events-auto"
+                    >
+                      <ChevronLeftIcon className="h-8 w-8" />
+                    </button>
+                    <button
+                      onClick={nextImage}
+                      className="fixed right-4 top-1/2 transform -translate-y-1/2 z-20 p-3 rounded-full bg-gray-800 bg-opacity-50 text-white hover:bg-opacity-75 transition-all duration-200 pointer-events-auto"
+                    >
+                      <ChevronRightIcon className="h-8 w-8" />
+                    </button>
+                  </>
+                )}
 
-              <img
-                src={selectedImage}
-                alt="Full size project screenshot"
-                className="w-full h-full object-contain rounded-lg shadow-2xl"
-              />
+                <img
+                  src={selectedImage}
+                  alt="Full size project screenshot"
+                  className="max-w-[95vw] max-h-[90vh] object-contain rounded-lg shadow-2xl bg-black"
+                />
 
-              {selectedProject && selectedProject.galleryImages && selectedProject.galleryImages.length > 1 && (
-                <div className="absolute bottom-2 sm:bottom-4 left-1/2 transform -translate-x-1/2 z-10 px-3 sm:px-4 py-1 sm:py-2 rounded-full bg-gray-800 bg-opacity-50 text-white text-xs sm:text-sm">
-                  {(selectedProject.galleryImages?.indexOf(selectedImage) ?? 0) + 1} / {selectedProject.galleryImages?.length}
-                </div>
-              )}
+                {selectedProject && selectedProject.galleryImages && selectedProject.galleryImages.length > 1 && (
+                  <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 z-10 px-4 py-2 rounded-full bg-gray-800 bg-opacity-75 text-white text-sm">
+                    {(selectedProject.galleryImages?.indexOf(selectedImage) ?? 0) + 1} / {selectedProject.galleryImages?.length}
+                  </div>
+                )}
+              </div>
             </motion.div>
           </div>
         )}

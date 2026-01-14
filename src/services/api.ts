@@ -8,6 +8,12 @@ import type {
   CvMetadata,
   BackendLanguage,
 } from '../types/api';
+import { mockEducation, mockExperiences, mockProjects } from '../data/mockData';
+
+// Import local assets
+import cvEsPath from '../assets/docs/CV_BRUNO_ESPANOL.pdf';
+import cvEnPath from '../assets/docs/CV_BRUNO_ENGLISH.pdf';
+import cvDePath from '../assets/docs/CV_BRUNO_DE_2026.pdf';
 
 const API_BASE_URL = process.env.REACT_APP_API_BASE_URL ?? 'http://localhost:8080/api';
 const PUBLIC_BASE = `${API_BASE_URL}/public`;
@@ -38,54 +44,18 @@ async function handleResponse<T>(response: Response): Promise<T> {
 }
 
 export async function fetchEducations(): Promise<Education[]> {
-  try {
-    const response = await fetch(`${PUBLIC_BASE}/educations`);
-    return handleResponse<Education[]>(response);
-  } catch (error) {
-    if (error instanceof TypeError && error.message.includes('fetch')) {
-      console.error('❌ Error de conexión:', {
-        url: `${PUBLIC_BASE}/educations`,
-        message: 'No se pudo conectar con el backend. Verifica que REACT_APP_API_BASE_URL esté configurada correctamente.',
-        apiBaseUrl: API_BASE_URL
-      });
-      throw new Error('No se pudo conectar con el backend. Verifica la configuración de REACT_APP_API_BASE_URL.');
-    }
-    throw error;
-  }
+  // Use mock data
+  return Promise.resolve(mockEducation);
 }
 
 export async function fetchExperiences(): Promise<Experience[]> {
-  try {
-    const response = await fetch(`${PUBLIC_BASE}/experiences`);
-    return handleResponse<Experience[]>(response);
-  } catch (error) {
-    if (error instanceof TypeError && error.message.includes('fetch')) {
-      console.error('❌ Error de conexión:', {
-        url: `${PUBLIC_BASE}/experiences`,
-        message: 'No se pudo conectar con el backend. Verifica que REACT_APP_API_BASE_URL esté configurada correctamente.',
-        apiBaseUrl: API_BASE_URL
-      });
-      throw new Error('No se pudo conectar con el backend. Verifica la configuración de REACT_APP_API_BASE_URL.');
-    }
-    throw error;
-  }
+  // Use mock data
+  return Promise.resolve(mockExperiences);
 }
 
 export async function fetchProjects(): Promise<Project[]> {
-  try {
-    const response = await fetch(`${PUBLIC_BASE}/projects`);
-    return handleResponse<Project[]>(response);
-  } catch (error) {
-    if (error instanceof TypeError && error.message.includes('fetch')) {
-      console.error('❌ Error de conexión:', {
-        url: `${PUBLIC_BASE}/projects`,
-        message: 'No se pudo conectar con el backend. Verifica que REACT_APP_API_BASE_URL esté configurada correctamente.',
-        apiBaseUrl: API_BASE_URL
-      });
-      throw new Error('No se pudo conectar con el backend. Verifica la configuración de REACT_APP_API_BASE_URL.');
-    }
-    throw error;
-  }
+  // Use mock data
+  return Promise.resolve(mockProjects);
 }
 
 export async function fetchCvMetadata(): Promise<CvMetadata[]> {
@@ -93,24 +63,19 @@ export async function fetchCvMetadata(): Promise<CvMetadata[]> {
     const response = await fetch(`${PUBLIC_BASE}/cv/metadata`);
     return handleResponse<CvMetadata[]>(response);
   } catch (error) {
-    if (error instanceof TypeError && error.message.includes('fetch')) {
-      console.error('❌ Error de conexión:', {
-        url: `${PUBLIC_BASE}/cv/metadata`,
-        message: 'No se pudo conectar con el backend. Verifica que REACT_APP_API_BASE_URL esté configurada correctamente.',
-        apiBaseUrl: API_BASE_URL
-      });
-      throw new Error('No se pudo conectar con el backend. Verifica la configuración de REACT_APP_API_BASE_URL.');
-    }
-    throw error;
+    // Return empty if backend is down
+    return [];
   }
 }
 
-export async function downloadCv(language: 'english' | 'spanish'): Promise<Blob> {
-  const endpoint = language === 'english' ? 'english' : 'spanish';
-  const response = await fetch(`${PUBLIC_BASE}/cv/${endpoint}`);
+export async function downloadCv(language: 'english' | 'spanish' | 'german' | 'deutsch'): Promise<Blob> {
+  let fileUrl = cvEsPath;
+  if (language === 'english') fileUrl = cvEnPath;
+  if (language === 'german' || language === 'deutsch') fileUrl = cvDePath;
+
+  const response = await fetch(fileUrl);
   if (!response.ok) {
-    const message = await response.text();
-    throw new Error(message || 'No se pudo descargar el CV');
+    throw new Error('No se pudo descargar el CV');
   }
   return response.blob();
 }
@@ -224,5 +189,4 @@ export async function uploadCv(language: BackendLanguage, file: File, token: str
   });
   return handleResponse<CvMetadata>(response);
 }
-
 

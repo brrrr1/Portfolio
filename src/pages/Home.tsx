@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
-import { 
+import {
   ArrowRightIcon,
   DocumentArrowDownIcon,
   ChevronDownIcon
@@ -15,7 +15,7 @@ import { downloadCv } from '../services/api';
 
 const AnimatedGradientName: React.FC<{ name: string }> = ({ name }) => {
   return (
-    <span 
+    <span
       className="bg-gradient-to-r from-blue-400 via-blue-500 via-blue-600 to-blue-700 bg-clip-text text-transparent"
       style={{
         backgroundSize: '200% 200%',
@@ -30,16 +30,16 @@ const AnimatedGradientName: React.FC<{ name: string }> = ({ name }) => {
 const Home: React.FC = () => {
   const { t } = useTranslation();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const [cvDownloading, setCvDownloading] = useState<'english' | 'spanish' | null>(null);
+  const [cvDownloading, setCvDownloading] = useState<'english' | 'spanish' | 'german' | null>(null);
   const dropdownRef = useRef<HTMLDivElement>(null);
   const { scrollToElement } = useSmoothScroll();
-  
+
   const { elementRef: heroRef, isVisible: heroVisible } = useScrollAnimation();
   const { elementRef: skillsRef, isVisible: skillsVisible } = useScrollAnimation();
   const { elementRef: servicesRef, isVisible: servicesVisible } = useScrollAnimation();
-  
+
   const { elementRef: profileRef, offset: profileOffset } = useParallax(0.3);
-  
+
   const { scrollYProgress } = useScroll();
   const springConfig = { stiffness: 300, damping: 30 };
   const opacity = useSpring(useTransform(scrollYProgress, [0, 0.5], [1, 0.8]), springConfig);
@@ -67,14 +67,17 @@ const Home: React.FC = () => {
     { name: 'SQL', category: t('home.skills.database') },
   ];
 
-  const handleDownloadCV = async (language: 'english' | 'spanish') => {
+  const handleDownloadCV = async (language: 'english' | 'spanish' | 'german') => {
     try {
       setCvDownloading(language);
       const blob = await downloadCv(language);
       const url = window.URL.createObjectURL(blob);
       const link = document.createElement('a');
       link.href = url;
-      link.download = language === 'english' ? 'CV_BRUNO_ENGLISH.pdf' : 'CV_BRUNO_ESPANOL.pdf';
+      let fileName = 'CV_BRUNO_ESPANOL.pdf';
+      if (language === 'english') fileName = 'CV_BRUNO_ENGLISH.pdf';
+      if (language === 'german') fileName = 'CV_BRUNO_DE_2026.pdf';
+      link.download = fileName;
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
@@ -116,13 +119,13 @@ const Home: React.FC = () => {
 
   return (
     <div id="home" className="min-h-screen">
-      <section 
+      <section
         ref={heroRef}
         className="section-padding bg-gradient-to-br from-primary-50 to-blue-50 dark:from-gray-900 dark:to-gray-800 relative overflow-hidden"
       >
 
         <div className="absolute inset-0 opacity-10 overflow-hidden">
-          <motion.div 
+          <motion.div
             className="absolute top-1/4 left-1/4 w-48 h-48 md:w-96 md:h-96 bg-primary-400 rounded-full mix-blend-multiply filter blur-xl"
             animate={{
               x: [0, 40, 0],
@@ -135,7 +138,7 @@ const Home: React.FC = () => {
               ease: "easeInOut"
             }}
           />
-          <motion.div 
+          <motion.div
             className="absolute top-1/3 right-1/4 w-48 h-48 md:w-96 md:h-96 bg-blue-400 rounded-full mix-blend-multiply filter blur-xl"
             animate={{
               x: [0, -35, 0],
@@ -149,7 +152,7 @@ const Home: React.FC = () => {
               delay: 0.5
             }}
           />
-          <motion.div 
+          <motion.div
             className="absolute bottom-1/4 left-1/3 w-48 h-48 md:w-96 md:h-96 bg-purple-400 rounded-full mix-blend-multiply filter blur-xl"
             animate={{
               x: [0, 30, 0],
@@ -177,7 +180,7 @@ const Home: React.FC = () => {
               variants={itemVariants}
               className="mb-8"
             >
-              <div 
+              <div
                 ref={profileRef}
                 className="w-40 h-40 mx-auto rounded-full overflow-hidden border-4 border-white dark:border-gray-700 shadow-2xl image-hover"
                 style={{ transform: `translateY(${profileOffset}px)` }}
@@ -195,7 +198,7 @@ const Home: React.FC = () => {
                     }
                   }}
                 />
-                <div className="w-full h-full bg-primary-100 dark:bg-primary-900 flex items-center justify-center text-primary-600 dark:text-primary-400 font-bold text-4xl" style={{display: 'none'}}>
+                <div className="w-full h-full bg-primary-100 dark:bg-primary-900 flex items-center justify-center text-primary-600 dark:text-primary-400 font-bold text-4xl" style={{ display: 'none' }}>
                   BD
                 </div>
               </div>
@@ -253,7 +256,7 @@ const Home: React.FC = () => {
                   </AnimatedText>
                   <ChevronDownIcon className={`ml-2 h-5 w-5 transition-transform duration-300 ${isDropdownOpen ? 'rotate-180' : ''}`} />
                 </button>
-                
+
                 {isDropdownOpen && (
                   <motion.div
                     initial={{ opacity: 0, y: -10, scale: 0.95 }}
@@ -279,6 +282,14 @@ const Home: React.FC = () => {
                         <span className="mr-2">🇪🇸</span>
                         {cvDownloading === 'spanish' ? 'Descargando...' : 'CV Español'}
                       </button>
+                      <button
+                        onClick={() => handleDownloadCV('german')}
+                        disabled={cvDownloading === 'german'}
+                        className="w-full px-4 py-2 text-left text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 flex items-center transition-colors duration-200 disabled:opacity-60"
+                      >
+                        <span className="mr-2">🇩🇪</span>
+                        {cvDownloading === 'german' ? 'Descargando...' : 'CV Deutsch'}
+                      </button>
                     </div>
                   </motion.div>
                 )}
@@ -288,7 +299,7 @@ const Home: React.FC = () => {
         </div>
       </section>
 
-      <section 
+      <section
         ref={skillsRef}
         className="section-padding bg-white dark:bg-gray-900"
       >
@@ -317,8 +328,8 @@ const Home: React.FC = () => {
                 key={skill.name}
                 initial={{ opacity: 0, y: 50, scale: 0.9 }}
                 animate={skillsVisible ? { opacity: 1, y: 0, scale: 1 } : { opacity: 0, y: 50, scale: 0.9 }}
-                transition={{ 
-                  duration: 0.5, 
+                transition={{
+                  duration: 0.5,
                   delay: index * 0.1,
                   ease: [0.25, 0.46, 0.45, 0.94]
                 }}
@@ -336,7 +347,7 @@ const Home: React.FC = () => {
         </div>
       </section>
 
-      <section 
+      <section
         ref={servicesRef}
         className="section-padding bg-gray-50 dark:bg-gray-800"
       >
@@ -381,8 +392,8 @@ const Home: React.FC = () => {
                 key={service.title}
                 initial={{ opacity: 0, y: 50, scale: 0.9 }}
                 animate={servicesVisible ? { opacity: 1, y: 0, scale: 1 } : { opacity: 0, y: 50, scale: 0.9 }}
-                transition={{ 
-                  duration: 0.5, 
+                transition={{
+                  duration: 0.5,
                   delay: index * 0.1,
                   ease: [0.25, 0.46, 0.45, 0.94]
                 }}
