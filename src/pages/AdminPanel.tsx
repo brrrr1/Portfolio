@@ -44,7 +44,7 @@ const createEmptyLocalized = (): LocalizedText => ({
 const createEmptyEducationForm = (): EducationPayload => ({
   institution: '',
   logoUrl: '',
-  yearRange: '',
+  yearRange: createEmptyLocalized(),
   degree: createEmptyLocalized(),
   description: createEmptyLocalized(),
   orderIndex: 0,
@@ -188,16 +188,6 @@ const AdminPanel: React.FC = () => {
       </div>
       <div className="grid md:grid-cols-2 gap-4">
         <div className="space-y-2">
-          <label className="text-sm font-medium text-gray-700 dark:text-gray-200">Periodo</label>
-          <input
-            type="text"
-            value={educationForm.yearRange}
-            onChange={(event) => setEducationForm({ ...educationForm, yearRange: event.target.value })}
-            className="w-full rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900 px-3 py-2 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500"
-            required
-          />
-        </div>
-        <div className="space-y-2">
           <label className="text-sm font-medium text-gray-700 dark:text-gray-200">Orden</label>
           <input
             type="number"
@@ -209,6 +199,11 @@ const AdminPanel: React.FC = () => {
           />
         </div>
       </div>
+      <LocalizedFields
+        label="Periodo"
+        value={educationForm.yearRange}
+        onChange={(value) => setEducationForm({ ...educationForm, yearRange: value })}
+      />
       <LocalizedFields
         label="Título"
         value={educationForm.degree}
@@ -525,7 +520,6 @@ const AdminPanel: React.FC = () => {
       const payload: EducationPayload = {
         ...educationForm,
         logoUrl: educationForm.logoUrl?.trim() || undefined,
-        yearRange: educationForm.yearRange.trim(),
         institution: educationForm.institution.trim(),
       };
       if (editingEducationId) {
@@ -799,7 +793,7 @@ const AdminPanel: React.FC = () => {
                 >
                   <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
                     <div>
-                      <p className="text-sm text-primary-600 dark:text-primary-300 font-semibold">{edu.yearRange}</p>
+                      <p className="text-sm text-primary-600 dark:text-primary-300 font-semibold">{edu.yearRange.es}</p>
                       <p className="text-lg font-semibold text-gray-900 dark:text-white">
                         {edu.institution}
                       </p>

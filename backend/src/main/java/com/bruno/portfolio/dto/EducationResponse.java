@@ -4,10 +4,12 @@ public record EducationResponse(
         Long id,
         String institution,
         String logoUrl,
-        String yearRange,
+        LocalizedTextDto yearRange,
         LocalizedTextDto degree,
         LocalizedTextDto description,
-        Integer orderIndex
+        Integer orderIndex,
+        String pdfUrl,
+        String certificateUrl
 ) {
 }
 

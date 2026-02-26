@@ -13,12 +13,20 @@ import pipocapp1 from '../assets/images/pipocapp1.png';
 import pipocapp2 from '../assets/images/pipocapp2.png';
 import pipocapp3 from '../assets/images/pipocapp3.png';
 
+// Imports for PDFs
+import unirisPdf from '../assets/docs/UNIRIS.pdf';
+import uniariaPdf from '../assets/docs/UNIRIA.pdf';
+
 export const mockEducation: Education[] = [
     {
         id: 1,
         institution: 'Salesianos San Pedro',
         logoUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTK9GfPg7Uf1cgFs_nlr_5GTcZiW8VyivN-lg&s',
-        yearRange: '2023-2025',
+        yearRange: {
+            es: '2023-2025',
+            en: '2023-2025',
+            de: '2023-2025'
+        },
         degree: {
             es: 'Desarrollo de Aplicaciones Multiplataforma',
             en: 'Multi-platform Application Development',
@@ -35,7 +43,11 @@ export const mockEducation: Education[] = [
         id: 2,
         institution: 'UNIR',
         logoUrl: 'https://yt3.googleusercontent.com/KLi8T391TBxKyUecknywtrrvG9tUHX7qhitaW47a-4n6CDUakZHZyZOYJZ2TKCuav_mB8XR4oBA=s900-c-k-c0x00ffffff-no-rj',
-        yearRange: 'Octubre 2024 - Junio 2025',
+        yearRange: {
+            es: 'Octubre 2024 - Septiembre 2025',
+            en: 'October 2024 - September 2025',
+            de: 'Oktober 2024 - September 2025'
+        },
         degree: {
             es: 'Programa de Formación Universitaria en Inteligencia Artificial',
             en: 'University training programme in Artificial Intelligence',
@@ -46,13 +58,18 @@ export const mockEducation: Education[] = [
             en: 'Intelligent Systems, Artificial Intelligence and Knowledge Engineering, Machine Learning and Data Mining.',
             de: 'Intelligente Systeme, Künstliche Intelligenz und Wissensingenieurwesen, Maschinelles Lernen und Data Mining.'
         },
-        orderIndex: 1
+        orderIndex: 1,
+        pdfUrl: unirisPdf
     },
     {
         id: 3,
         institution: 'UNIR',
         logoUrl: 'https://yt3.googleusercontent.com/KLi8T391TBxKyUecknywtrrvG9tUHX7qhitaW47a-4n6CDUakZHZyZOYJZ2TKCuav_mB8XR4oBA=s900-c-k-c0x00ffffff-no-rj',
-        yearRange: 'Octubre 2024 - Junio 2025',
+        yearRange: {
+            es: 'Octubre 2024 - Septiembre 2025',
+            en: 'October 2024 - September 2025',
+            de: 'Oktober 2024 - September 2025'
+        },
         degree: {
             es: 'Programa de Formación Universitaria en Ingeniería Informática',
             en: 'University training programme in Software Engineering',
@@ -63,13 +80,18 @@ export const mockEducation: Education[] = [
             en: 'Software Engineering, Advanced Databases, Advanced Software Engineering.',
             de: 'Softwaretechnik, Erweiterte Datenbanken, Erweiterte Softwaretechnik.'
         },
-        orderIndex: 2
+        orderIndex: 2,
+        pdfUrl: uniariaPdf
     },
     {
         id: 4,
         institution: 'Microsoft',
         logoUrl: 'https://foroalfa.org/imagenes/ilustraciones/1296.jpg',
-        yearRange: '2025',
+        yearRange: {
+            es: 'Julio 2025',
+            en: 'July 2025',
+            de: 'Juli 2025'
+        },
         degree: {
             es: 'Microsoft Certified: Azure Data Fundamentals',
             en: 'Microsoft Certified: Azure Data Fundamentals',
@@ -80,13 +102,18 @@ export const mockEducation: Education[] = [
             en: 'Certification in Azure data fundamentals.',
             de: 'Zertifizierung in Azure-Datenfundamenten.'
         },
-        orderIndex: 3
+        orderIndex: 3,
+        certificateUrl: 'https://www.credly.com/badges/b00ee5cd-5294-4a94-bc91-e43c44352552'
     },
     {
         id: 5,
         institution: 'Canterbury Christ Church University',
         logoUrl: 'https://photos.applyboard.com/schools/000/002/471/logos/original/CCCU-GUSInUni-Logo-Nov2023.png?1699273441',
-        yearRange: '2026',
+        yearRange: {
+            es: '2026',
+            en: '2026',
+            de: '2026'
+        },
         degree: {
             es: 'Grado en Ingeniería Informática',
             en: 'Bachelor Degree in Computer Science, Online Studying (Last year)',

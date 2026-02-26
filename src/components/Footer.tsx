@@ -131,12 +131,6 @@ const Footer: React.FC = () => {
             <p className="text-gray-400 text-sm">
               © {currentYear} Bruno Delgado. {t('footer.rights')}
             </p>
-            <button
-              onClick={() => navigate('/admin')}
-              className="btn-secondary"
-            >
-              {t('footer.adminPanel')}
-            </button>
           </div>
         </motion.div>
       </div>

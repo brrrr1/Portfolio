@@ -32,7 +32,13 @@ public class Education {
 
     private String logoUrl;
 
-    private String yearRange;
+    @Embedded
+    @AttributeOverrides({
+            @AttributeOverride(name = "es", column = @Column(name = "year_range_es", columnDefinition = "TEXT")),
+            @AttributeOverride(name = "en", column = @Column(name = "year_range_en", columnDefinition = "TEXT")),
+            @AttributeOverride(name = "de", column = @Column(name = "year_range_de", columnDefinition = "TEXT"))
+    })
+    private LocalizedText yearRange;
 
     @Column(name = "display_order")
     private Integer orderIndex;
@@ -52,6 +58,10 @@ public class Education {
             @AttributeOverride(name = "de", column = @Column(name = "description_de", columnDefinition = "TEXT"))
     })
     private LocalizedText description;
+
+    private String pdfUrl;
+
+    private String certificateUrl;
 }
 
 

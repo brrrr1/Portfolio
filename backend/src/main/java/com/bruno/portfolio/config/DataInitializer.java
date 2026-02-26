@@ -49,7 +49,10 @@ public class DataInitializer implements CommandLineRunner {
         Education dam = Education.builder()
                 .institution("Salesianos San Pedro")
                 .logoUrl("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTK9GfPg7Uf1cgFs_nlr_5GTcZiW8VyivN-lg&s")
-                .yearRange("2023-2025")
+                .yearRange(text(
+                        "2023-2025",
+                        "2023-2025",
+                        "2023-2025"))
                 .orderIndex(0)
                 .degree(text(
                         "Desarrollo de Aplicaciones Multiplataforma",
@@ -65,7 +68,10 @@ public class DataInitializer implements CommandLineRunner {
         Education ai = Education.builder()
                 .institution("UNIR")
                 .logoUrl("https://yt3.googleusercontent.com/KLi8T391TBxKyUecknywtrrvG9tUHX7qhitaW47a-4n6CDUakZHZyZOYJZ2TKCuav_mB8XR4oBA=s900-c-k-c0x00ffffff-no-rj")
-                .yearRange("Octubre 2024 - Junio 2025")
+                .yearRange(text(
+                        "Octubre 2024 - Septiembre 2025",
+                        "October 2024 - September 2025",
+                        "Oktober 2024 - September 2025"))
                 .orderIndex(1)
                 .degree(text(
                         "Programa de Formación Universitaria en Inteligencia Artificial",
@@ -76,12 +82,16 @@ public class DataInitializer implements CommandLineRunner {
                         "Intelligent Systems, Artificial Intelligence and Knowledge Engineering, Machine Learning and Data Mining.",
                         "Intelligente Systeme, Künstliche Intelligenz und Wissensingenieurwesen, Maschinelles Lernen und Data Mining."
                 ))
+                .pdfUrl("./docs/UNIRIS.pdf")
                 .build();
 
         Education software = Education.builder()
                 .institution("UNIR")
                 .logoUrl("https://yt3.googleusercontent.com/KLi8T391TBxKyUecknywtrrvG9tUHX7qhitaW47a-4n6CDUakZHZyZOYJZ2TKCuav_mB8XR4oBA=s900-c-k-c0x00ffffff-no-rj")
-                .yearRange("Octubre 2024 - Junio 2025")
+                .yearRange(text(
+                        "Octubre 2024 - Septiembre 2025",
+                        "October 2024 - September 2025",
+                        "Oktober 2024 - September 2025"))
                 .orderIndex(2)
                 .degree(text(
                         "Programa de Formación Universitaria en Ingeniería Informática",
@@ -92,12 +102,16 @@ public class DataInitializer implements CommandLineRunner {
                         "Software Engineering, Advanced Databases, Advanced Software Engineering.",
                         "Softwaretechnik, Erweiterte Datenbanken, Erweiterte Softwaretechnik."
                 ))
+                .pdfUrl("./docs/UNIRIA.pdf")
                 .build();
 
         Education azure = Education.builder()
                 .institution("Microsoft")
                 .logoUrl("https://foroalfa.org/imagenes/ilustraciones/1296.jpg")
-                .yearRange("2024")
+                .yearRange(text(
+                        "Julio 2025",
+                        "July 2025",
+                        "Juli 2025"))
                 .orderIndex(3)
                 .degree(text(
                         "Microsoft Certified: Azure Data Fundamentals",
@@ -108,6 +122,7 @@ public class DataInitializer implements CommandLineRunner {
                         "Certification in Azure data fundamentals.",
                         "Zertifizierung in Azure-Datenfundamenten."
                 ))
+                .certificateUrl("https://www.credly.com/badges/b00ee5cd-5294-4a94-bc91-e43c44352552")
                 .build();
 
         educationRepository.saveAll(List.of(dam, ai, software, azure));

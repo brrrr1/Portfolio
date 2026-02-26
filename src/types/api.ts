@@ -10,19 +10,23 @@ export interface Education {
   id: number;
   institution: string;
   logoUrl?: string | null;
-  yearRange: string;
+  yearRange: LocalizedText;
   degree: LocalizedText;
   description: LocalizedText;
   orderIndex: number;
+  pdfUrl?: string | null;
+  certificateUrl?: string | null;
 }
 
 export interface EducationPayload {
   institution: string;
   logoUrl?: string;
-  yearRange: string;
+  yearRange: LocalizedText;
   degree: LocalizedText;
   description: LocalizedText;
   orderIndex: number;
+  pdfUrl?: string;
+  certificateUrl?: string;
 }
 
 export interface Experience {

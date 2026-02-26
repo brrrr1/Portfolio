@@ -353,11 +353,23 @@ const About: React.FC = () => {
                   </div>
                   <div className="flex-1 min-w-0">
                     <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-2 sm:gap-3 mb-2">
-                      <h3 className="text-lg sm:text-xl font-semibold text-gray-900 dark:text-white flex-1 min-w-0">
-                        {getLocalizedText(edu.degree, language)}
-                      </h3>
+                      {edu.certificateUrl || edu.pdfUrl ? (
+                        <button
+                          onClick={() => {
+                            const url = edu.certificateUrl || edu.pdfUrl;
+                            if (url) window.open(url, '_blank');
+                          }}
+                          className="text-lg sm:text-xl font-semibold text-gray-900 dark:text-white flex-1 min-w-0 text-left hover:text-primary-600 dark:hover:text-primary-400 transition-colors cursor-pointer underline decoration-transparent hover:decoration-primary-600 dark:hover:decoration-primary-400"
+                        >
+                          {getLocalizedText(edu.degree, language)}
+                        </button>
+                      ) : (
+                        <h3 className="text-lg sm:text-xl font-semibold text-gray-900 dark:text-white flex-1 min-w-0">
+                          {getLocalizedText(edu.degree, language)}
+                        </h3>
+                      )}
                       <span className="text-sm text-primary-600 dark:text-primary-400 font-medium flex-shrink-0 whitespace-nowrap">
-                        {edu.yearRange}
+                        {getLocalizedText(edu.yearRange, language)}
                       </span>
                     </div>
                     <p className="text-primary-600 dark:text-primary-400 font-medium mb-2">

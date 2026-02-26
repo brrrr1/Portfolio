@@ -36,20 +36,24 @@ public class PortfolioMapper {
         return Education.builder()
                 .institution(request.institution())
                 .logoUrl(request.logoUrl())
-                .yearRange(request.yearRange())
+                .yearRange(toEntity(request.yearRange()))
                 .orderIndex(request.orderIndex())
                 .degree(toEntity(request.degree()))
                 .description(toEntity(request.description()))
+                .pdfUrl(request.pdfUrl())
+                .certificateUrl(request.certificateUrl())
                 .build();
     }
 
     public void updateEducation(Education education, EducationRequest request) {
         education.setInstitution(request.institution());
         education.setLogoUrl(request.logoUrl());
-        education.setYearRange(request.yearRange());
+        education.setYearRange(toEntity(request.yearRange()));
         education.setOrderIndex(request.orderIndex());
         education.setDegree(toEntity(request.degree()));
         education.setDescription(toEntity(request.description()));
+        education.setPdfUrl(request.pdfUrl());
+        education.setCertificateUrl(request.certificateUrl());
     }
 
     public EducationResponse toResponse(Education education) {
@@ -57,10 +61,12 @@ public class PortfolioMapper {
                 education.getId(),
                 education.getInstitution(),
                 education.getLogoUrl(),
-                education.getYearRange(),
+                toDto(education.getYearRange()),
                 toDto(education.getDegree()),
                 toDto(education.getDescription()),
-                education.getOrderIndex()
+                education.getOrderIndex(),
+                education.getPdfUrl(),
+                education.getCertificateUrl()
         );
     }
 
