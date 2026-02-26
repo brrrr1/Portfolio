@@ -82,7 +82,7 @@ public class DataInitializer implements CommandLineRunner {
                         "Intelligent Systems, Artificial Intelligence and Knowledge Engineering, Machine Learning and Data Mining.",
                         "Intelligente Systeme, Künstliche Intelligenz und Wissensingenieurwesen, Maschinelles Lernen und Data Mining."
                 ))
-                .pdfUrl("./docs/UNIRIS.pdf")
+                .pdfUrl("./docs/UNIRIA.pdf")
                 .build();
 
         Education software = Education.builder()
@@ -94,7 +94,7 @@ public class DataInitializer implements CommandLineRunner {
                         "Oktober 2024 - September 2025"))
                 .orderIndex(2)
                 .degree(text(
-                        "Programa de Formación Universitaria en Ingeniería Informática",
+                        "Programa de Formación Universitaria en Ingeniería de Software",
                         "University training programme in Software Engineering",
                         "Universitäres Ausbildungsprogramm in Softwaretechnik"))
                 .description(text(
@@ -102,7 +102,7 @@ public class DataInitializer implements CommandLineRunner {
                         "Software Engineering, Advanced Databases, Advanced Software Engineering.",
                         "Softwaretechnik, Erweiterte Datenbanken, Erweiterte Softwaretechnik."
                 ))
-                .pdfUrl("./docs/UNIRIA.pdf")
+                .pdfUrl("./docs/UNIRIS.pdf")
                 .build();
 
         Education azure = Education.builder()

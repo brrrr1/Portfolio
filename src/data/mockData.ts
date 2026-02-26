@@ -59,7 +59,7 @@ export const mockEducation: Education[] = [
             de: 'Intelligente Systeme, Künstliche Intelligenz und Wissensingenieurwesen, Maschinelles Lernen und Data Mining.'
         },
         orderIndex: 1,
-        pdfUrl: unirisPdf
+        pdfUrl: uniariaPdf
     },
     {
         id: 3,
@@ -71,7 +71,7 @@ export const mockEducation: Education[] = [
             de: 'Oktober 2024 - September 2025'
         },
         degree: {
-            es: 'Programa de Formación Universitaria en Ingeniería Informática',
+            es: 'Programa de Formación Universitaria en Ingeniería de Software',
             en: 'University training programme in Software Engineering',
             de: 'Universitäres Ausbildungsprogramm in Softwaretechnik'
         },
@@ -81,7 +81,7 @@ export const mockEducation: Education[] = [
             de: 'Softwaretechnik, Erweiterte Datenbanken, Erweiterte Softwaretechnik.'
         },
         orderIndex: 2,
-        pdfUrl: uniariaPdf
+        pdfUrl: unirisPdf
     },
     {
         id: 4,
