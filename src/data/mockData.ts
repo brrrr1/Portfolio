@@ -220,6 +220,38 @@ export const mockProjects: Project[] = [
 
 export const mockExperiences: Experience[] = [
     {
+        id: 2,
+        company: 'Solera Holdings, LLC',
+        companyUrl: 'https://www.solera.com/',
+        logoUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSBFKHnMvmzNF3WvT2ysHdvpCUqoXQgXwP1pg&s',
+        role: {
+            es: 'Software Engineer in Test',
+            en: 'Software Engineer in Test',
+            de: 'Software Engineer in Test'
+        },
+        description: {
+            es: 'Desarrollo y mantenimiento de pruebas automatizadas para asegurar la calidad del software en Solera.',
+            en: 'Developing and maintaining automated tests to ensure software quality at Solera.',
+            de: 'Entwicklung und Wartung automatisierter Tests zur Sicherstellung der Softwarequalität bei Solera.'
+        },
+        location: {
+            es: 'Sevilla',
+            en: 'Seville',
+            de: 'Sevilla'
+        },
+        dateRange: {
+            es: 'Abril 2026 - Actualidad',
+            en: 'April 2026 - Present',
+            de: 'April 2026 - Heute'
+        },
+        workMode: {
+            es: 'Híbrida',
+            en: 'Hybrid',
+            de: 'Hybrid'
+        },
+        orderIndex: 0
+    },
+    {
         id: 1,
         company: 'Ordio GmbH',
         companyUrl: 'https://www.ordio.com/',
@@ -249,6 +281,6 @@ export const mockExperiences: Experience[] = [
             en: 'On-site',
             de: 'Vor Ort'
         },
-        orderIndex: 0
+        orderIndex: 1
     }
 ];
