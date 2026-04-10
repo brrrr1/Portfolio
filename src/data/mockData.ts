@@ -230,14 +230,14 @@ export const mockExperiences: Experience[] = [
             de: 'Software Engineer in Test'
         },
         description: {
-            es: 'Desarrollo y mantenimiento de pruebas automatizadas para asegurar la calidad del software en Solera.',
-            en: 'Developing and maintaining automated tests to ensure software quality at Solera.',
-            de: 'Entwicklung und Wartung automatisierter Tests zur Sicherstellung der Softwarequalität bei Solera.'
+            es: '',
+            en: '',
+            de: ''
         },
         location: {
-            es: 'Sevilla',
-            en: 'Seville',
-            de: 'Sevilla'
+            es: 'Sevilla, España',
+            en: 'Seville, Spain',
+            de: 'Sevilla, Spanien'
         },
         dateRange: {
             es: 'Abril 2026 - Actualidad',
