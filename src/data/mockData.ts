@@ -12,6 +12,10 @@ import pipocappCover from '../assets/images/pipocapp.jpeg';
 import pipocapp1 from '../assets/images/pipocapp1.png';
 import pipocapp2 from '../assets/images/pipocapp2.png';
 import pipocapp3 from '../assets/images/pipocapp3.png';
+import fifaWorldCupCover from '../assets/images/fifawc261.png';
+import fifaWorldCup1 from '../assets/images/fifawc262.png';
+import fifaWorldCup2 from '../assets/images/fifawc263.png';
+import fifaWorldCup3 from '../assets/images/fifawc264.png';
 
 // Imports for PDFs
 import unirisPdf from '../assets/docs/UNIRIS.pdf';
@@ -139,7 +143,7 @@ export const mockProjects: Project[] = [
         githubUrl: 'https://github.com/brrrr1/MediaFetch',
         githubUrlFront: null,
         githubUrlBack: null,
-        orderIndex: 0,
+        orderIndex: 1,
         technologies: ['React 18', 'Vite', 'Tailwind CSS', 'Node.js', 'Express', 'yt-dlp', 'FFmpeg'],
         galleryImages: [mf1, mf2, mf3],
         title: {
@@ -159,6 +163,48 @@ export const mockProjects: Project[] = [
         }
     },
     {
+        id: 4,
+        slug: 'fifa-world-cup-2026-prediction',
+        category: 'web',
+        featured: true,
+        coverImageUrl: fifaWorldCupCover,
+        liveUrl: 'https://fifawc26prediction.vercel.app/',
+        githubUrl: 'https://github.com/brrrr1/fifawc26prediction',
+        githubUrlFront: null,
+        githubUrlBack: null,
+        orderIndex: 0,
+        technologies: [
+            'Python 3.11',
+            'FastAPI',
+            'XGBoost',
+            'scikit-learn',
+            'NumPy',
+            'Pandas',
+            'CuPy',
+            'SciPy',
+            'React 18',
+            'TypeScript',
+            'Vite',
+            'dnd-kit'
+        ],
+        galleryImages: [fifaWorldCupCover, fifaWorldCup1, fifaWorldCup2, fifaWorldCup3],
+        title: {
+            es: 'FIFA World Cup 2026 Prediction',
+            en: 'FIFA World Cup 2026 Prediction',
+            de: 'FIFA World Cup 2026 Prediction'
+        },
+        shortDescription: {
+            es: 'Herramienta interactiva para predecir y simular el Mundial 2026 mediante modelos de machine learning, con simulación precargada, torneos personalizados y backtesting con Qatar 2022.',
+            en: 'Interactive tool to predict and simulate the 2026 World Cup using machine learning models, with a preloaded simulation, custom tournaments and backtesting against Qatar 2022.',
+            de: 'Interaktives Tool zur Vorhersage und Simulation der Weltmeisterschaft 2026 mit Machine-Learning-Modellen, vorinstallierter Simulation, benutzerdefinierten Turnieren und Backtesting anhand von Katar 2022.'
+        },
+        detailedDescription: {
+            es: 'Proyecto desarrollado como parte de mi Trabajo Fin de Grado en Ingeniería Informática, combinando mis dos pasiones: el fútbol y la tecnología. La aplicación permite analizar una simulación completa del próximo Mundial, crear torneos personalizados y validar el rendimiento del modelo reproduciendo el Mundial de Qatar 2022.\n\nCaracterísticas principales:\n\n• Simulación precargada: análisis detallado de resultados, probabilidades y estadísticas del torneo, además del ganador más probable.\n• Live Simulation: interfaz interactiva para definir grupos, elegir entre formatos de 32 o 48 equipos y ejecutar simulaciones personalizadas al momento.\n• Backtesting: reproducción del Mundial de Qatar 2022 para comparar las predicciones del modelo con los resultados reales.\n\nStack técnico:\n\n• Backend: Python 3.11, FastAPI, XGBoost, scikit-learn, NumPy, Pandas, CuPy y SciPy.\n• Frontend: React 18, TypeScript, Vite y dnd-kit para las interacciones de arrastrar y soltar.',
+            en: 'Project developed as part of my Bachelor Degree in Computer Science dissertation, combining two of my passions: football and technology. The application allows users to analyse a complete simulation of the next World Cup, create custom tournaments and validate the model by replaying the Qatar 2022 World Cup.\n\nKey features:\n\n• Preloaded simulation: detailed analysis of tournament results, probabilities and statistics, including the most likely winner.\n• Live Simulation: interactive interface to define groups, choose between 32- or 48-team formats and run custom simulations instantly.\n• Backtesting: replay of the Qatar 2022 World Cup to compare model predictions with the actual results.\n\nTechnical stack:\n\n• Backend: Python 3.11, FastAPI, XGBoost, scikit-learn, NumPy, Pandas, CuPy and SciPy.\n• Frontend: React 18, TypeScript, Vite and dnd-kit for drag-and-drop interactions.',
+            de: 'Projekt, das im Rahmen meiner Bachelorarbeit in Informatik entwickelt wurde und zwei meiner Leidenschaften verbindet: Fußball und Technologie. Die Anwendung ermöglicht die Analyse einer vollständigen Simulation der nächsten Weltmeisterschaft, die Erstellung eigener Turniere und die Validierung des Modells durch die Wiederholung der Weltmeisterschaft 2022 in Katar.\n\nWichtige Funktionen:\n\n• Vorinstallierte Simulation: detaillierte Analyse von Turnierergebnissen, Wahrscheinlichkeiten und Statistiken einschließlich des wahrscheinlichsten Siegers.\n• Live Simulation: interaktive Oberfläche zur Definition von Gruppen, Auswahl zwischen 32- oder 48-Team-Formaten und sofortigen Durchführung eigener Simulationen.\n• Backtesting: Wiederholung der Weltmeisterschaft 2022 in Katar zum Vergleich der Modellvorhersagen mit den tatsächlichen Ergebnissen.\n\nTechnischer Stack:\n\n• Backend: Python 3.11, FastAPI, XGBoost, scikit-learn, NumPy, Pandas, CuPy und SciPy.\n• Frontend: React 18, TypeScript, Vite und dnd-kit für Drag-and-Drop-Interaktionen.'
+        }
+    },
+    {
         id: 1,
         slug: 'lagrada',
         category: 'web',
@@ -168,7 +214,7 @@ export const mockProjects: Project[] = [
         githubUrl: null,
         githubUrlFront: 'https://github.com/brrrr1/La-Grada-FRONT',
         githubUrlBack: 'https://github.com/brrrr1/La-Grada',
-        orderIndex: 1,
+        orderIndex: 2,
         technologies: ['Java/Spring', 'Angular', 'TypeScript', 'MySQL', 'RxJS', 'Angular Material'],
         galleryImages: [lagrada1, lagrada2, lagrada3],
         title: {
@@ -197,7 +243,7 @@ export const mockProjects: Project[] = [
         githubUrl: 'https://github.com/brrrr1/PipocApp',
         githubUrlFront: null,
         githubUrlBack: null,
-        orderIndex: 2,
+        orderIndex: 3,
         technologies: ['React', 'JavaScript', 'Firebase', 'Node.js'],
         galleryImages: [pipocapp1, pipocapp2, pipocapp3],
         title: {
@@ -216,7 +262,7 @@ export const mockProjects: Project[] = [
             de: 'Webanwendung entwickelt mit Angular zur Erkundung von Filmen und Serien mithilfe der TMDB API. Die Anwendung bietet eine personalisierte Erfahrung, indem Benutzer ihre TMDB-Konten verwenden, um Favoriten zu speichern und benutzerdefinierte Listen zu erstellen.\n\nTechnische Merkmale:\n\n• Frontend: Angular mit TypeScript, HTML und CSS\n• TMDB API Integration zur Beschaffung von Film- und Seriendaten\n• Authentifizierungssystem mit TMDB-Konten\n• Favoriten- und benutzerdefinierte Listenfunktionen\n• Moderne und responsive Benutzeroberfläche\n• Modulare Architektur und wiederverwendbare Komponenten'
         }
     }
-];
+].sort((a, b) => a.orderIndex - b.orderIndex);
 
 export const mockExperiences: Experience[] = [
     {
